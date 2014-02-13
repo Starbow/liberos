@@ -43,6 +43,7 @@ private:
 	bool passworded_;
 	bool joined_;
 	int user_count_;
+	Eros *eros_;
 
 public slots:
 	void join();

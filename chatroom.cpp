@@ -3,9 +3,10 @@
 #include "eros.pb.h"
 
 ChatRoom::ChatRoom(Eros *parent, const QString &name)
-	: QObject(parent)
+	: QObject(0)
 {
 	this->name_ = name;
+	this->eros_ = parent;
 	this->key_ = name.trimmed().toLower();
 	this->participants_ = QList<User *>();
 	this->joinable_ = true;
@@ -41,7 +42,7 @@ void ChatRoom::update(const protobufs::ChatRoomInfo &info)
 	{
 		const protobufs::UserStats &user_stats = info.participant(i);
 
-		User* user = ((Eros*)this->parent())->getUser(QString::fromStdString(user_stats.username()));
+		User* user = this->eros_->getUser(QString::fromStdString(user_stats.username()));
 		user->update(user_stats);
 
 		this->participants_ << user;
@@ -92,7 +93,7 @@ void ChatRoom::userJoined(ChatRoom *room, User *user)
 			this->participants_ << user;
 		}
 
-		if (user == ((Eros*)parent())->localUser())
+		if (user == this->eros_->localUser())
 		{
 			joined_ = true;
 		}
@@ -109,7 +110,7 @@ void ChatRoom::userLeft(ChatRoom *room, User *user)
 			this->participants_.removeAll(user);
 		}
 
-		if (user == ((Eros*)parent())->localUser())
+		if (user == this->eros_->localUser())
 		{
 			joined_ = false;
 		}
@@ -118,17 +119,17 @@ void ChatRoom::userLeft(ChatRoom *room, User *user)
 
 void ChatRoom::join()
 {
-	((Eros*)parent())->joinChatRoom(this, ""); 
+	this->eros_->joinChatRoom(this, ""); 
 }
 void ChatRoom::join(const QString &password)
 {
-	((Eros*)parent())->joinChatRoom(this, password);
+	this->eros_->joinChatRoom(this, password);
 }
 void ChatRoom::leave()
 {
-	((Eros*)parent())->leaveChatRoom(this);
+	this->eros_->leaveChatRoom(this);
 }
 void ChatRoom::sendMessage(const QString &message)
 {
-	((Eros*)parent())->sendMessage(this, message);
+	this->eros_->sendMessage(this, message);
 }

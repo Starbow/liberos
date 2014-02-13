@@ -8,6 +8,7 @@ CONFIG += staticlib
 
 SOURCES += character.cpp\
            chatroom.cpp\
+           divisions.cpp\
            eros.cpp\
            eros.pb.cc\
            localuser.cpp\
@@ -22,10 +23,15 @@ SOURCES += character.cpp\
            requests/matchmakingdequeuerequest.cpp\
            requests/matchmakingqueuerequest.cpp\
            requests/pingrequest.cpp\
-           requests/privatemessagerequest.cpp
+           requests/privatemessagerequest.cpp\
+           requests/uploadreplayrequest.cpp\
+           requests/addcharacterrequest.cpp\
+           requests/removecharacterrequest.cpp\
+           requests/updatecharacterrequest.cpp
 
 HEADERS += character.h\
            chatroom.h\
+           divisions.h\
            eros.h\
            eros.pb.h\
            localuser.h\
@@ -40,7 +46,11 @@ HEADERS += character.h\
            requests/matchmakingdequeuerequest.h\
            requests/matchmakingqueuerequest.h\
            requests/pingrequest.h\
-           requests/privatemessagerequest.h
+           requests/privatemessagerequest.h\
+           requests/uploadreplayrequest.h\
+           requests/addcharacterrequest.h\
+           requests/removecharacterrequest.h\
+           requests/updatecharacterrequest.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

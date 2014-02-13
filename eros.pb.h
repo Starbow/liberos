@@ -35,6 +35,7 @@ void protobuf_AssignDesc_eros_2eproto();
 void protobuf_ShutdownFile_eros_2eproto();
 
 class Handshake;
+class Division;
 class HandshakeResponse;
 class UserStats;
 class MapPool;
@@ -52,6 +53,8 @@ class ChatRoomRequest;
 class MatchmakingStats;
 class ServerStats;
 class Character;
+class MatchParticipant;
+class MatchResult;
 
 enum HandshakeResponse_HandshakeStatus {
   HandshakeResponse_HandshakeStatus_FAIL = 0,
@@ -198,6 +201,103 @@ class Handshake : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
+class Division : public ::google::protobuf::Message {
+ public:
+  Division();
+  virtual ~Division();
+
+  Division(const Division& from);
+
+  inline Division& operator=(const Division& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const Division& default_instance();
+
+  void Swap(Division* other);
+
+  // implements Message ----------------------------------------------
+
+  Division* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const Division& from);
+  void MergeFrom(const Division& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string name = 1;
+  inline bool has_name() const;
+  inline void clear_name();
+  static const int kNameFieldNumber = 1;
+  inline const ::std::string& name() const;
+  inline void set_name(const ::std::string& value);
+  inline void set_name(const char* value);
+  inline void set_name(const char* value, size_t size);
+  inline ::std::string* mutable_name();
+  inline ::std::string* release_name();
+  inline void set_allocated_name(::std::string* name);
+
+  // required int64 points = 2;
+  inline bool has_points() const;
+  inline void clear_points();
+  static const int kPointsFieldNumber = 2;
+  inline ::google::protobuf::int64 points() const;
+  inline void set_points(::google::protobuf::int64 value);
+
+  // @@protoc_insertion_point(class_scope:protobufs.Division)
+ private:
+  inline void set_has_name();
+  inline void clear_has_name();
+  inline void set_has_points();
+  inline void clear_has_points();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::std::string* name_;
+  ::google::protobuf::int64 points_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_eros_2eproto();
+  friend void protobuf_AssignDesc_eros_2eproto();
+  friend void protobuf_ShutdownFile_eros_2eproto();
+
+  void InitAsDefaultInstance();
+  static Division* default_instance_;
+};
+// -------------------------------------------------------------------
+
 class HandshakeResponse : public ::google::protobuf::Message {
  public:
   HandshakeResponse();
@@ -311,6 +411,18 @@ class HandshakeResponse : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedPtrField< ::protobufs::Character >*
       mutable_character();
 
+  // repeated .protobufs.Division division = 5;
+  inline int division_size() const;
+  inline void clear_division();
+  static const int kDivisionFieldNumber = 5;
+  inline const ::protobufs::Division& division(int index) const;
+  inline ::protobufs::Division* mutable_division(int index);
+  inline ::protobufs::Division* add_division();
+  inline const ::google::protobuf::RepeatedPtrField< ::protobufs::Division >&
+      division() const;
+  inline ::google::protobuf::RepeatedPtrField< ::protobufs::Division >*
+      mutable_division();
+
   // @@protoc_insertion_point(class_scope:protobufs.HandshakeResponse)
  private:
   inline void set_has_status();
@@ -325,10 +437,11 @@ class HandshakeResponse : public ::google::protobuf::Message {
   ::protobufs::UserStats* user_;
   ::google::protobuf::int64 id_;
   ::google::protobuf::RepeatedPtrField< ::protobufs::Character > character_;
+  ::google::protobuf::RepeatedPtrField< ::protobufs::Division > division_;
   int status_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
   friend void  protobuf_AddDesc_eros_2eproto();
   friend void protobuf_AssignDesc_eros_2eproto();
@@ -2079,7 +2192,7 @@ class Character : public ::google::protobuf::Message {
   inline ::std::string* release_character_name();
   inline void set_allocated_character_name(::std::string* character_name);
 
-  // required int32 character_code = 5;
+  // optional int32 character_code = 5;
   inline bool has_character_code() const;
   inline void clear_character_code();
   static const int kCharacterCodeFieldNumber = 5;
@@ -2166,6 +2279,264 @@ class Character : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static Character* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class MatchParticipant : public ::google::protobuf::Message {
+ public:
+  MatchParticipant();
+  virtual ~MatchParticipant();
+
+  MatchParticipant(const MatchParticipant& from);
+
+  inline MatchParticipant& operator=(const MatchParticipant& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const MatchParticipant& default_instance();
+
+  void Swap(MatchParticipant* other);
+
+  // implements Message ----------------------------------------------
+
+  MatchParticipant* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const MatchParticipant& from);
+  void MergeFrom(const MatchParticipant& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional .protobufs.UserStats user = 1;
+  inline bool has_user() const;
+  inline void clear_user();
+  static const int kUserFieldNumber = 1;
+  inline const ::protobufs::UserStats& user() const;
+  inline ::protobufs::UserStats* mutable_user();
+  inline ::protobufs::UserStats* release_user();
+  inline void set_allocated_user(::protobufs::UserStats* user);
+
+  // optional .protobufs.Character character = 2;
+  inline bool has_character() const;
+  inline void clear_character();
+  static const int kCharacterFieldNumber = 2;
+  inline const ::protobufs::Character& character() const;
+  inline ::protobufs::Character* mutable_character();
+  inline ::protobufs::Character* release_character();
+  inline void set_allocated_character(::protobufs::Character* character);
+
+  // required int64 points_before = 3;
+  inline bool has_points_before() const;
+  inline void clear_points_before();
+  static const int kPointsBeforeFieldNumber = 3;
+  inline ::google::protobuf::int64 points_before() const;
+  inline void set_points_before(::google::protobuf::int64 value);
+
+  // required int64 points_after = 4;
+  inline bool has_points_after() const;
+  inline void clear_points_after();
+  static const int kPointsAfterFieldNumber = 4;
+  inline ::google::protobuf::int64 points_after() const;
+  inline void set_points_after(::google::protobuf::int64 value);
+
+  // required int64 points_difference = 5;
+  inline bool has_points_difference() const;
+  inline void clear_points_difference();
+  static const int kPointsDifferenceFieldNumber = 5;
+  inline ::google::protobuf::int64 points_difference() const;
+  inline void set_points_difference(::google::protobuf::int64 value);
+
+  // required bool victory = 6;
+  inline bool has_victory() const;
+  inline void clear_victory();
+  static const int kVictoryFieldNumber = 6;
+  inline bool victory() const;
+  inline void set_victory(bool value);
+
+  // required string race = 7;
+  inline bool has_race() const;
+  inline void clear_race();
+  static const int kRaceFieldNumber = 7;
+  inline const ::std::string& race() const;
+  inline void set_race(const ::std::string& value);
+  inline void set_race(const char* value);
+  inline void set_race(const char* value, size_t size);
+  inline ::std::string* mutable_race();
+  inline ::std::string* release_race();
+  inline void set_allocated_race(::std::string* race);
+
+  // @@protoc_insertion_point(class_scope:protobufs.MatchParticipant)
+ private:
+  inline void set_has_user();
+  inline void clear_has_user();
+  inline void set_has_character();
+  inline void clear_has_character();
+  inline void set_has_points_before();
+  inline void clear_has_points_before();
+  inline void set_has_points_after();
+  inline void clear_has_points_after();
+  inline void set_has_points_difference();
+  inline void clear_has_points_difference();
+  inline void set_has_victory();
+  inline void clear_has_victory();
+  inline void set_has_race();
+  inline void clear_has_race();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::protobufs::UserStats* user_;
+  ::protobufs::Character* character_;
+  ::google::protobuf::int64 points_before_;
+  ::google::protobuf::int64 points_after_;
+  ::google::protobuf::int64 points_difference_;
+  ::std::string* race_;
+  bool victory_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
+
+  friend void  protobuf_AddDesc_eros_2eproto();
+  friend void protobuf_AssignDesc_eros_2eproto();
+  friend void protobuf_ShutdownFile_eros_2eproto();
+
+  void InitAsDefaultInstance();
+  static MatchParticipant* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class MatchResult : public ::google::protobuf::Message {
+ public:
+  MatchResult();
+  virtual ~MatchResult();
+
+  MatchResult(const MatchResult& from);
+
+  inline MatchResult& operator=(const MatchResult& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const MatchResult& default_instance();
+
+  void Swap(MatchResult* other);
+
+  // implements Message ----------------------------------------------
+
+  MatchResult* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const MatchResult& from);
+  void MergeFrom(const MatchResult& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .protobufs.Region region = 1;
+  inline bool has_region() const;
+  inline void clear_region();
+  static const int kRegionFieldNumber = 1;
+  inline ::protobufs::Region region() const;
+  inline void set_region(::protobufs::Region value);
+
+  // required .protobufs.Map map = 2;
+  inline bool has_map() const;
+  inline void clear_map();
+  static const int kMapFieldNumber = 2;
+  inline const ::protobufs::Map& map() const;
+  inline ::protobufs::Map* mutable_map();
+  inline ::protobufs::Map* release_map();
+  inline void set_allocated_map(::protobufs::Map* map);
+
+  // repeated .protobufs.MatchParticipant participant = 3;
+  inline int participant_size() const;
+  inline void clear_participant();
+  static const int kParticipantFieldNumber = 3;
+  inline const ::protobufs::MatchParticipant& participant(int index) const;
+  inline ::protobufs::MatchParticipant* mutable_participant(int index);
+  inline ::protobufs::MatchParticipant* add_participant();
+  inline const ::google::protobuf::RepeatedPtrField< ::protobufs::MatchParticipant >&
+      participant() const;
+  inline ::google::protobuf::RepeatedPtrField< ::protobufs::MatchParticipant >*
+      mutable_participant();
+
+  // @@protoc_insertion_point(class_scope:protobufs.MatchResult)
+ private:
+  inline void set_has_region();
+  inline void clear_has_region();
+  inline void set_has_map();
+  inline void clear_has_map();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::protobufs::Map* map_;
+  ::google::protobuf::RepeatedPtrField< ::protobufs::MatchParticipant > participant_;
+  int region_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_eros_2eproto();
+  friend void protobuf_AssignDesc_eros_2eproto();
+  friend void protobuf_ShutdownFile_eros_2eproto();
+
+  void InitAsDefaultInstance();
+  static MatchResult* default_instance_;
 };
 // ===================================================================
 
@@ -2316,6 +2687,102 @@ inline void Handshake::set_allocated_auth_key(::std::string* auth_key) {
 
 // -------------------------------------------------------------------
 
+// Division
+
+// required string name = 1;
+inline bool Division::has_name() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void Division::set_has_name() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void Division::clear_has_name() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void Division::clear_name() {
+  if (name_ != &::google::protobuf::internal::kEmptyString) {
+    name_->clear();
+  }
+  clear_has_name();
+}
+inline const ::std::string& Division::name() const {
+  return *name_;
+}
+inline void Division::set_name(const ::std::string& value) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(value);
+}
+inline void Division::set_name(const char* value) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(value);
+}
+inline void Division::set_name(const char* value, size_t size) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Division::mutable_name() {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  return name_;
+}
+inline ::std::string* Division::release_name() {
+  clear_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = name_;
+    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void Division::set_allocated_name(::std::string* name) {
+  if (name_ != &::google::protobuf::internal::kEmptyString) {
+    delete name_;
+  }
+  if (name) {
+    set_has_name();
+    name_ = name;
+  } else {
+    clear_has_name();
+    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required int64 points = 2;
+inline bool Division::has_points() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void Division::set_has_points() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void Division::clear_has_points() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void Division::clear_points() {
+  points_ = GOOGLE_LONGLONG(0);
+  clear_has_points();
+}
+inline ::google::protobuf::int64 Division::points() const {
+  return points_;
+}
+inline void Division::set_points(::google::protobuf::int64 value) {
+  set_has_points();
+  points_ = value;
+}
+
+// -------------------------------------------------------------------
+
 // HandshakeResponse
 
 // required .protobufs.HandshakeResponse.HandshakeStatus status = 1;
@@ -2424,6 +2891,31 @@ HandshakeResponse::character() const {
 inline ::google::protobuf::RepeatedPtrField< ::protobufs::Character >*
 HandshakeResponse::mutable_character() {
   return &character_;
+}
+
+// repeated .protobufs.Division division = 5;
+inline int HandshakeResponse::division_size() const {
+  return division_.size();
+}
+inline void HandshakeResponse::clear_division() {
+  division_.Clear();
+}
+inline const ::protobufs::Division& HandshakeResponse::division(int index) const {
+  return division_.Get(index);
+}
+inline ::protobufs::Division* HandshakeResponse::mutable_division(int index) {
+  return division_.Mutable(index);
+}
+inline ::protobufs::Division* HandshakeResponse::add_division() {
+  return division_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::protobufs::Division >&
+HandshakeResponse::division() const {
+  return division_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::protobufs::Division >*
+HandshakeResponse::mutable_division() {
+  return &division_;
 }
 
 // -------------------------------------------------------------------
@@ -4450,7 +4942,7 @@ inline void Character::set_allocated_character_name(::std::string* character_nam
   }
 }
 
-// required int32 character_code = 5;
+// optional int32 character_code = 5;
 inline bool Character::has_character_code() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
@@ -4654,6 +5146,334 @@ inline ::google::protobuf::int32 Character::verification_portrait() const {
 inline void Character::set_verification_portrait(::google::protobuf::int32 value) {
   set_has_verification_portrait();
   verification_portrait_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// MatchParticipant
+
+// optional .protobufs.UserStats user = 1;
+inline bool MatchParticipant::has_user() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void MatchParticipant::set_has_user() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void MatchParticipant::clear_has_user() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void MatchParticipant::clear_user() {
+  if (user_ != NULL) user_->::protobufs::UserStats::Clear();
+  clear_has_user();
+}
+inline const ::protobufs::UserStats& MatchParticipant::user() const {
+  return user_ != NULL ? *user_ : *default_instance_->user_;
+}
+inline ::protobufs::UserStats* MatchParticipant::mutable_user() {
+  set_has_user();
+  if (user_ == NULL) user_ = new ::protobufs::UserStats;
+  return user_;
+}
+inline ::protobufs::UserStats* MatchParticipant::release_user() {
+  clear_has_user();
+  ::protobufs::UserStats* temp = user_;
+  user_ = NULL;
+  return temp;
+}
+inline void MatchParticipant::set_allocated_user(::protobufs::UserStats* user) {
+  delete user_;
+  user_ = user;
+  if (user) {
+    set_has_user();
+  } else {
+    clear_has_user();
+  }
+}
+
+// optional .protobufs.Character character = 2;
+inline bool MatchParticipant::has_character() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void MatchParticipant::set_has_character() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void MatchParticipant::clear_has_character() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void MatchParticipant::clear_character() {
+  if (character_ != NULL) character_->::protobufs::Character::Clear();
+  clear_has_character();
+}
+inline const ::protobufs::Character& MatchParticipant::character() const {
+  return character_ != NULL ? *character_ : *default_instance_->character_;
+}
+inline ::protobufs::Character* MatchParticipant::mutable_character() {
+  set_has_character();
+  if (character_ == NULL) character_ = new ::protobufs::Character;
+  return character_;
+}
+inline ::protobufs::Character* MatchParticipant::release_character() {
+  clear_has_character();
+  ::protobufs::Character* temp = character_;
+  character_ = NULL;
+  return temp;
+}
+inline void MatchParticipant::set_allocated_character(::protobufs::Character* character) {
+  delete character_;
+  character_ = character;
+  if (character) {
+    set_has_character();
+  } else {
+    clear_has_character();
+  }
+}
+
+// required int64 points_before = 3;
+inline bool MatchParticipant::has_points_before() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void MatchParticipant::set_has_points_before() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void MatchParticipant::clear_has_points_before() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void MatchParticipant::clear_points_before() {
+  points_before_ = GOOGLE_LONGLONG(0);
+  clear_has_points_before();
+}
+inline ::google::protobuf::int64 MatchParticipant::points_before() const {
+  return points_before_;
+}
+inline void MatchParticipant::set_points_before(::google::protobuf::int64 value) {
+  set_has_points_before();
+  points_before_ = value;
+}
+
+// required int64 points_after = 4;
+inline bool MatchParticipant::has_points_after() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void MatchParticipant::set_has_points_after() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void MatchParticipant::clear_has_points_after() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void MatchParticipant::clear_points_after() {
+  points_after_ = GOOGLE_LONGLONG(0);
+  clear_has_points_after();
+}
+inline ::google::protobuf::int64 MatchParticipant::points_after() const {
+  return points_after_;
+}
+inline void MatchParticipant::set_points_after(::google::protobuf::int64 value) {
+  set_has_points_after();
+  points_after_ = value;
+}
+
+// required int64 points_difference = 5;
+inline bool MatchParticipant::has_points_difference() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void MatchParticipant::set_has_points_difference() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void MatchParticipant::clear_has_points_difference() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void MatchParticipant::clear_points_difference() {
+  points_difference_ = GOOGLE_LONGLONG(0);
+  clear_has_points_difference();
+}
+inline ::google::protobuf::int64 MatchParticipant::points_difference() const {
+  return points_difference_;
+}
+inline void MatchParticipant::set_points_difference(::google::protobuf::int64 value) {
+  set_has_points_difference();
+  points_difference_ = value;
+}
+
+// required bool victory = 6;
+inline bool MatchParticipant::has_victory() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void MatchParticipant::set_has_victory() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void MatchParticipant::clear_has_victory() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void MatchParticipant::clear_victory() {
+  victory_ = false;
+  clear_has_victory();
+}
+inline bool MatchParticipant::victory() const {
+  return victory_;
+}
+inline void MatchParticipant::set_victory(bool value) {
+  set_has_victory();
+  victory_ = value;
+}
+
+// required string race = 7;
+inline bool MatchParticipant::has_race() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void MatchParticipant::set_has_race() {
+  _has_bits_[0] |= 0x00000040u;
+}
+inline void MatchParticipant::clear_has_race() {
+  _has_bits_[0] &= ~0x00000040u;
+}
+inline void MatchParticipant::clear_race() {
+  if (race_ != &::google::protobuf::internal::kEmptyString) {
+    race_->clear();
+  }
+  clear_has_race();
+}
+inline const ::std::string& MatchParticipant::race() const {
+  return *race_;
+}
+inline void MatchParticipant::set_race(const ::std::string& value) {
+  set_has_race();
+  if (race_ == &::google::protobuf::internal::kEmptyString) {
+    race_ = new ::std::string;
+  }
+  race_->assign(value);
+}
+inline void MatchParticipant::set_race(const char* value) {
+  set_has_race();
+  if (race_ == &::google::protobuf::internal::kEmptyString) {
+    race_ = new ::std::string;
+  }
+  race_->assign(value);
+}
+inline void MatchParticipant::set_race(const char* value, size_t size) {
+  set_has_race();
+  if (race_ == &::google::protobuf::internal::kEmptyString) {
+    race_ = new ::std::string;
+  }
+  race_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* MatchParticipant::mutable_race() {
+  set_has_race();
+  if (race_ == &::google::protobuf::internal::kEmptyString) {
+    race_ = new ::std::string;
+  }
+  return race_;
+}
+inline ::std::string* MatchParticipant::release_race() {
+  clear_has_race();
+  if (race_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = race_;
+    race_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void MatchParticipant::set_allocated_race(::std::string* race) {
+  if (race_ != &::google::protobuf::internal::kEmptyString) {
+    delete race_;
+  }
+  if (race) {
+    set_has_race();
+    race_ = race;
+  } else {
+    clear_has_race();
+    race_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
+
+// MatchResult
+
+// required .protobufs.Region region = 1;
+inline bool MatchResult::has_region() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void MatchResult::set_has_region() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void MatchResult::clear_has_region() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void MatchResult::clear_region() {
+  region_ = 1;
+  clear_has_region();
+}
+inline ::protobufs::Region MatchResult::region() const {
+  return static_cast< ::protobufs::Region >(region_);
+}
+inline void MatchResult::set_region(::protobufs::Region value) {
+  assert(::protobufs::Region_IsValid(value));
+  set_has_region();
+  region_ = value;
+}
+
+// required .protobufs.Map map = 2;
+inline bool MatchResult::has_map() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void MatchResult::set_has_map() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void MatchResult::clear_has_map() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void MatchResult::clear_map() {
+  if (map_ != NULL) map_->::protobufs::Map::Clear();
+  clear_has_map();
+}
+inline const ::protobufs::Map& MatchResult::map() const {
+  return map_ != NULL ? *map_ : *default_instance_->map_;
+}
+inline ::protobufs::Map* MatchResult::mutable_map() {
+  set_has_map();
+  if (map_ == NULL) map_ = new ::protobufs::Map;
+  return map_;
+}
+inline ::protobufs::Map* MatchResult::release_map() {
+  clear_has_map();
+  ::protobufs::Map* temp = map_;
+  map_ = NULL;
+  return temp;
+}
+inline void MatchResult::set_allocated_map(::protobufs::Map* map) {
+  delete map_;
+  map_ = map;
+  if (map) {
+    set_has_map();
+  } else {
+    clear_has_map();
+  }
+}
+
+// repeated .protobufs.MatchParticipant participant = 3;
+inline int MatchResult::participant_size() const {
+  return participant_.size();
+}
+inline void MatchResult::clear_participant() {
+  participant_.Clear();
+}
+inline const ::protobufs::MatchParticipant& MatchResult::participant(int index) const {
+  return participant_.Get(index);
+}
+inline ::protobufs::MatchParticipant* MatchResult::mutable_participant(int index) {
+  return participant_.Mutable(index);
+}
+inline ::protobufs::MatchParticipant* MatchResult::add_participant() {
+  return participant_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::protobufs::MatchParticipant >&
+MatchResult::participant() const {
+  return participant_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::protobufs::MatchParticipant >*
+MatchResult::mutable_participant() {
+  return &participant_;
 }
 
 

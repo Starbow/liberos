@@ -11,6 +11,7 @@ public:
 	MatchmakingDequeueRequest(Eros *parent);
 	~MatchmakingDequeueRequest();
 
+	bool processData(const QString &command, const QByteArray &data);
 private:
 	
 };

@@ -17,21 +17,21 @@ class Character : public QObject
 
 public:
 	Character(Eros *parent, ErosRegion region, int realm, int character_id, const QString &display_name);
+	Character(Eros *parent, const protobufs::Character &character);
 	~Character();
 
 	ErosRegion region() const;
 	int realm() const;
-	int profile_id() const;
-	const QString &display_name() const;
-	int character_code() const;
-	const QString &game_profile_link() const;
-	const QString &web_profile_link() const;
-	const QString &api_profile_link() const;
+	int profileId() const;
+	const QString &displayName() const;
+	int characterCode() const;
+	const QString &gameProfileLink() const;
+	const QString &webProfileLink() const;
+	const QString &apiProfileLink() const;
 	bool verified() const;
-	int verification_portrait() const;
+	int verificationPortrait() const;
 
 	void update(const protobufs::Character &character);
-
 signals:
 	void updated(Character *character);
 

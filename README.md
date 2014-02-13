@@ -6,8 +6,7 @@ www.starbowmod.com
 
 Todo
 ==========
-- Matchmaking aborting.
-- Character management.
+- Match results from replays
 - Commentify stuff.
 - Add documentation.
 - Make sure everything works.

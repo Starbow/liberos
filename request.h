@@ -33,6 +33,7 @@ signals:
 protected:
 	QString command_;
 	QIODevice *data_;
+	Eros *eros_;
 };
 
 #endif // REQUEST_H

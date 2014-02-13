@@ -46,7 +46,7 @@ bool MatchmakingQueueRequest::processData(const QString &command, const QByteArr
 		protobufs::MatchmakingResult result;
 		result.ParseFromArray(data.data(), data.size());
 
-		this->match_ = new MatchmakingMatch((Eros*)parent(), result);
+		this->match_ = new MatchmakingMatch(this->eros_, result);
 		this->status_ = ErosMatchmakingState::Matched;
 
 		emit complete(this);

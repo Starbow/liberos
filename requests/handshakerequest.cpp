@@ -35,6 +35,12 @@ LocalUser* HandshakeRequest::user() const
 	return this->user_;  
 }
 
+Divisions* HandshakeRequest::divisions() const
+{
+	return this->divisions_;  
+}
+
+
 bool HandshakeRequest::processHandshakeResponse(const QString &command, const QByteArray &data)
 {
 	protobufs::HandshakeResponse response;
@@ -46,7 +52,8 @@ bool HandshakeRequest::processHandshakeResponse(const QString &command, const QB
 
 		if (this->status_ == ResponseStatus::Success)
 		{
-			this->user_ = new LocalUser((Eros*)this->parent(), response);
+			this->user_ = new LocalUser(this->eros_, response);
+			this->divisions_ = new Divisions(this->parent(), response);
 		}
 	} else {
 		this->status_ = ResponseStatus::Fail;

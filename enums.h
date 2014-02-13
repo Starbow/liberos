@@ -42,8 +42,38 @@ enum ErosUserState
 
 Q_DECLARE_METATYPE(ErosUserState)
 
-enum ErosChatError
+enum ErosError
 {
+	None = 0,
+
+	DatabaseReadError = 101,
+	DatabaseWriteError = 102,
+	DiskReadError = 103,
+	DiskWriteError = 104,
+	AuthenticationError = 105,
+	GenericError = 106,
+	BadName = 107,
+	NameInUse = 108,
+
+	BadCharacterInfo = 201,
+	CharacterExists = 202,
+	BattleNetCommunicationError = 203,
+	VerificationFailed = 204,
+
+	ReplayProcessingError = 301,
+	MatchProcessingError = 302,
+	DuplicateReplay = 303,
+	ClientNotInvolvedInMatch = 304,
+	GameTooShort = 305,
+	BadFormat = 306,
+	BadMap = 307,
+	InvalidParticipants = 308,
+	PlayerNotInDatabase = 309,
+	NotAssignedOpponent = 310,
+
+	NoCharacterForRegion = 401,
+	MatchmakingAborted = 402,
+
 	RoomNotJoinable = 501,
 	BadPassword = 502,
 	RoomAlreadyExists = 503,
@@ -56,5 +86,5 @@ enum ErosChatError
 };
 
 
-Q_DECLARE_METATYPE(ErosChatError)
+Q_DECLARE_METATYPE(ErosError)
 #endif

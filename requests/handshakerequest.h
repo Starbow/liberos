@@ -25,6 +25,7 @@ public:
 	
 
 	LocalUser *user() const;
+	Divisions *divisions() const;
 	ResponseStatus status() const;
 
 	
@@ -34,6 +35,7 @@ private:
 	
 	ResponseStatus status_;
 	LocalUser *user_;
+	Divisions *divisions_;
 	
 	bool processHandshakeResponse(const QString &command, const QByteArray &data);
 };

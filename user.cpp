@@ -2,9 +2,10 @@
 #include "eros.h"
 #include "eros.pb.h"
 
-User::User(const Eros *parent, const QString &username)
-	: QObject((QObject*)parent)
+User::User(Eros *parent, const QString &username)
+	: QObject(0)
 {
+	this->eros_ = parent;
 	this->username_ = username;
 	this->first_update_ = true;
 	this->state_ = ErosUserState::Unknown;
@@ -15,6 +16,7 @@ User::User(Eros *parent)
 {
 	this->state_ = ErosUserState::Unknown;
 	this->first_update_ = true;
+	this->eros_ = parent;
 }
 User::~User()
 {

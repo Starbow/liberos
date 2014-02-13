@@ -5,6 +5,7 @@ Request::Request(Eros *parent, const QString &command)
 	: QObject(parent)
 {
 	this->command_ = command;
+	this->eros_ = parent;
 	this->data_ = nullptr;
 }
 

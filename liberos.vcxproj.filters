@@ -188,6 +188,51 @@
     <ClCompile Include="requests\chatmessagerequest.cpp">
       <Filter>Source Files\requests</Filter>
     </ClCompile>
+    <ClCompile Include="requests\addcharacterrequest.cpp">
+      <Filter>Source Files\requests</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_addcharacterrequest.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_addcharacterrequest.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="requests\updatecharacterrequest.cpp">
+      <Filter>Source Files\requests</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_updatecharacterrequest.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_updatecharacterrequest.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="divisions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_divisions.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_divisions.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_removecharacterrequest.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_removecharacterrequest.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="requests\removecharacterrequest.cpp">
+      <Filter>Source Files\requests</Filter>
+    </ClCompile>
+    <ClCompile Include="requests\uploadreplayrequest.cpp">
+      <Filter>Source Files\requests</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_uploadreplayrequest.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_uploadreplayrequest.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="eros.h">
@@ -236,6 +281,21 @@
       <Filter>Header Files\requests</Filter>
     </CustomBuild>
     <CustomBuild Include="requests\chatmessagerequest.h">
+      <Filter>Header Files\requests</Filter>
+    </CustomBuild>
+    <CustomBuild Include="requests\addcharacterrequest.h">
+      <Filter>Header Files\requests</Filter>
+    </CustomBuild>
+    <CustomBuild Include="requests\updatecharacterrequest.h">
+      <Filter>Header Files\requests</Filter>
+    </CustomBuild>
+    <CustomBuild Include="divisions.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="requests\removecharacterrequest.h">
+      <Filter>Header Files\requests</Filter>
+    </CustomBuild>
+    <CustomBuild Include="requests\uploadreplayrequest.h">
       <Filter>Header Files\requests</Filter>
     </CustomBuild>
   </ItemGroup>

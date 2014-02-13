@@ -13,7 +13,15 @@ Character::Character(Eros *parent, ErosRegion region, int realm, int profile_id,
 	this->verified_ = false;
 	this->first_update_ = true;
 }
-
+Character::Character(Eros *parent, const protobufs::Character &character_message)
+	: QObject(parent)
+{
+	this->region_ = (ErosRegion)character_message.region();
+	this->realm_ = character_message.subregion();
+	this->profile_id_ = character_message.profile_id();
+	this->display_name_ = QString::fromStdString(character_message.character_name());
+	this->update(character_message);
+}
 Character::~Character()
 {
 
@@ -21,7 +29,8 @@ Character::~Character()
 
 void Character::setLinks()
 {
-
+	this->api_profile_link_ = QString("http://%1/api/sc2/profile/%2/%3/%4/").arg(Eros::regionToDomainString(this->region_), QString::number(this->profile_id_), QString::number(this->realm_), this->display_name_);
+	this->web_profile_link_ = QString("http://%1/sc2/%2/profile/%3/%4/%5/").arg(Eros::regionToDomainString(this->region_), Eros::regionToLanguageString(this->region_), QString::number(this->profile_id_), QString::number(this->realm_), this->display_name_);
 }
 
 
@@ -97,27 +106,27 @@ int Character::realm() const
 {
 	return this->realm_;
 }
-int Character::profile_id() const
+int Character::profileId() const
 {
 	return this->profile_id_;
 }
-const QString &Character::display_name() const
+const QString &Character::displayName() const
 {
 	return this->display_name_;
 }
-int Character::character_code() const
+int Character::characterCode() const
 {
 	return this->character_code_;
 }
-const QString &Character::game_profile_link() const
+const QString &Character::gameProfileLink() const
 {
 	return this->game_profile_link_;
 }
-const QString &Character::web_profile_link() const
+const QString &Character::webProfileLink() const
 {
 	return this->web_profile_link_;
 }
-const QString &Character::api_profile_link() const
+const QString &Character::apiProfileLink() const
 {
 	return this->api_profile_link_;
 }
@@ -125,7 +134,7 @@ bool Character::verified() const
 {
 	return this->verified_;
 }
-int Character::verification_portrait() const
+int Character::verificationPortrait() const
 {
 	return this->verification_portrait_;
 }

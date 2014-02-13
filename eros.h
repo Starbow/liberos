@@ -15,6 +15,7 @@
 #include "character.h"
 #include "chatroom.h"
 #include "matchmakingmatch.h"
+#include "divisions.h"
 
 
 
@@ -58,6 +59,10 @@ public:
 	int searchingUserCount() const;
 	int activeUserCount() const;
 
+	
+	const Divisions *divisions() const;
+	const MatchmakingMatch *matchmakingMatch() const;
+
 	LocalUser *localUser();
 	User *getUser(const QString &username);
 	
@@ -78,6 +83,7 @@ public slots:
 
 	// Matchmaking slots
 	void queueMatchmaking(ErosRegion region, int search_radius);
+	void dequeueMatchmaking();
 
 	// Chat slots
 	void sendMessage(ChatRoom *room, const QString message);
@@ -86,6 +92,15 @@ public slots:
 	void joinChatRoom(ChatRoom *room, const QString password);
 	void leaveChatRoom(ChatRoom *room);
 	void refreshChatRooms();
+
+	// Character slots
+	void addCharacter(const QString battle_net_url);
+	void updateCharacter(Character *character, int new_character_code, const QString new_game_profile_link);
+	void removeCharacter(Character *character);
+
+	//Upload replay slots
+	void uploadReplay(const QString path);
+	void uploadReplay(QIODevice *device);
 
 private:
 	QString server_hostname_;
@@ -99,6 +114,7 @@ private:
 	QTcpSocket *socket_;
 	LocalUser *local_user_;
 	MatchmakingMatch *matchmaking_match_;
+	Divisions *divisions_;
 
 	int last_error_;
 	QAtomicInt transaction_id_base_;
@@ -110,10 +126,10 @@ private:
 
 	// I don't even know if this is necessary, but it's better safe than sorry
 	bool awaiting_data_;
-    QString awaiting_data_command_;
-    qint64 awaiting_data_size_;
-    qint64 awaiting_data_transaction_id_;
-    QBuffer *awaiting_data_buffer_;
+	QString awaiting_data_command_;
+	qint64 awaiting_data_size_;
+	qint64 awaiting_data_transaction_id_;
+	QBuffer *awaiting_data_buffer_;
 
 	// Server Stats
 	QMap<ErosRegion, int> eros_matchmaking_searching_regions_;
@@ -152,6 +168,10 @@ private slots:
 	void chatLeaveRequestComplete(Request *);
 	void chatMessageRequestComplete(Request *);
 
+	void characterRequestComplete(Request *);
+
+    void replayRequestComplete(Request *request);
+
 	void ensureUserParent(User *user);
 	void ensureChatParent(ChatRoom *room);
 signals:
@@ -175,13 +195,19 @@ signals:
 	void localUserUpdated(LocalUser *user);
 	void characterAdded(Character* character);
 	void characterUpdated(Character* character);
+	void characterRemoved(Character* character);
+	void addCharacterError(const QString battle_net_profile, ErosError error);
+	void updateCharacterError(Character* character, ErosError error);
+	void removeCharacterError(Character* character, ErosError error);
 
 	// Match signals
 	void matchmakingStateChanged(ErosMatchmakingState status);
 	void matchmakingMatchFound(MatchmakingMatch *match);
+	void replayUploaded();
+	void replayUploadError(ErosError error);
 
 	// Chat signals
-	void chatRoomJoinFailed(ChatRoom *room, ErosChatError code);
+	void chatRoomJoinFailed(ChatRoom *room, ErosError code);
 
 	void chatRoomAdded(ChatRoom *room);
 	void chatRoomRemoved(ChatRoom *room);
@@ -196,8 +222,8 @@ signals:
 
 	void chatMessageSent(ChatRoom *room, const QString message);
 	void chatMessageSent(User *user, const QString message);
-	void chatMessageFailed(ChatRoom *room, const QString message, ErosChatError code);
-	void chatMessageFailed(User *user, const QString message, ErosChatError code);
+	void chatMessageFailed(ChatRoom *room, const QString message, ErosError code);
+	void chatMessageFailed(User *user, const QString message, ErosError code);
 	
 
 };

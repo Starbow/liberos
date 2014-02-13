@@ -19,7 +19,7 @@ class User : public QObject
 	Q_OBJECT
 
 public:
-	User(const Eros *parent, const QString &username);
+	User(Eros *parent, const QString &username);
 	~User();
 
 	const QString &username() const;
@@ -45,6 +45,7 @@ protected:
 	int walkovers_;
 	int search_radius_;
 	int points_;
+	Eros *eros_;
 
 	bool first_update_;
 

@@ -26,7 +26,7 @@ bool ChatIndexRequest::processData(const QString &command, const QByteArray &dat
 		{
 			const protobufs::ChatRoomInfo &info = index.room(i);
 
-			ChatRoom *room = ((Eros*)this->parent())->getChatRoom(QString::fromStdString(info.name()));
+			ChatRoom *room = this->eros_->getChatRoom(QString::fromStdString(info.name()));
 			room->update(info);
 
 			this->chatRooms_ << room;

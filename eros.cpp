@@ -4,21 +4,27 @@
 
 #include "requests/handshakerequest.h"
 #include "requests/pingrequest.h"
+#include "requests/matchmakingdequeuerequest.h"
 #include "requests/matchmakingqueuerequest.h"
 #include "requests/chatindexrequest.h"
 #include "requests/chatjoinrequest.h"
 #include "requests/chatleaverequest.h"
 #include "requests/chatmessagerequest.h"
 #include "requests/privatemessagerequest.h"
+#include "requests/addcharacterrequest.h"
+#include "requests/updatecharacterrequest.h"
+#include "requests/removecharacterrequest.h"
+#include "requests/uploadreplayrequest.h"
 
 #include <QTimer>
 #include <QThread>
+#include <QFile>
 
 Eros::Eros(QObject *parent)
 	: QObject(parent)
 {
 	qRegisterMetaType<ErosRegion>();
-	qRegisterMetaType<ErosChatError>();
+	qRegisterMetaType<ErosError>();
 
 	this->users_ = QList<User *>();
 	this->chatrooms_ = QList<ChatRoom *>();
@@ -138,8 +144,7 @@ void Eros::socketConnected()
 }
 
 void Eros::socketDisconnected() {
-
-	setState(ErosState::UnconnectedState);
+	disconnectFromEros();
 }
 
 void Eros::socketError(QAbstractSocket::SocketError error)
@@ -326,6 +331,16 @@ void Eros::setMatchmakingState(ErosMatchmakingState state)
 	}
 }
 
+const Divisions *Eros::divisions() const
+{
+	return this->divisions_;
+}
+
+const MatchmakingMatch *Eros::matchmakingMatch() const
+{
+	return this->matchmaking_match_;
+}
+
 User* Eros::getUser(const QString &username)
 {
 	const QString key = username.toLower();
@@ -340,7 +355,7 @@ User* Eros::getUser(const QString &username)
 	}
 
 	// Ugly cross-thread hack.
-	User *new_user = new User(0, username);
+	User *new_user = new User(this, username);
 	if (QThread::currentThread() == this->thread())
 	{
 		new_user->setParent(this);
@@ -421,7 +436,7 @@ ChatRoom *Eros::getChatRoom(const QString &room)
 	}
 
 	// Ugly cross-thread hack.
-	ChatRoom *new_room = new ChatRoom(0, room);
+	ChatRoom *new_room = new ChatRoom(this, room);
 	if (QThread::currentThread() == this->thread())
 	{
 		new_room->setParent(this);
@@ -440,6 +455,19 @@ void Eros::queueMatchmaking(ErosRegion region, int radius)
 		MatchmakingQueueRequest *request = new MatchmakingQueueRequest(this, region, radius);
 		QObject::connect(request, SIGNAL(queued(Request*)), this, SLOT(matchmakingRequestQueued(Request*)));
 		sendRequest(request);
+	}
+}
+
+void Eros::dequeueMatchmaking()
+{
+	// Dequeue from matchmaking. Check locally to ensure we're not already queued.
+	if (state_ == ErosState::ConnectedState)
+	{
+		if (matchmaking_state_ == ErosMatchmakingState::Queued)
+		{
+			MatchmakingDequeueRequest *request = new MatchmakingDequeueRequest(this);
+			sendRequest(request);
+		}
 	}
 }
 
@@ -540,6 +568,11 @@ void Eros::handleServerCommand(const QString &command, const QByteArray &data)
 }
 void Eros::sendRequest(Request *request)
 {
+	if (this->socket_->state() != QTcpSocket::SocketState::ConnectedState)
+	{
+		disconnectFromEros();
+		return;
+	}
 	// This should be in a worker thread.
 
 	int transaction_id = transaction_id_base_.fetchAndAddRelaxed(1);
@@ -574,9 +607,19 @@ void Eros::sendRequest(Request *request)
 		qint64 written = 0;
 		while (written < dataLength)
 		{
+			
 			qint64 remaining = dataLength - written;
 			qint64 read = data->read(buffer, (remaining > UPLOAD_BUFFER_SIZE) ? UPLOAD_BUFFER_SIZE : remaining);
-			written += this->socket_->write(buffer, read);
+			qint64 this_write = this->socket_->write(buffer, read);
+			written += this_write;
+			if (this_write == 0)
+			{
+				if (this->socket_->state() != QTcpSocket::SocketState::ConnectedState)
+				{
+					disconnectFromEros();
+					return;
+				}
+			}
 			if (dataLength > UPLOAD_BUFFER_SIZE)
 			{
 				emit uploadProgress(written, dataLength);
@@ -613,6 +656,7 @@ void Eros::handshakeRequestComplete(Request* request)
 		else
 		{
 			this->local_user_ = handshake_request->user();
+			this->divisions_ = handshake_request->divisions();
 			this->users_ <<  this->local_user_;
 
 			QObject::connect(this->local_user_, SIGNAL(updated(User*)), this, SLOT(userUpdatedHandler(User*)));
@@ -812,7 +856,7 @@ void Eros::chatJoinRequestComplete(Request *request)
     {
 		if (join_request->status() != ChatJoinRequest::RequestStatus::Success)
 		{
-			emit chatRoomJoinFailed(join_request->room(), (ErosChatError)join_request->status());
+			emit chatRoomJoinFailed(join_request->room(), (ErosError)join_request->status());
 		}
 	}
 }
@@ -832,7 +876,7 @@ void Eros::chatMessageRequestComplete(Request *request)
     {
 		if (message_request->status() != ChatJoinRequest::RequestStatus::Success)
 		{
-			emit chatMessageFailed(message_request->user(), message_request->message(), (ErosChatError)message_request->status());
+			emit chatMessageFailed(message_request->user(), message_request->message(), (ErosError)message_request->status());
 		}
 		else 
 		{
@@ -843,7 +887,7 @@ void Eros::chatMessageRequestComplete(Request *request)
     {
 		if (message_request->status() != ChatJoinRequest::RequestStatus::Success)
 		{
-			emit chatMessageFailed(message_request->room(), message_request->message(), (ErosChatError)message_request->status());
+			emit chatMessageFailed(message_request->room(), message_request->message(), (ErosError)message_request->status());
 		}
 		else 
 		{
@@ -877,5 +921,98 @@ void Eros::joinChatRoom(ChatRoom *room, const QString password)
 void Eros::leaveChatRoom(ChatRoom *room)
 {
 	ChatLeaveRequest *request = new ChatLeaveRequest(this, room);
+	sendRequest(request);
+}
+
+void Eros::characterRequestComplete(Request *request)
+{
+	if(AddCharacterRequest* character_request = dynamic_cast<AddCharacterRequest*>(request))
+    {
+		if (character_request->status() == AddCharacterRequest::RequestStatus::Success) 
+		{
+			Character *character = character_request->character();
+			emit characterAdded(character);
+		} 
+		else 
+		{
+			emit addCharacterError(character_request->battle_net_url(), (ErosError)character_request->status());
+		}
+	}
+	else if(UpdateCharacterRequest* character_request = dynamic_cast<UpdateCharacterRequest*>(request))
+    {
+		// Don't need to emit character updated ourselves. It's done in the character->update handler.
+		if (character_request->status() != AddCharacterRequest::RequestStatus::Success) 
+		{
+			Character *character = character_request->character();
+			emit updateCharacterError(character, (ErosError)character_request->status());
+		} 
+	}
+	else if(RemoveCharacterRequest* character_request = dynamic_cast<RemoveCharacterRequest*>(request))
+    {
+		Character *character = character_request->character();
+		if (character_request->status() != AddCharacterRequest::RequestStatus::Success) 
+		{
+			emit removeCharacterError(character, (ErosError)character_request->status());
+		} 
+		else
+		{
+			emit characterRemoved(character);
+		}
+	}
+}
+
+void Eros::addCharacter(const QString battle_net_url)
+{
+	AddCharacterRequest *request = new AddCharacterRequest(this, battle_net_url);
+	QObject::connect(request, SIGNAL(complete(Request*)), this, SLOT(characterRequestComplete(Request*)));
+	sendRequest(request);
+}
+
+void Eros::updateCharacter(Character *character, int new_character_code, const QString new_game_profile_link)
+{
+	UpdateCharacterRequest *request = new UpdateCharacterRequest(this, character, new_character_code, new_game_profile_link);
+	QObject::connect(request, SIGNAL(complete(Request*)), this, SLOT(characterRequestComplete(Request*)));
+	sendRequest(request);
+}
+
+void Eros::removeCharacter(Character *character)
+{
+	RemoveCharacterRequest *request = new RemoveCharacterRequest(this, character);
+	QObject::connect(request, SIGNAL(complete(Request*)), this, SLOT(characterRequestComplete(Request*)));
+	sendRequest(request);
+}
+
+
+void Eros::replayRequestComplete(Request *request)
+{
+	if(UploadReplayRequest* replay_request = dynamic_cast<UploadReplayRequest*>(request))
+    {
+		if (replay_request->error() != ErosError::None)
+		{
+			emit replayUploadError(replay_request->error());
+		}
+		else
+		{
+			emit replayUploaded();
+		}
+	}
+
+}
+
+void Eros::uploadReplay(const QString path)
+{
+	QFile replay(path);
+	if (!replay.open(QIODevice::ReadOnly)) {
+		emit replayUploadError(ErosError::DiskReadError);
+		return;
+	}
+
+	uploadReplay(&replay);
+}
+
+void Eros::uploadReplay(QIODevice *device)
+{
+	UploadReplayRequest	 *request = new UploadReplayRequest(this, device);
+	QObject::connect(request, SIGNAL(complete(Request*)), this, SLOT(replayRequestComplete(Request*)));
 	sendRequest(request);
 }

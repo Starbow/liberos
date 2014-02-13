@@ -17,6 +17,11 @@ public:
 	~LocalUser();
 
 	const QList<Character *> &characters() const;
+
+private slots:
+	void characterAdded(Character *character);
+	void characterRemoved(Character *character);
+
 private:
 	
 	QList<Character *> characters_;
