@@ -37,6 +37,7 @@ void protobuf_ShutdownFile_eros_2eproto();
 class Handshake;
 class Division;
 class HandshakeResponse;
+class UserRegionStats;
 class UserStats;
 class MapPool;
 class Map;
@@ -452,6 +453,138 @@ class HandshakeResponse : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
+class UserRegionStats : public ::google::protobuf::Message {
+ public:
+  UserRegionStats();
+  virtual ~UserRegionStats();
+
+  UserRegionStats(const UserRegionStats& from);
+
+  inline UserRegionStats& operator=(const UserRegionStats& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const UserRegionStats& default_instance();
+
+  void Swap(UserRegionStats* other);
+
+  // implements Message ----------------------------------------------
+
+  UserRegionStats* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const UserRegionStats& from);
+  void MergeFrom(const UserRegionStats& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .protobufs.Region region = 1;
+  inline bool has_region() const;
+  inline void clear_region();
+  static const int kRegionFieldNumber = 1;
+  inline ::protobufs::Region region() const;
+  inline void set_region(::protobufs::Region value);
+
+  // required int64 points = 2;
+  inline bool has_points() const;
+  inline void clear_points();
+  static const int kPointsFieldNumber = 2;
+  inline ::google::protobuf::int64 points() const;
+  inline void set_points(::google::protobuf::int64 value);
+
+  // required int64 wins = 3;
+  inline bool has_wins() const;
+  inline void clear_wins();
+  static const int kWinsFieldNumber = 3;
+  inline ::google::protobuf::int64 wins() const;
+  inline void set_wins(::google::protobuf::int64 value);
+
+  // required int64 losses = 4;
+  inline bool has_losses() const;
+  inline void clear_losses();
+  static const int kLossesFieldNumber = 4;
+  inline ::google::protobuf::int64 losses() const;
+  inline void set_losses(::google::protobuf::int64 value);
+
+  // required int64 forefeits = 5;
+  inline bool has_forefeits() const;
+  inline void clear_forefeits();
+  static const int kForefeitsFieldNumber = 5;
+  inline ::google::protobuf::int64 forefeits() const;
+  inline void set_forefeits(::google::protobuf::int64 value);
+
+  // required int64 walkovers = 6;
+  inline bool has_walkovers() const;
+  inline void clear_walkovers();
+  static const int kWalkoversFieldNumber = 6;
+  inline ::google::protobuf::int64 walkovers() const;
+  inline void set_walkovers(::google::protobuf::int64 value);
+
+  // @@protoc_insertion_point(class_scope:protobufs.UserRegionStats)
+ private:
+  inline void set_has_region();
+  inline void clear_has_region();
+  inline void set_has_points();
+  inline void clear_has_points();
+  inline void set_has_wins();
+  inline void clear_has_wins();
+  inline void set_has_losses();
+  inline void clear_has_losses();
+  inline void set_has_forefeits();
+  inline void clear_has_forefeits();
+  inline void set_has_walkovers();
+  inline void clear_has_walkovers();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int64 points_;
+  ::google::protobuf::int64 wins_;
+  ::google::protobuf::int64 losses_;
+  ::google::protobuf::int64 forefeits_;
+  ::google::protobuf::int64 walkovers_;
+  int region_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
+
+  friend void  protobuf_AddDesc_eros_2eproto();
+  friend void protobuf_AssignDesc_eros_2eproto();
+  friend void protobuf_ShutdownFile_eros_2eproto();
+
+  void InitAsDefaultInstance();
+  static UserRegionStats* default_instance_;
+};
+// -------------------------------------------------------------------
+
 class UserStats : public ::google::protobuf::Message {
  public:
   UserStats();
@@ -518,19 +651,19 @@ class UserStats : public ::google::protobuf::Message {
   inline ::std::string* release_username();
   inline void set_allocated_username(::std::string* username);
 
-  // required int64 points = 2;
-  inline bool has_points() const;
-  inline void clear_points();
-  static const int kPointsFieldNumber = 2;
-  inline ::google::protobuf::int64 points() const;
-  inline void set_points(::google::protobuf::int64 value);
-
-  // required int64 search_radius = 3;
+  // required int64 search_radius = 2;
   inline bool has_search_radius() const;
   inline void clear_search_radius();
-  static const int kSearchRadiusFieldNumber = 3;
+  static const int kSearchRadiusFieldNumber = 2;
   inline ::google::protobuf::int64 search_radius() const;
   inline void set_search_radius(::google::protobuf::int64 value);
+
+  // required int64 points = 3;
+  inline bool has_points() const;
+  inline void clear_points();
+  static const int kPointsFieldNumber = 3;
+  inline ::google::protobuf::int64 points() const;
+  inline void set_points(::google::protobuf::int64 value);
 
   // required int64 wins = 4;
   inline bool has_wins() const;
@@ -560,14 +693,26 @@ class UserStats : public ::google::protobuf::Message {
   inline ::google::protobuf::int64 walkovers() const;
   inline void set_walkovers(::google::protobuf::int64 value);
 
+  // repeated .protobufs.UserRegionStats region = 8;
+  inline int region_size() const;
+  inline void clear_region();
+  static const int kRegionFieldNumber = 8;
+  inline const ::protobufs::UserRegionStats& region(int index) const;
+  inline ::protobufs::UserRegionStats* mutable_region(int index);
+  inline ::protobufs::UserRegionStats* add_region();
+  inline const ::google::protobuf::RepeatedPtrField< ::protobufs::UserRegionStats >&
+      region() const;
+  inline ::google::protobuf::RepeatedPtrField< ::protobufs::UserRegionStats >*
+      mutable_region();
+
   // @@protoc_insertion_point(class_scope:protobufs.UserStats)
  private:
   inline void set_has_username();
   inline void clear_has_username();
-  inline void set_has_points();
-  inline void clear_has_points();
   inline void set_has_search_radius();
   inline void clear_has_search_radius();
+  inline void set_has_points();
+  inline void clear_has_points();
   inline void set_has_wins();
   inline void clear_has_wins();
   inline void set_has_losses();
@@ -580,15 +725,16 @@ class UserStats : public ::google::protobuf::Message {
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::std::string* username_;
-  ::google::protobuf::int64 points_;
   ::google::protobuf::int64 search_radius_;
+  ::google::protobuf::int64 points_;
   ::google::protobuf::int64 wins_;
   ::google::protobuf::int64 losses_;
   ::google::protobuf::int64 forefeits_;
   ::google::protobuf::int64 walkovers_;
+  ::google::protobuf::RepeatedPtrField< ::protobufs::UserRegionStats > region_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(8 + 31) / 32];
 
   friend void  protobuf_AddDesc_eros_2eproto();
   friend void protobuf_AssignDesc_eros_2eproto();
@@ -2920,6 +3066,143 @@ HandshakeResponse::mutable_division() {
 
 // -------------------------------------------------------------------
 
+// UserRegionStats
+
+// required .protobufs.Region region = 1;
+inline bool UserRegionStats::has_region() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void UserRegionStats::set_has_region() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void UserRegionStats::clear_has_region() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void UserRegionStats::clear_region() {
+  region_ = 1;
+  clear_has_region();
+}
+inline ::protobufs::Region UserRegionStats::region() const {
+  return static_cast< ::protobufs::Region >(region_);
+}
+inline void UserRegionStats::set_region(::protobufs::Region value) {
+  assert(::protobufs::Region_IsValid(value));
+  set_has_region();
+  region_ = value;
+}
+
+// required int64 points = 2;
+inline bool UserRegionStats::has_points() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void UserRegionStats::set_has_points() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void UserRegionStats::clear_has_points() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void UserRegionStats::clear_points() {
+  points_ = GOOGLE_LONGLONG(0);
+  clear_has_points();
+}
+inline ::google::protobuf::int64 UserRegionStats::points() const {
+  return points_;
+}
+inline void UserRegionStats::set_points(::google::protobuf::int64 value) {
+  set_has_points();
+  points_ = value;
+}
+
+// required int64 wins = 3;
+inline bool UserRegionStats::has_wins() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void UserRegionStats::set_has_wins() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void UserRegionStats::clear_has_wins() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void UserRegionStats::clear_wins() {
+  wins_ = GOOGLE_LONGLONG(0);
+  clear_has_wins();
+}
+inline ::google::protobuf::int64 UserRegionStats::wins() const {
+  return wins_;
+}
+inline void UserRegionStats::set_wins(::google::protobuf::int64 value) {
+  set_has_wins();
+  wins_ = value;
+}
+
+// required int64 losses = 4;
+inline bool UserRegionStats::has_losses() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void UserRegionStats::set_has_losses() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void UserRegionStats::clear_has_losses() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void UserRegionStats::clear_losses() {
+  losses_ = GOOGLE_LONGLONG(0);
+  clear_has_losses();
+}
+inline ::google::protobuf::int64 UserRegionStats::losses() const {
+  return losses_;
+}
+inline void UserRegionStats::set_losses(::google::protobuf::int64 value) {
+  set_has_losses();
+  losses_ = value;
+}
+
+// required int64 forefeits = 5;
+inline bool UserRegionStats::has_forefeits() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void UserRegionStats::set_has_forefeits() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void UserRegionStats::clear_has_forefeits() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void UserRegionStats::clear_forefeits() {
+  forefeits_ = GOOGLE_LONGLONG(0);
+  clear_has_forefeits();
+}
+inline ::google::protobuf::int64 UserRegionStats::forefeits() const {
+  return forefeits_;
+}
+inline void UserRegionStats::set_forefeits(::google::protobuf::int64 value) {
+  set_has_forefeits();
+  forefeits_ = value;
+}
+
+// required int64 walkovers = 6;
+inline bool UserRegionStats::has_walkovers() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void UserRegionStats::set_has_walkovers() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void UserRegionStats::clear_has_walkovers() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void UserRegionStats::clear_walkovers() {
+  walkovers_ = GOOGLE_LONGLONG(0);
+  clear_has_walkovers();
+}
+inline ::google::protobuf::int64 UserRegionStats::walkovers() const {
+  return walkovers_;
+}
+inline void UserRegionStats::set_walkovers(::google::protobuf::int64 value) {
+  set_has_walkovers();
+  walkovers_ = value;
+}
+
+// -------------------------------------------------------------------
+
 // UserStats
 
 // required string username = 1;
@@ -2992,37 +3275,15 @@ inline void UserStats::set_allocated_username(::std::string* username) {
   }
 }
 
-// required int64 points = 2;
-inline bool UserStats::has_points() const {
+// required int64 search_radius = 2;
+inline bool UserStats::has_search_radius() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void UserStats::set_has_points() {
+inline void UserStats::set_has_search_radius() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void UserStats::clear_has_points() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void UserStats::clear_points() {
-  points_ = GOOGLE_LONGLONG(0);
-  clear_has_points();
-}
-inline ::google::protobuf::int64 UserStats::points() const {
-  return points_;
-}
-inline void UserStats::set_points(::google::protobuf::int64 value) {
-  set_has_points();
-  points_ = value;
-}
-
-// required int64 search_radius = 3;
-inline bool UserStats::has_search_radius() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void UserStats::set_has_search_radius() {
-  _has_bits_[0] |= 0x00000004u;
-}
 inline void UserStats::clear_has_search_radius() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void UserStats::clear_search_radius() {
   search_radius_ = GOOGLE_LONGLONG(0);
@@ -3034,6 +3295,28 @@ inline ::google::protobuf::int64 UserStats::search_radius() const {
 inline void UserStats::set_search_radius(::google::protobuf::int64 value) {
   set_has_search_radius();
   search_radius_ = value;
+}
+
+// required int64 points = 3;
+inline bool UserStats::has_points() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void UserStats::set_has_points() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void UserStats::clear_has_points() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void UserStats::clear_points() {
+  points_ = GOOGLE_LONGLONG(0);
+  clear_has_points();
+}
+inline ::google::protobuf::int64 UserStats::points() const {
+  return points_;
+}
+inline void UserStats::set_points(::google::protobuf::int64 value) {
+  set_has_points();
+  points_ = value;
 }
 
 // required int64 wins = 4;
@@ -3122,6 +3405,31 @@ inline ::google::protobuf::int64 UserStats::walkovers() const {
 inline void UserStats::set_walkovers(::google::protobuf::int64 value) {
   set_has_walkovers();
   walkovers_ = value;
+}
+
+// repeated .protobufs.UserRegionStats region = 8;
+inline int UserStats::region_size() const {
+  return region_.size();
+}
+inline void UserStats::clear_region() {
+  region_.Clear();
+}
+inline const ::protobufs::UserRegionStats& UserStats::region(int index) const {
+  return region_.Get(index);
+}
+inline ::protobufs::UserRegionStats* UserStats::mutable_region(int index) {
+  return region_.Mutable(index);
+}
+inline ::protobufs::UserRegionStats* UserStats::add_region() {
+  return region_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::protobufs::UserRegionStats >&
+UserStats::region() const {
+  return region_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::protobufs::UserRegionStats >*
+UserStats::mutable_region() {
+  return &region_;
 }
 
 // -------------------------------------------------------------------

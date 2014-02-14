@@ -32,6 +32,7 @@ Eros::Eros(QObject *parent)
 	this->socket_ = new QTcpSocket(this);
 	this->state_ = ErosState::UnconnectedState;
 	this->awaiting_data_ = false;
+	this->matchmaking_state_ = ErosMatchmakingState::Idle;
 
 	QObject::connect(this->socket_, SIGNAL(connected()), this, SLOT(socketConnected()));
     QObject::connect(this->socket_, SIGNAL(disconnected()), this, SLOT(socketDisconnected()));
@@ -446,10 +447,13 @@ ChatRoom *Eros::getChatRoom(const QString &room)
 
 void Eros::queueMatchmaking(ErosRegion region, int radius)
 {
+	if (this->matchmaking_state_ == ErosMatchmakingState::Queued)
+		return;
 	if (state_ == ErosState::ConnectedState)
-	{
+	{	
 		MatchmakingQueueRequest *request = new MatchmakingQueueRequest(this, region, radius);
 		QObject::connect(request, SIGNAL(queued(Request*)), this, SLOT(matchmakingRequestQueued(Request*)));
+		QObject::connect(request, SIGNAL(complete(Request*)), this, SLOT(matchmakingRequestComplete(Request*)));
 		sendRequest(request);
 	}
 }
@@ -628,8 +632,8 @@ void Eros::sendRequest(Request *request)
 
 void Eros::requestComplete(Request* request) 
 {
-	QMap<int, Request*>::const_iterator iterator = this->requests_.constBegin();
-	while (iterator != this->requests_.constEnd()) {
+	for (QMap<int, Request*>::const_iterator iterator = this->requests_.constBegin(); iterator != this->requests_.constEnd(); iterator++)
+	{
 		if (iterator.value() == request)
 		{
 			this->requests_.remove(iterator.key());
