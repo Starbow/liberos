@@ -320,14 +320,10 @@ void Eros::setMatchmakingState(ErosMatchmakingState state)
 		this->matchmaking_state_ = state;
 		emit matchmakingStateChanged(this->matchmaking_state_);
 
-		if (this->state_ == ErosState::UnconnectedState)
+		if (this->matchmaking_state_ == ErosMatchmakingState::Matched)
 		{
-			emit disconnected();
+			emit matchmakingMatchFound(this->matchmaking_match_);
 		} 
-		else if (this->state_ == ErosState::ConnectedState)
-		{
-			emit connected();
-		}
 	}
 }
 
