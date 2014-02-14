@@ -522,13 +522,11 @@ void Eros::handleServerCommand(const QString &command, const QByteArray &data)
 
 		if (command == "CHJ")
 		{
-
 			emit chatRoomUserJoined(room, user);
 			if (user == this->local_user_)
 			{
 				emit chatRoomJoined(room);
 			}
-
 		}
 		else if (command == "CHL")
 		{
@@ -858,6 +856,13 @@ void Eros::chatJoinRequestComplete(Request *request)
 		{
 			emit chatRoomJoinFailed(join_request->room(), (ErosError)join_request->status());
 		}
+		else
+		{
+			if (!this->chatrooms_.contains(join_request->room()))
+			{
+				this->chatrooms_ << join_request->room();
+			}
+		}
 	}
 }
 
@@ -921,6 +926,7 @@ void Eros::joinChatRoom(ChatRoom *room, const QString password)
 void Eros::leaveChatRoom(ChatRoom *room)
 {
 	ChatLeaveRequest *request = new ChatLeaveRequest(this, room);
+	QObject::connect(request, SIGNAL(complete(Request*)), this, SLOT(chatLeaveRequestComplete(Request*)));
 	sendRequest(request);
 }
 
