@@ -20,3 +20,28 @@ MatchmakingMatch::~MatchmakingMatch()
 {
 
 }
+
+User *MatchmakingMatch::opponent() const
+{
+	return this->opponent_;
+}
+int MatchmakingMatch::matchTime() const
+{
+	this->match_time_;
+}
+ChatRoom *MatchmakingMatch::chatRoom() const
+{
+	return this->chat_room_;
+}
+const QString &MatchmakingMatch::battleNetChannel() const
+{
+	return this->battle_net_channel_;
+}
+int MatchmakingMatch::opponentLatency() const
+{
+	return this->opponent_latency_;
+}
+const QString &MatchmakingMatch::map() const
+{
+	return this->map_;
+}

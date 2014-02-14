@@ -21,6 +21,13 @@ public:
 	MatchmakingMatch(Eros *parent, const protobufs::MatchmakingResult &result);
 	~MatchmakingMatch();
 
+	User *opponent() const;
+	int matchTime() const;
+	ChatRoom *chatRoom() const;
+	const QString &battleNetChannel() const;
+	int opponentLatency() const;
+	const QString &map() const;
+
 private:
 	User *opponent_;
 	int match_time_;
