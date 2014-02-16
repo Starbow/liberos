@@ -31,43 +31,34 @@ const QString &User::username() const
 {
 	return this->username_;
 }
-int User::wins() const
-{
-	return this->wins_;
-}
-int User::losses() const
-{
-	return this->losses_;
-}
-int User::forefeits() const
-{
-	return this->forefeits_;
-}
-int User::walkovers() const
-{
-	return this->walkovers_;
-}
 int User::searchRadius() const
 {
 	return this->search_radius_;
 }
 
-int User::points() const
+
+const QMap<ErosRegion, UserLadderStats*> &User::ladderStats() const
 {
-	return this->points_;
+	return this->ladder_stats_;
+}
+const UserLadderStats *User::ladderStatsGlobal() const
+{
+	return this->ladder_stats_global_;
 }
 
 void User::update(const protobufs::UserStats &stats)
 {
 	this->state_ = ErosUserState::Known;
 	this->username_ = QString::fromStdString(stats.username());
-	this->wins_ = stats.wins();
-	this->losses_ = stats.losses();
-	this->walkovers_ = stats.walkovers();
-	this->forefeits_ = stats.forefeits();
-	this->points_ = stats.points();
+	this->ladder_stats_global_ = new UserLadderStats(this, stats.wins(), stats.losses(), stats.forefeits(), stats.walkovers(), stats.points());
 	this->search_radius_ = stats.search_radius();
 	
+	for (int i = 0; i < stats.region_size(); i++)
+	{
+		const protobufs::UserRegionStats &region = stats.region(i);
+		this->ladder_stats_[(ErosRegion)region.region()] = new UserLadderStats(this, region.wins(), region.losses(), region.forefeits(), region.walkovers(), region.points());
+	}
+
 	if (this->first_update_)
 	{
 		this->first_update_ = false;

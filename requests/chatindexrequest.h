@@ -1,5 +1,5 @@
-#ifndef CHATINDEXREQUEST_H
-#define CHATINDEXREQUEST_H
+#ifndef LIBEROS_REQUESTS_CHATINDEXREQUEST_H
+#define LIBEROS_REQUESTS_CHATINDEXREQUEST_H
 
 #include "../request.h"
 #include <QList>
@@ -34,4 +34,4 @@ private:
 	RequestStatus status_;
 };
 
-#endif // CHATINDEXREQUEST_H
+#endif // LIBEROS_REQUESTS_CHATINDEXREQUEST_H

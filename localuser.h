@@ -1,5 +1,5 @@
-#ifndef LOCALUSER_H
-#define LOCALUSER_H
+#ifndef LIBEROS_LOCALUSER_H
+#define LIBEROS_LOCALUSER_H
 
 #include <QObject>
 
@@ -27,4 +27,4 @@ private:
 	QList<Character *> characters_;
 };
 
-#endif // LOCALUSER_H
+#endif // LIBEROS_LOCALUSER_H

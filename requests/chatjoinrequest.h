@@ -1,5 +1,5 @@
-#ifndef CHATJOINREQUEST_H
-#define CHATJOINREQUEST_H
+#ifndef LIBEROS_REQUESTS_CHATJOINREQUEST_H
+#define LIBEROS_REQUESTS_CHATJOINREQUEST_H
 
 #include "../request.h"
 
@@ -33,4 +33,4 @@ private:
 	RequestStatus status_;
 };
 
-#endif // CHATJOINREQUEST_H
+#endif // LIBEROS_REQUESTS_CHATJOINREQUEST_H

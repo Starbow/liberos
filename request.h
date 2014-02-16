@@ -1,5 +1,5 @@
-#ifndef REQUEST_H
-#define REQUEST_H
+#ifndef LIBEROS_REQUEST_H
+#define LIBEROS_REQUEST_H
 
 #include <QObject>
 #include <QBuffer>
@@ -36,4 +36,4 @@ protected:
 	Eros *eros_;
 };
 
-#endif // REQUEST_H
+#endif // LIBEROS_REQUEST_H

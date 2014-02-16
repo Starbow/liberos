@@ -1,5 +1,5 @@
-#ifndef CHATLEAVEREQUEST_H
-#define CHATLEAVEREQUEST_H
+#ifndef LIBEROS_REQUESTS_CHATLEAVEREQUEST_H
+#define LIBEROS_REQUESTS_CHATLEAVEREQUEST_H
 
 #include "../request.h"
 
@@ -18,4 +18,4 @@ private:
 	ChatRoom *room_;
 };
 
-#endif // CHATLEAVEREQUEST_H
+#endif // LIBEROS_REQUESTS_CHATLEAVEREQUEST_H

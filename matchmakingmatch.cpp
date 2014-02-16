@@ -27,7 +27,7 @@ User *MatchmakingMatch::opponent() const
 }
 int MatchmakingMatch::matchTime() const
 {
-	this->match_time_;
+	return this->match_time_;
 }
 ChatRoom *MatchmakingMatch::chatRoom() const
 {

@@ -1,5 +1,5 @@
-#ifndef ENUMS_H
-#define ENUMS_H
+#ifndef LIBEROS_ENUMS_H
+#define LIBEROS_ENUMS_H
 
 enum ErosState
 {

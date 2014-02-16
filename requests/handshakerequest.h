@@ -1,5 +1,5 @@
-#ifndef HANDSHAKEREQUEST_H
-#define HANDSHAKEREQUEST_H
+#ifndef LIBEROS_REQUESTS_HANDSHAKEREQUEST_H
+#define LIBEROS_REQUESTS_HANDSHAKEREQUEST_H
 
 #include "../request.h"
 #include <QBuffer>
@@ -27,7 +27,7 @@ public:
 	LocalUser *user() const;
 	Divisions *divisions() const;
 	ResponseStatus status() const;
-
+	const QList<ErosRegion> &activeRegions() const;
 	
 
 
@@ -36,9 +36,10 @@ private:
 	ResponseStatus status_;
 	LocalUser *user_;
 	Divisions *divisions_;
-	
+	QList<ErosRegion> active_regions_;
+
 	bool processHandshakeResponse(const QString &command, const QByteArray &data);
 };
 
-#endif // HANDSHAKEREQUEST_H
+#endif // LIBEROS_REQUESTS_HANDSHAKEREQUEST_H
 

@@ -1,5 +1,5 @@
-#ifndef MATCHMAKINGMATCH_H
-#define MATCHMAKINGMATCH_H
+#ifndef LIBEROS_MATCHMAKINGMATCH_H
+#define LIBEROS_MATCHMAKINGMATCH_H
 
 #include <QObject>
 
@@ -38,4 +38,4 @@ private:
 
 };
 
-#endif // MATCHMAKINGMATCH_H
+#endif // LIBEROS_MATCHMAKINGMATCH_H

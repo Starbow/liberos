@@ -233,6 +233,15 @@
     <ClCompile Include="GeneratedFiles\Release\moc_uploadreplayrequest.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="userladderstats.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_userladderstats.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_userladderstats.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="eros.h">
@@ -297,6 +306,9 @@
     </CustomBuild>
     <CustomBuild Include="requests\uploadreplayrequest.h">
       <Filter>Header Files\requests</Filter>
+    </CustomBuild>
+    <CustomBuild Include="userladderstats.h">
+      <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

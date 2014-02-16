@@ -1,5 +1,5 @@
-#ifndef DIVISIONS_H
-#define DIVISIONS_H
+#ifndef LIBEROS_DIVISIONS_H
+#define LIBEROS_DIVISIONS_H
 
 #include <QObject>
 #include <QList>
@@ -35,4 +35,4 @@ private:
 	QList<QPair<int, QString>> divisions_;
 };
 
-#endif // DIVISIONS_H
+#endif // LIBEROS_DIVISIONS_H

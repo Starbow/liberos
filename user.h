@@ -1,9 +1,11 @@
-#ifndef USER_H
-#define USER_H
+#ifndef LIBEROS_USER_H
+#define LIBEROS_USER_H
 
 #include <QObject>
 #include <QString>
-#include <QVector>
+#include <QMap>
+
+#include "userladderstats.h"
 
 #include "enums.h"
 
@@ -23,14 +25,11 @@ public:
 	~User();
 
 	const QString &username() const;
-	int wins() const;
-	int losses() const;
-	int forefeits() const;
-	int walkovers() const;
 	int searchRadius() const;
-	int points() const;
 	void update(const protobufs::UserStats &stats);
 	ErosUserState state() const;
+	const QMap<ErosRegion, UserLadderStats*> &ladderStats() const;
+	const UserLadderStats *ladderStatsGlobal() const;
 
 signals:
 	void updated(User* user);
@@ -39,17 +38,14 @@ protected:
 	User(Eros *parent);
 
 	QString username_;
-	int wins_;
-	int losses_;
-	int forefeits_;
-	int walkovers_;
+	
 	int search_radius_;
-	int points_;
 	Eros *eros_;
-
 	bool first_update_;
+	UserLadderStats *ladder_stats_global_;
+	QMap<ErosRegion, UserLadderStats*> ladder_stats_;
 
 	ErosUserState state_;
 };
 
-#endif // USER_H
+#endif // LIBEROS_USER_H

@@ -131,12 +131,13 @@ void protobuf_AssignDesc_eros_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(Division));
   HandshakeResponse_descriptor_ = file->message_type(2);
-  static const int HandshakeResponse_offsets_[5] = {
+  static const int HandshakeResponse_offsets_[6] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HandshakeResponse, status_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HandshakeResponse, user_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HandshakeResponse, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HandshakeResponse, character_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HandshakeResponse, division_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HandshakeResponse, active_region_),
   };
   HandshakeResponse_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -607,69 +608,70 @@ void protobuf_AddDesc_eros_2eproto() {
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\neros.proto\022\tprotobufs\"/\n\tHandshake\022\020\n\010"
     "username\030\001 \001(\t\022\020\n\010auth_key\030\002 \001(\t\"(\n\010Divi"
-    "sion\022\014\n\004name\030\001 \002(\t\022\016\n\006points\030\002 \002(\003\"\373\001\n\021H"
+    "sion\022\014\n\004name\030\001 \002(\t\022\016\n\006points\030\002 \002(\003\"\245\002\n\021H"
     "andshakeResponse\022<\n\006status\030\001 \002(\0162,.proto"
     "bufs.HandshakeResponse.HandshakeStatus\022\""
     "\n\004user\030\002 \001(\0132\024.protobufs.UserStats\022\n\n\002id"
     "\030\003 \001(\003\022\'\n\tcharacter\030\004 \003(\0132\024.protobufs.Ch"
     "aracter\022%\n\010division\030\005 \003(\0132\023.protobufs.Di"
-    "vision\"(\n\017HandshakeStatus\022\010\n\004FAIL\020\000\022\013\n\007S"
-    "UCCESS\020\001\"\210\001\n\017UserRegionStats\022!\n\006region\030\001"
-    " \002(\0162\021.protobufs.Region\022\016\n\006points\030\002 \002(\003\022"
-    "\014\n\004wins\030\003 \002(\003\022\016\n\006losses\030\004 \002(\003\022\021\n\tforefei"
-    "ts\030\005 \002(\003\022\021\n\twalkovers\030\006 \002(\003\"\264\001\n\tUserStat"
-    "s\022\020\n\010username\030\001 \002(\t\022\025\n\rsearch_radius\030\002 \002"
-    "(\003\022\016\n\006points\030\003 \002(\003\022\014\n\004wins\030\004 \002(\003\022\016\n\006loss"
-    "es\030\005 \002(\003\022\021\n\tforefeits\030\006 \002(\003\022\021\n\twalkovers"
-    "\030\007 \002(\003\022*\n\006region\030\010 \003(\0132\032.protobufs.UserR"
-    "egionStats\"&\n\007MapPool\022\033\n\003map\030\001 \003(\0132\016.pro"
-    "tobufs.Map\"X\n\003Map\022!\n\006region\030\001 \002(\0162\021.prot"
-    "obufs.Region\022\027\n\017battle_net_name\030\002 \002(\t\022\025\n"
-    "\rbattle_net_id\030\003 \002(\005\"b\n\020SimulationResult"
-    "\022&\n\010opponent\030\001 \002(\0132\024.protobufs.UserStats"
-    "\022\017\n\007victory\030\002 \002(\010\022\025\n\rmatch_quality\030\003 \002(\001"
-    "\"E\n\020MatchmakingQueue\022!\n\006region\030\001 \002(\0162\021.p"
-    "rotobufs.Region\022\016\n\006radius\030\002 \002(\003\"\271\001\n\021Matc"
-    "hmakingResult\022\020\n\010timespan\030\001 \002(\003\022\017\n\007quali"
-    "ty\030\002 \002(\001\022&\n\010opponent\030\003 \002(\0132\024.protobufs.U"
-    "serStats\022\030\n\020opponent_latency\030\004 \002(\003\022\017\n\007ch"
-    "annel\030\005 \002(\t\022\021\n\tchat_room\030\006 \002(\t\022\033\n\003map\030\007 "
-    "\002(\0132\016.protobufs.Map\"\230\001\n\014ChatRoomInfo\022\013\n\003"
-    "key\030\001 \002(\t\022\014\n\004name\030\002 \002(\t\022\022\n\npassworded\030\003 "
-    "\002(\010\022\020\n\010joinable\030\004 \002(\010\022\r\n\005fixed\030\005 \002(\010\022\r\n\005"
-    "users\030\006 \002(\003\022)\n\013participant\030\007 \003(\0132\024.proto"
-    "bufs.UserStats\"6\n\rChatRoomIndex\022%\n\004room\030"
-    "\001 \003(\0132\027.protobufs.ChatRoomInfo\">\n\013ChatMe"
-    "ssage\022\016\n\006sender\030\001 \002(\t\022\016\n\006target\030\002 \002(\t\022\017\n"
-    "\007message\030\003 \002(\t\"o\n\017ChatRoomMessage\022%\n\004roo"
-    "m\030\001 \002(\0132\027.protobufs.ChatRoomInfo\022$\n\006send"
-    "er\030\002 \002(\0132\024.protobufs.UserStats\022\017\n\007messag"
-    "e\030\003 \002(\t\"K\n\022ChatPrivateMessage\022$\n\006sender\030"
-    "\001 \002(\0132\024.protobufs.UserStats\022\017\n\007message\030\002"
-    " \002(\t\"Y\n\014ChatRoomUser\022%\n\004room\030\001 \002(\0132\027.pro"
-    "tobufs.ChatRoomInfo\022\"\n\004user\030\002 \002(\0132\024.prot"
-    "obufs.UserStats\"1\n\017ChatRoomRequest\022\014\n\004ro"
-    "om\030\001 \002(\t\022\020\n\010password\030\002 \002(\t\"N\n\020Matchmakin"
-    "gStats\022!\n\006region\030\001 \002(\0162\021.protobufs.Regio"
-    "n\022\027\n\017searching_users\030\002 \002(\003\"i\n\013ServerStat"
-    "s\022\024\n\014active_users\030\001 \002(\003\022\027\n\017searching_use"
-    "rs\030\002 \002(\003\022+\n\006region\030\003 \003(\0132\033.protobufs.Mat"
-    "chmakingStats\"\351\001\n\tCharacter\022!\n\006region\030\001 "
-    "\002(\0162\021.protobufs.Region\022\021\n\tsubregion\030\002 \002("
-    "\005\022\022\n\nprofile_id\030\003 \002(\005\022\026\n\016character_name\030"
-    "\004 \002(\t\022\026\n\016character_code\030\005 \001(\005\022\024\n\014profile"
-    "_link\030\006 \001(\t\022\033\n\023ingame_profile_link\030\007 \001(\t"
-    "\022\020\n\010verified\030\010 \001(\010\022\035\n\025verification_portr"
-    "ait\030\t \001(\005\"\306\001\n\020MatchParticipant\022\"\n\004user\030\001"
-    " \001(\0132\024.protobufs.UserStats\022\'\n\tcharacter\030"
-    "\002 \001(\0132\024.protobufs.Character\022\025\n\rpoints_be"
-    "fore\030\003 \002(\003\022\024\n\014points_after\030\004 \002(\003\022\031\n\021poin"
-    "ts_difference\030\005 \002(\003\022\017\n\007victory\030\006 \002(\010\022\014\n\004"
-    "race\030\007 \002(\t\"\177\n\013MatchResult\022!\n\006region\030\001 \002("
-    "\0162\021.protobufs.Region\022\033\n\003map\030\002 \002(\0132\016.prot"
-    "obufs.Map\0220\n\013participant\030\003 \003(\0132\033.protobu"
-    "fs.MatchParticipant*1\n\006Region\022\006\n\002NA\020\001\022\006\n"
-    "\002EU\020\002\022\006\n\002KR\020\003\022\006\n\002CN\020\005\022\007\n\003SEA\020\006", 2590);
+    "vision\022(\n\ractive_region\030\006 \003(\0162\021.protobuf"
+    "s.Region\"(\n\017HandshakeStatus\022\010\n\004FAIL\020\000\022\013\n"
+    "\007SUCCESS\020\001\"\210\001\n\017UserRegionStats\022!\n\006region"
+    "\030\001 \002(\0162\021.protobufs.Region\022\016\n\006points\030\002 \002("
+    "\003\022\014\n\004wins\030\003 \002(\003\022\016\n\006losses\030\004 \002(\003\022\021\n\tforef"
+    "eits\030\005 \002(\003\022\021\n\twalkovers\030\006 \002(\003\"\264\001\n\tUserSt"
+    "ats\022\020\n\010username\030\001 \002(\t\022\025\n\rsearch_radius\030\002"
+    " \002(\003\022\016\n\006points\030\003 \002(\003\022\014\n\004wins\030\004 \002(\003\022\016\n\006lo"
+    "sses\030\005 \002(\003\022\021\n\tforefeits\030\006 \002(\003\022\021\n\twalkove"
+    "rs\030\007 \002(\003\022*\n\006region\030\010 \003(\0132\032.protobufs.Use"
+    "rRegionStats\"&\n\007MapPool\022\033\n\003map\030\001 \003(\0132\016.p"
+    "rotobufs.Map\"X\n\003Map\022!\n\006region\030\001 \002(\0162\021.pr"
+    "otobufs.Region\022\027\n\017battle_net_name\030\002 \002(\t\022"
+    "\025\n\rbattle_net_id\030\003 \002(\005\"b\n\020SimulationResu"
+    "lt\022&\n\010opponent\030\001 \002(\0132\024.protobufs.UserSta"
+    "ts\022\017\n\007victory\030\002 \002(\010\022\025\n\rmatch_quality\030\003 \002"
+    "(\001\"E\n\020MatchmakingQueue\022!\n\006region\030\001 \002(\0162\021"
+    ".protobufs.Region\022\016\n\006radius\030\002 \002(\003\"\271\001\n\021Ma"
+    "tchmakingResult\022\020\n\010timespan\030\001 \002(\003\022\017\n\007qua"
+    "lity\030\002 \002(\001\022&\n\010opponent\030\003 \002(\0132\024.protobufs"
+    ".UserStats\022\030\n\020opponent_latency\030\004 \002(\003\022\017\n\007"
+    "channel\030\005 \002(\t\022\021\n\tchat_room\030\006 \002(\t\022\033\n\003map\030"
+    "\007 \002(\0132\016.protobufs.Map\"\230\001\n\014ChatRoomInfo\022\013"
+    "\n\003key\030\001 \002(\t\022\014\n\004name\030\002 \002(\t\022\022\n\npassworded\030"
+    "\003 \002(\010\022\020\n\010joinable\030\004 \002(\010\022\r\n\005fixed\030\005 \002(\010\022\r"
+    "\n\005users\030\006 \002(\003\022)\n\013participant\030\007 \003(\0132\024.pro"
+    "tobufs.UserStats\"6\n\rChatRoomIndex\022%\n\004roo"
+    "m\030\001 \003(\0132\027.protobufs.ChatRoomInfo\">\n\013Chat"
+    "Message\022\016\n\006sender\030\001 \002(\t\022\016\n\006target\030\002 \002(\t\022"
+    "\017\n\007message\030\003 \002(\t\"o\n\017ChatRoomMessage\022%\n\004r"
+    "oom\030\001 \002(\0132\027.protobufs.ChatRoomInfo\022$\n\006se"
+    "nder\030\002 \002(\0132\024.protobufs.UserStats\022\017\n\007mess"
+    "age\030\003 \002(\t\"K\n\022ChatPrivateMessage\022$\n\006sende"
+    "r\030\001 \002(\0132\024.protobufs.UserStats\022\017\n\007message"
+    "\030\002 \002(\t\"Y\n\014ChatRoomUser\022%\n\004room\030\001 \002(\0132\027.p"
+    "rotobufs.ChatRoomInfo\022\"\n\004user\030\002 \002(\0132\024.pr"
+    "otobufs.UserStats\"1\n\017ChatRoomRequest\022\014\n\004"
+    "room\030\001 \002(\t\022\020\n\010password\030\002 \002(\t\"N\n\020Matchmak"
+    "ingStats\022!\n\006region\030\001 \002(\0162\021.protobufs.Reg"
+    "ion\022\027\n\017searching_users\030\002 \002(\003\"i\n\013ServerSt"
+    "ats\022\024\n\014active_users\030\001 \002(\003\022\027\n\017searching_u"
+    "sers\030\002 \002(\003\022+\n\006region\030\003 \003(\0132\033.protobufs.M"
+    "atchmakingStats\"\351\001\n\tCharacter\022!\n\006region\030"
+    "\001 \002(\0162\021.protobufs.Region\022\021\n\tsubregion\030\002 "
+    "\002(\005\022\022\n\nprofile_id\030\003 \002(\005\022\026\n\016character_nam"
+    "e\030\004 \002(\t\022\026\n\016character_code\030\005 \001(\005\022\024\n\014profi"
+    "le_link\030\006 \001(\t\022\033\n\023ingame_profile_link\030\007 \001"
+    "(\t\022\020\n\010verified\030\010 \001(\010\022\035\n\025verification_por"
+    "trait\030\t \001(\005\"\306\001\n\020MatchParticipant\022\"\n\004user"
+    "\030\001 \001(\0132\024.protobufs.UserStats\022\'\n\tcharacte"
+    "r\030\002 \001(\0132\024.protobufs.Character\022\025\n\rpoints_"
+    "before\030\003 \002(\003\022\024\n\014points_after\030\004 \002(\003\022\031\n\021po"
+    "ints_difference\030\005 \002(\003\022\017\n\007victory\030\006 \002(\010\022\014"
+    "\n\004race\030\007 \002(\t\"\177\n\013MatchResult\022!\n\006region\030\001 "
+    "\002(\0162\021.protobufs.Region\022\033\n\003map\030\002 \002(\0132\016.pr"
+    "otobufs.Map\0220\n\013participant\030\003 \003(\0132\033.proto"
+    "bufs.MatchParticipant*1\n\006Region\022\006\n\002NA\020\001\022"
+    "\006\n\002EU\020\002\022\006\n\002KR\020\003\022\006\n\002CN\020\005\022\007\n\003SEA\020\006", 2632);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "eros.proto", &protobuf_RegisterTypes);
   Handshake::default_instance_ = new Handshake();
@@ -1320,6 +1322,7 @@ const int HandshakeResponse::kUserFieldNumber;
 const int HandshakeResponse::kIdFieldNumber;
 const int HandshakeResponse::kCharacterFieldNumber;
 const int HandshakeResponse::kDivisionFieldNumber;
+const int HandshakeResponse::kActiveRegionFieldNumber;
 #endif  // !_MSC_VER
 
 HandshakeResponse::HandshakeResponse()
@@ -1386,6 +1389,7 @@ void HandshakeResponse::Clear() {
   }
   character_.Clear();
   division_.Clear();
+  active_region_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -1472,6 +1476,35 @@ bool HandshakeResponse::MergePartialFromCodedStream(
           goto handle_uninterpreted;
         }
         if (input->ExpectTag(42)) goto parse_division;
+        if (input->ExpectTag(48)) goto parse_active_region;
+        break;
+      }
+
+      // repeated .protobufs.Region active_region = 6;
+      case 6: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_active_region:
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::protobufs::Region_IsValid(value)) {
+            add_active_region(static_cast< ::protobufs::Region >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(6, value);
+          }
+        } else if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag)
+                   == ::google::protobuf::internal::WireFormatLite::
+                      WIRETYPE_LENGTH_DELIMITED) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedEnumNoInline(
+                 input,
+                 &::protobufs::Region_IsValid,
+                 this->mutable_active_region())));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(48)) goto parse_active_region;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -1523,6 +1556,12 @@ void HandshakeResponse::SerializeWithCachedSizes(
       5, this->division(i), output);
   }
 
+  // repeated .protobufs.Region active_region = 6;
+  for (int i = 0; i < this->active_region_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      6, this->active_region(i), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -1561,6 +1600,12 @@ void HandshakeResponse::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         5, this->division(i), target);
+  }
+
+  // repeated .protobufs.Region active_region = 6;
+  for (int i = 0; i < this->active_region_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      6, this->active_region(i), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -1611,6 +1656,16 @@ int HandshakeResponse::ByteSize() const {
         this->division(i));
   }
 
+  // repeated .protobufs.Region active_region = 6;
+  {
+    int data_size = 0;
+    for (int i = 0; i < this->active_region_size(); i++) {
+      data_size += ::google::protobuf::internal::WireFormatLite::EnumSize(
+        this->active_region(i));
+    }
+    total_size += 1 * this->active_region_size() + data_size;
+  }
+
   if (!unknown_fields().empty()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -1638,6 +1693,7 @@ void HandshakeResponse::MergeFrom(const HandshakeResponse& from) {
   GOOGLE_CHECK_NE(&from, this);
   character_.MergeFrom(from.character_);
   division_.MergeFrom(from.division_);
+  active_region_.MergeFrom(from.active_region_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_status()) {
       set_status(from.status());
@@ -1686,6 +1742,7 @@ void HandshakeResponse::Swap(HandshakeResponse* other) {
     std::swap(id_, other->id_);
     character_.Swap(&other->character_);
     division_.Swap(&other->division_);
+    active_region_.Swap(&other->active_region_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

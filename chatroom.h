@@ -1,5 +1,5 @@
-#ifndef CHATROOM_H
-#define CHATROOM_H
+#ifndef LIBEROS_CHATROOM_H
+#define LIBEROS_CHATROOM_H
 
 #include <QObject>
 #include <QList>
@@ -57,4 +57,4 @@ private slots:
 
 };
 
-#endif // CHATROOM_H
+#endif // LIBEROS_CHATROOM_H

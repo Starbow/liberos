@@ -1,5 +1,5 @@
-#ifndef ChatMessageRequest_H
-#define ChatMessageRequest_H
+#ifndef LIBEROS_REQUESTS_CHATMESSAGEREQUEST_H
+#define LIBEROS_REQUESTS_CHATMESSAGEREQUEST_H
 
 #include "../request.h"
 #include <QObject>
@@ -39,4 +39,4 @@ private:
 	QString message_;
 };
 
-#endif // ChatMessageRequest_H
+#endif // LIBEROS_REQUESTS_CHATMESSAGEREQUEST_H

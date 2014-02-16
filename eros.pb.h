@@ -424,6 +424,16 @@ class HandshakeResponse : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedPtrField< ::protobufs::Division >*
       mutable_division();
 
+  // repeated .protobufs.Region active_region = 6;
+  inline int active_region_size() const;
+  inline void clear_active_region();
+  static const int kActiveRegionFieldNumber = 6;
+  inline ::protobufs::Region active_region(int index) const;
+  inline void set_active_region(int index, ::protobufs::Region value);
+  inline void add_active_region(::protobufs::Region value);
+  inline const ::google::protobuf::RepeatedField<int>& active_region() const;
+  inline ::google::protobuf::RepeatedField<int>* mutable_active_region();
+
   // @@protoc_insertion_point(class_scope:protobufs.HandshakeResponse)
  private:
   inline void set_has_status();
@@ -439,10 +449,11 @@ class HandshakeResponse : public ::google::protobuf::Message {
   ::google::protobuf::int64 id_;
   ::google::protobuf::RepeatedPtrField< ::protobufs::Character > character_;
   ::google::protobuf::RepeatedPtrField< ::protobufs::Division > division_;
+  ::google::protobuf::RepeatedField<int> active_region_;
   int status_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
 
   friend void  protobuf_AddDesc_eros_2eproto();
   friend void protobuf_AssignDesc_eros_2eproto();
@@ -3062,6 +3073,33 @@ HandshakeResponse::division() const {
 inline ::google::protobuf::RepeatedPtrField< ::protobufs::Division >*
 HandshakeResponse::mutable_division() {
   return &division_;
+}
+
+// repeated .protobufs.Region active_region = 6;
+inline int HandshakeResponse::active_region_size() const {
+  return active_region_.size();
+}
+inline void HandshakeResponse::clear_active_region() {
+  active_region_.Clear();
+}
+inline ::protobufs::Region HandshakeResponse::active_region(int index) const {
+  return static_cast< ::protobufs::Region >(active_region_.Get(index));
+}
+inline void HandshakeResponse::set_active_region(int index, ::protobufs::Region value) {
+  assert(::protobufs::Region_IsValid(value));
+  active_region_.Set(index, value);
+}
+inline void HandshakeResponse::add_active_region(::protobufs::Region value) {
+  assert(::protobufs::Region_IsValid(value));
+  active_region_.Add(value);
+}
+inline const ::google::protobuf::RepeatedField<int>&
+HandshakeResponse::active_region() const {
+  return active_region_;
+}
+inline ::google::protobuf::RepeatedField<int>*
+HandshakeResponse::mutable_active_region() {
+  return &active_region_;
 }
 
 // -------------------------------------------------------------------

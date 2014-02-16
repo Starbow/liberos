@@ -1,5 +1,5 @@
-#ifndef PINGREQUEST_H
-#define PINGREQUEST_H
+#ifndef LIBEROS_REQUESTS_PINGREQUEST_H
+#define LIBEROS_REQUESTS_PINGREQUEST_H
 
 #include "../request.h"
 #include <QTime>
@@ -22,4 +22,4 @@ private:
 	int latency_;
 };
 
-#endif // PINGREQUEST_H
+#endif // LIBEROS_REQUESTS_PINGREQUEST_H

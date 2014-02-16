@@ -14,6 +14,7 @@ HandshakeRequest::HandshakeRequest(Eros *parent, const QString &username, const 
 
 	this->user_ = nullptr;
 	this->status_ = ResponseStatus::NotReady; 
+	this->active_regions_ = QList<ErosRegion>();
 }
 
 HandshakeRequest::~HandshakeRequest()
@@ -40,6 +41,11 @@ Divisions* HandshakeRequest::divisions() const
 	return this->divisions_;  
 }
 
+const QList<ErosRegion> &HandshakeRequest::activeRegions() const
+{
+	return this->active_regions_;
+}
+
 
 bool HandshakeRequest::processHandshakeResponse(const QString &command, const QByteArray &data)
 {
@@ -54,6 +60,11 @@ bool HandshakeRequest::processHandshakeResponse(const QString &command, const QB
 		{
 			this->user_ = new LocalUser(this->eros_, response);
 			this->divisions_ = new Divisions(this->parent(), response);
+			for (int i = 0; i < response.active_region_size(); i++)
+			{
+				this->active_regions_ << (ErosRegion)response.active_region(i);
+				
+			}
 		}
 	} else {
 		this->status_ = ResponseStatus::Fail;

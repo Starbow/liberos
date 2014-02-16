@@ -1,5 +1,5 @@
-#ifndef ADDCHARACTERREQUEST_H
-#define ADDCHARACTERREQUEST_H
+#ifndef LIBEROS_REQUESTS_ADDCHARACTERREQUEST_H
+#define LIBEROS_REQUESTS_ADDCHARACTERREQUEST_H
 
 #include <QObject>
 #include "../request.h"
@@ -36,4 +36,4 @@ private:
 	QString battle_net_url_;
 };
 
-#endif // ADDCHARACTERREQUEST_H
+#endif // LIBEROS_REQUESTS_ADDCHARACTERREQUEST_H

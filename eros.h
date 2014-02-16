@@ -1,5 +1,5 @@
-#ifndef EROS_H
-#define EROS_H
+#ifndef LIBEROS_EROS_H
+#define LIBEROS_EROS_H
 
 #include <QObject>
 #include <QList>
@@ -69,7 +69,7 @@ public:
 
 	const QList<ChatRoom *> &chatRooms() const;
 	ChatRoom *getChatRoom(const QString &room);
-	
+	const QList<ErosRegion> &activeRegions() const;
 
 
 	static const QString regionToString(ErosRegion region);
@@ -133,6 +133,8 @@ private:
 
 	// Server Stats
 	QMap<ErosRegion, int> eros_matchmaking_searching_regions_;
+	QList<ErosRegion> eros_active_regions_;
+
 	int eros_active_user_count_;
 	int eros_searching_user_count_;
 
@@ -228,4 +230,4 @@ signals:
 
 };
 
-#endif // EROS_H
+#endif // LIBEROS_EROS_H

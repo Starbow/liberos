@@ -1,5 +1,5 @@
-#ifndef CHARACTER_H
-#define CHARACTER_H
+#ifndef LIBEROS_CHARACTER_H
+#define LIBEROS_CHARACTER_H
 
 #include <QObject>
 #include "enums.h"
@@ -52,4 +52,4 @@ private:
 	void setLinks();
 };
 
-#endif // CHARACTER_H
+#endif // LIBEROS_CHARACTER_H

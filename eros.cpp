@@ -25,6 +25,7 @@ Eros::Eros(QObject *parent)
 {
 	qRegisterMetaType<ErosRegion>();
 	qRegisterMetaType<ErosError>();
+	qRegisterMetaType<ErosState>();
 
 	this->users_ = QList<User *>();
 	this->chatrooms_ = QList<ChatRoom *>();
@@ -33,6 +34,8 @@ Eros::Eros(QObject *parent)
 	this->state_ = ErosState::UnconnectedState;
 	this->awaiting_data_ = false;
 	this->matchmaking_state_ = ErosMatchmakingState::Idle;
+	this->eros_active_regions_ = QList<ErosRegion>();
+
 
 	QObject::connect(this->socket_, SIGNAL(connected()), this, SLOT(socketConnected()));
     QObject::connect(this->socket_, SIGNAL(disconnected()), this, SLOT(socketDisconnected()));
@@ -656,6 +659,7 @@ void Eros::handshakeRequestComplete(Request* request)
 			this->local_user_ = handshake_request->user();
 			this->divisions_ = handshake_request->divisions();
 			this->users_ <<  this->local_user_;
+			this->eros_active_regions_ = handshake_request->activeRegions();
 
 			QObject::connect(this->local_user_, SIGNAL(updated(User*)), this, SLOT(userUpdatedHandler(User*)));
 
@@ -707,6 +711,11 @@ void Eros::userUpdatedHandler(User *user)
 void Eros::characterUpdatedHandler(Character *character)
 {
 	emit characterUpdated(character);
+}
+
+const QList<ErosRegion> &Eros::activeRegions() const
+{
+	return this->eros_active_regions_;
 }
 
 int Eros::regionSearchingUserCount(ErosRegion region) const
