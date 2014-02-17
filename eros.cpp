@@ -6,6 +6,7 @@
 #include "requests/pingrequest.h"
 #include "requests/matchmakingdequeuerequest.h"
 #include "requests/matchmakingqueuerequest.h"
+#include "requests/matchmakingforefeitrequest.h"
 #include "requests/chatindexrequest.h"
 #include "requests/chatjoinrequest.h"
 #include "requests/chatleaverequest.h"
@@ -19,6 +20,7 @@
 #include <QTimer>
 #include <QThread>
 #include <QFile>
+#include <QCoreApplication>
 
 Eros::Eros(QObject *parent)
 	: QObject(parent)
@@ -169,6 +171,9 @@ const QString Eros::regionToLanguageString(ErosRegion region)
 
 void Eros::socketConnected()
 {
+	this->matchmaking_state_ = ErosMatchmakingState::Idle;
+	this->matchmaking_match_ = nullptr;
+
 	HandshakeRequest *request = new HandshakeRequest(this, this->username_, this->password_);
 	QObject::connect(request, SIGNAL(complete(Request*)), this, SLOT(handshakeRequestComplete(Request*)));
 	sendRequest(request);
@@ -264,7 +269,48 @@ const QString Eros::errorString(ErosError code)
 {
 	switch (code)
 	{
-	case 0:
+	case 201:
+		return tr("Invalid Battle.net character information.");
+		break;
+	case 202:
+		return tr("Battle.net character already exists.");
+		break;
+	case 203:
+		return tr("Error while communicating with Battle.net.");
+		break;
+	case 204:
+		return tr("Battle.net account vericiation failed.");
+		break;
+	case 301:
+		return tr("Error processing replay file. Ensure the file is a valid StarCraft 2 replay.");
+		break;
+	case 302:
+		return tr("Error processing match result from replay file.");
+		break;
+	case 303:
+		return tr("The provided replay has already been used in a result.");
+		break;
+	case 304:
+		return tr("None of your verified Battle.net accounts were involved in the match. You may only submit replays for matches you were involved in.");
+		break;
+	case 305:
+		return tr("The game was too short to qualify for ranking.");
+		break;
+	case 306:
+		return tr("Bad game format. Games must be played without observers.");
+		break;
+	case 307:
+		return tr("Bad map. Games must be played on a map in the current map pool, and must be played on the selected map if played using the matchmaking system.");
+		break;
+	case 308:
+		return tr("The game contained players not registered on Eros.");
+		break;
+	case 309:
+		return tr("A player was not found in the database.");
+		break;
+	case 310:
+		return tr("The replay uploaded was not against your matchmade opponent. You have forefeited your matchmade game.");
+		break;
 	default:
 		return tr("Unknown error");
 		break;
@@ -493,14 +539,14 @@ void Eros::queueMatchmaking(ErosRegion region, int radius)
 	}
 }
 
-void Eros::dequeueMatchmaking()
+void Eros::forefeitMatchmaking()
 {
 	// Dequeue from matchmaking. Check locally to ensure we're not already queued.
 	if (state_ == ErosState::ConnectedState)
 	{
-		if (matchmaking_state_ == ErosMatchmakingState::Queued)
+		if (matchmaking_state_ == ErosMatchmakingState::Matched)
 		{
-			MatchmakingDequeueRequest *request = new MatchmakingDequeueRequest(this);
+			MatchmakingForefeitRequest *request = new MatchmakingForefeitRequest(this);
 			sendRequest(request);
 		}
 	}
@@ -557,6 +603,12 @@ void Eros::handleServerCommand(const QString &command, const QByteArray &data)
 
 		if (command == "CHJ")
 		{
+			if (!this->chatrooms_.contains(room))
+			{
+				this->chatrooms_ << room;
+				emit chatRoomAdded(room);
+			}
+
 			emit chatRoomUserJoined(room, user);
 			if (user == this->local_user_)
 			{
@@ -597,6 +649,10 @@ void Eros::handleServerCommand(const QString &command, const QByteArray &data)
 		User *user = getUser(QString::fromStdString(user_message.username()));
 
 		emit chatMessageReceieved(user, QString::fromStdString(message.message()));
+	}
+	else if (command == "MMI")
+	{
+		setMatchmakingState(ErosMatchmakingState::Idle);
 	}
 }
 void Eros::sendRequest(Request *request)
@@ -656,6 +712,7 @@ void Eros::sendRequest(Request *request)
 			if (dataLength > UPLOAD_BUFFER_SIZE)
 			{
 				emit uploadProgress(written, dataLength);
+				QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
 			}
 		}	
 
@@ -871,21 +928,23 @@ void Eros::chatIndexRequestComplete(Request *request)
 				{
 					continue;
 				}
-
+				
 				this->chatrooms_ << (*i);
 				emit chatRoomAdded(*i);
 			}
 
+			QMutableListIterator<ChatRoom*> mli(this->chatrooms_);
 			// Compare our known rooms to the index. Remove rooms that no longer exist.
-			for (i = this->chatrooms_.begin(); i != this->chatrooms_.end(); i++)
+			while (mli.hasNext())
 			{
-				if (rooms.contains(*i))
+				ChatRoom* room = mli.next();
+				if (rooms.contains(room))
 				{
 					continue;
 				}
-
-				this->chatrooms_.removeAll(*i);
-				emit chatRoomRemoved(*i);
+				
+				mli.remove();
+				emit chatRoomRemoved(room);
 			}
 
 		}
@@ -905,6 +964,7 @@ void Eros::chatJoinRequestComplete(Request *request)
 			if (!this->chatrooms_.contains(join_request->room()))
 			{
 				this->chatrooms_ << join_request->room();
+				emit chatRoomAdded(join_request->room());
 			}
 		}
 	}

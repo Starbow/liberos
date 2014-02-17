@@ -36,5 +36,6 @@ bool UploadReplayRequest::processData(const QString &command, const QByteArray &
 bool UploadReplayRequest::processError(int code, const QByteArray &data)
 {
 	this->error_ = (ErosError)code;
+	emit complete(this);
 	return true;
 }

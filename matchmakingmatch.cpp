@@ -14,6 +14,9 @@ MatchmakingMatch::MatchmakingMatch(Eros *parent, const protobufs::MatchmakingRes
 	this->battle_net_channel_ = QString::fromStdString(result.channel());
 	this->chat_room_ = parent->getChatRoom(QString::fromStdString(result.chat_room()));
 	this->opponent_latency_ = result.opponent_latency();
+	const protobufs::Map &map = result.map();
+	this->map_name_ = QString::fromStdString(map.battle_net_name());
+	this->map_id_ = map.battle_net_id();
 }
 
 MatchmakingMatch::~MatchmakingMatch()
@@ -41,7 +44,12 @@ int MatchmakingMatch::opponentLatency() const
 {
 	return this->opponent_latency_;
 }
-const QString &MatchmakingMatch::map() const
+const QString &MatchmakingMatch::mapName() const
 {
-	return this->map_;
+	return this->map_name_;
+}
+
+int MatchmakingMatch::mapId() const
+{
+	return this->map_id_;
 }
