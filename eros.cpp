@@ -539,9 +539,22 @@ void Eros::queueMatchmaking(ErosRegion region, int radius)
 	}
 }
 
-void Eros::forefeitMatchmaking()
+void Eros::dequeueMatchmaking()
 {
 	// Dequeue from matchmaking. Check locally to ensure we're not already queued.
+	if (state_ == ErosState::ConnectedState)
+	{
+		if (matchmaking_state_ == ErosMatchmakingState::Queued)
+		{
+			MatchmakingDequeueRequest *request = new MatchmakingDequeueRequest(this);
+			sendRequest(request);
+		}
+	}
+}
+
+void Eros::forefeitMatchmaking()
+{
+	// forefeit from matchmaking. Check locally to ensure we're not already queued.
 	if (state_ == ErosState::ConnectedState)
 	{
 		if (matchmaking_state_ == ErosMatchmakingState::Matched)

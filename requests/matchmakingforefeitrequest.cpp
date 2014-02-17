@@ -1,12 +1,12 @@
 #include "matchmakingforefeitrequest.h"
 
-MatchmakingForefeitRequest::MatchmakingDequeueRequest(Eros *parent)
+MatchmakingForefeitRequest::MatchmakingForefeitRequest(Eros *parent)
 	: Request(parent, "MMF")
 {
 
 }
 
-MatchmakingForefeitRequest::~MatchmakingDequeueRequest()
+MatchmakingForefeitRequest::~MatchmakingForefeitRequest()
 {
 
 }

@@ -21,6 +21,7 @@ SOURCES += character.cpp\
            requests/chatmessagerequest.cpp\
            requests/handshakerequest.cpp\
            requests/matchmakingdequeuerequest.cpp\
+		   requests/matchmakingforefeitrequest.cpp\
            requests/matchmakingqueuerequest.cpp\
            requests/pingrequest.cpp\
            requests/privatemessagerequest.cpp\
@@ -44,6 +45,7 @@ HEADERS += character.h\
            requests/chatmessagerequest.h\
            requests/handshakerequest.h\
            requests/matchmakingdequeuerequest.h\
+		   requests/matchmakingforefeitrequest.h\
            requests/matchmakingqueuerequest.h\
            requests/pingrequest.h\
            requests/privatemessagerequest.h\
