@@ -48,9 +48,9 @@ public:
 	Eros(QObject *parent);
 	~Eros();
 
-	int lastError();
-	QString errorString(int code) const;
-	QString errorString() const;
+	ErosError lastError();
+	static const QString errorString(ErosError error);
+	const QString errorString() const;
 
 	ErosState state() const;
 	ErosMatchmakingState matchmakingState() const;
@@ -73,6 +73,7 @@ public:
 
 
 	static const QString regionToString(ErosRegion region);
+	static const QString regionToLongString(ErosRegion region);
 	static const QString regionToLanguageString(ErosRegion region);
 	static const QString regionToDomainString(ErosRegion region);
 
@@ -116,7 +117,7 @@ private:
 	MatchmakingMatch *matchmaking_match_;
 	Divisions *divisions_;
 
-	int last_error_;
+	ErosError last_error_;
 	QAtomicInt transaction_id_base_;
 
 	int latency_;

@@ -26,10 +26,12 @@ Eros::Eros(QObject *parent)
 	qRegisterMetaType<ErosRegion>();
 	qRegisterMetaType<ErosError>();
 	qRegisterMetaType<ErosState>();
+	qRegisterMetaType<ErosMatchmakingState>();
+	qRegisterMetaType<ErosUserState>();
 
 	this->users_ = QList<User *>();
 	this->chatrooms_ = QList<ChatRoom *>();
-	this->last_error_ = 0;
+	this->last_error_ = ErosError::None;
 	this->socket_ = new QTcpSocket(this);
 	this->state_ = ErosState::UnconnectedState;
 	this->awaiting_data_ = false;
@@ -81,6 +83,31 @@ const QString Eros::regionToString(ErosRegion region)
 			break;
 		case ErosRegion::CN:
 			return tr("CN");
+			break;
+		default:
+			return tr("Unknown");
+			break;
+	}
+}
+
+const QString Eros::regionToLongString(ErosRegion region)
+{
+	switch (region)
+	{
+		case ErosRegion::NA:
+			return tr("North America");
+			break;
+		case ErosRegion::KR:
+			return tr("Korea");
+			break;
+		case ErosRegion::EU:
+			return tr("Europe");
+			break;
+		case ErosRegion::SEA:
+			return tr("South East Asia");
+			break;
+		case ErosRegion::CN:
+			return tr("China");
 			break;
 		default:
 			return tr("Unknown");
@@ -227,13 +254,13 @@ void Eros::socketReadyRead()
 
 
 // Gets the last server error code.
-int Eros::lastError()
+ErosError Eros::lastError()
 {
 	return this->last_error_;
 }
 
 // Converts a server error code to a string.
-QString Eros::errorString(int code) const
+const QString Eros::errorString(ErosError code)
 {
 	switch (code)
 	{
@@ -245,9 +272,9 @@ QString Eros::errorString(int code) const
 }
 
 // Converts the last server error to a string.
-QString Eros::errorString() const 
+const QString Eros::errorString() const 
 {
-	return this->errorString(this->last_error_);
+	return Eros::errorString(this->last_error_);
 }
 
 void Eros::disconnectFromEros() 
@@ -319,16 +346,15 @@ void Eros::setState(ErosState state)
 // Sets the state and emits the stateChanged signal.
 void Eros::setMatchmakingState(ErosMatchmakingState state)
 {
-	if (this->matchmaking_state_ != state) 
-	{
-		this->matchmaking_state_ = state;
-		emit matchmakingStateChanged(this->matchmaking_state_);
 
-		if (this->matchmaking_state_ == ErosMatchmakingState::Matched)
-		{
-			emit matchmakingMatchFound(this->matchmaking_match_);
-		} 
-	}
+	this->matchmaking_state_ = state;
+	emit matchmakingStateChanged(this->matchmaking_state_);
+
+	if (this->matchmaking_state_ == ErosMatchmakingState::Matched)
+	{
+		emit matchmakingMatchFound(this->matchmaking_match_);
+	} 
+	
 }
 
 const Divisions *Eros::divisions() const
@@ -374,6 +400,12 @@ ErosState Eros::state() const
 {
 	return this->state_;
 }
+
+ErosMatchmakingState Eros::matchmakingState() const
+{
+	return this->matchmaking_state_;
+}
+
 
 void Eros::handleCommand(const QString &command, const int &transaction_id, const QByteArray &data)
 {
@@ -676,6 +708,9 @@ void Eros::matchmakingRequestComplete(Request *request)
 		{
 			this->matchmaking_match_ = matchmaking_request->match();
 		}
+		
+
+		
 
 		setMatchmakingState(matchmaking_request->status());
 
