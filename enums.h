@@ -70,6 +70,7 @@ enum ErosError
 	InvalidParticipants = 308,
 	PlayerNotInDatabase = 309,
 	NotAssignedOpponent = 310,
+	BadSpeed = 311,
 
 	NoCharacterForRegion = 401,
 	MatchmakingAborted = 402,

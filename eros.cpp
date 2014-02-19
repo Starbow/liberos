@@ -311,6 +311,9 @@ const QString Eros::errorString(ErosError code)
 	case 310:
 		return tr("The replay uploaded was not against your matchmade opponent. You have forefeited your matchmade game.");
 		break;
+	case 311:
+		return tr("Games must be played on the Faster speed settings.");
+		break;
 	default:
 		return tr("Unknown error");
 		break;
@@ -753,8 +756,8 @@ void Eros::handshakeRequestComplete(Request* request)
     {
 		if (handshake_request->status() != HandshakeRequest::ResponseStatus::Success)
 		{
-			emit handshakeFailed();
 			disconnectFromEros();
+			emit handshakeFailed();
 		}
 		else
 		{
