@@ -182,7 +182,7 @@ signals:
 
 	// Low level connection signals.
 	void stateChanged(ErosState);
-	void connectionError(QAbstractSocket::SocketError);
+	void connectionError(QAbstractSocket::SocketError, const QString);
 
 	// Basic operation signals
 	void connected();

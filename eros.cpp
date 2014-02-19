@@ -185,8 +185,9 @@ void Eros::socketDisconnected() {
 
 void Eros::socketError(QAbstractSocket::SocketError error)
 {
-	emit connectionError(error);
+	const QString string = this->socket_->errorString();
 	disconnectFromEros();
+	emit connectionError(error, string);
 }
 
 void Eros::socketReadyRead()
