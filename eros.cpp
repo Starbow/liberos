@@ -6,7 +6,7 @@
 #include "requests/pingrequest.h"
 #include "requests/matchmakingdequeuerequest.h"
 #include "requests/matchmakingqueuerequest.h"
-#include "requests/matchmakingforefeitrequest.h"
+#include "requests/matchmakingforfeitrequest.h"
 #include "requests/chatindexrequest.h"
 #include "requests/chatjoinrequest.h"
 #include "requests/chatleaverequest.h"
@@ -310,7 +310,7 @@ const QString Eros::errorString(ErosError code)
 		return tr("A player was not found in the database.");
 		break;
 	case 310:
-		return tr("The replay uploaded was not against your matchmade opponent. You have forefeited your matchmade game.");
+		return tr("The replay uploaded was not against your matchmade opponent. You have forfeited your matchmade game.");
 		break;
 	case 311:
 		return tr("Games must be played on the Faster speed settings.");
@@ -556,9 +556,9 @@ void Eros::dequeueMatchmaking()
 	}
 }
 
-void Eros::forefeitMatchmaking()
+void Eros::forfeitMatchmaking()
 {
-	// forefeit from matchmaking. Check locally to ensure we're not already queued.
+	// forfeit from matchmaking. Check locally to ensure we're not already queued.
 	if (state_ == ErosState::ConnectedState)
 	{
 		if (matchmaking_state_ == ErosMatchmakingState::Matched)
@@ -669,7 +669,29 @@ void Eros::handleServerCommand(const QString &command, const QByteArray &data)
 	}
 	else if (command == "MMI")
 	{
+		// Matchmaking idle.
+
 		setMatchmakingState(ErosMatchmakingState::Idle);
+	}
+	else if (command == "MMR")
+	{
+		// Resume an old match.
+		protobufs::MatchmakingResult result;
+		result.ParseFromArray(data.data(), data.size());
+
+		this->matchmaking_match_ = new MatchmakingMatch(this, result);
+		this->matchmaking_state_ = ErosMatchmakingState::Matched;
+
+		emit matchmakingStateChanged(this->matchmaking_state_);
+		emit matchmakingMatchFound(this->matchmaking_match_);
+	}
+	else if (command == "ALT")
+	{
+		protobufs::BroadcastAlert alert;
+		alert.ParseFromArray(data.data(), data.size());
+
+		QString message = QString::fromStdString(alert.message());
+		emit broadcastAlert(message, alert.predefined());
 	}
 }
 void Eros::sendRequest(Request *request)

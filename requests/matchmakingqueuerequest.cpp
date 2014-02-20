@@ -42,7 +42,6 @@ bool MatchmakingQueueRequest::processData(const QString &command, const QByteArr
 	}
 	else if (command == "MMR")
 	{
-		int time = matchmaking_timer_->elapsed();
 		protobufs::MatchmakingResult result;
 		result.ParseFromArray(data.data(), data.size());
 

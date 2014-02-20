@@ -56,6 +56,7 @@ class ServerStats;
 class Character;
 class MatchParticipant;
 class MatchResult;
+class BroadcastAlert;
 
 enum HandshakeResponse_HandshakeStatus {
   HandshakeResponse_HandshakeStatus_FAIL = 0,
@@ -546,12 +547,12 @@ class UserRegionStats : public ::google::protobuf::Message {
   inline ::google::protobuf::int64 losses() const;
   inline void set_losses(::google::protobuf::int64 value);
 
-  // required int64 forefeits = 5;
-  inline bool has_forefeits() const;
-  inline void clear_forefeits();
-  static const int kForefeitsFieldNumber = 5;
-  inline ::google::protobuf::int64 forefeits() const;
-  inline void set_forefeits(::google::protobuf::int64 value);
+  // required int64 forfeits = 5;
+  inline bool has_forfeits() const;
+  inline void clear_forfeits();
+  static const int kForfeitsFieldNumber = 5;
+  inline ::google::protobuf::int64 forfeits() const;
+  inline void set_forfeits(::google::protobuf::int64 value);
 
   // required int64 walkovers = 6;
   inline bool has_walkovers() const;
@@ -570,8 +571,8 @@ class UserRegionStats : public ::google::protobuf::Message {
   inline void clear_has_wins();
   inline void set_has_losses();
   inline void clear_has_losses();
-  inline void set_has_forefeits();
-  inline void clear_has_forefeits();
+  inline void set_has_forfeits();
+  inline void clear_has_forfeits();
   inline void set_has_walkovers();
   inline void clear_has_walkovers();
 
@@ -580,7 +581,7 @@ class UserRegionStats : public ::google::protobuf::Message {
   ::google::protobuf::int64 points_;
   ::google::protobuf::int64 wins_;
   ::google::protobuf::int64 losses_;
-  ::google::protobuf::int64 forefeits_;
+  ::google::protobuf::int64 forfeits_;
   ::google::protobuf::int64 walkovers_;
   int region_;
 
@@ -690,12 +691,12 @@ class UserStats : public ::google::protobuf::Message {
   inline ::google::protobuf::int64 losses() const;
   inline void set_losses(::google::protobuf::int64 value);
 
-  // required int64 forefeits = 6;
-  inline bool has_forefeits() const;
-  inline void clear_forefeits();
-  static const int kForefeitsFieldNumber = 6;
-  inline ::google::protobuf::int64 forefeits() const;
-  inline void set_forefeits(::google::protobuf::int64 value);
+  // required int64 forfeits = 6;
+  inline bool has_forfeits() const;
+  inline void clear_forfeits();
+  static const int kForfeitsFieldNumber = 6;
+  inline ::google::protobuf::int64 forfeits() const;
+  inline void set_forfeits(::google::protobuf::int64 value);
 
   // required int64 walkovers = 7;
   inline bool has_walkovers() const;
@@ -728,8 +729,8 @@ class UserStats : public ::google::protobuf::Message {
   inline void clear_has_wins();
   inline void set_has_losses();
   inline void clear_has_losses();
-  inline void set_has_forefeits();
-  inline void clear_has_forefeits();
+  inline void set_has_forfeits();
+  inline void clear_has_forfeits();
   inline void set_has_walkovers();
   inline void clear_has_walkovers();
 
@@ -740,7 +741,7 @@ class UserStats : public ::google::protobuf::Message {
   ::google::protobuf::int64 points_;
   ::google::protobuf::int64 wins_;
   ::google::protobuf::int64 losses_;
-  ::google::protobuf::int64 forefeits_;
+  ::google::protobuf::int64 forfeits_;
   ::google::protobuf::int64 walkovers_;
   ::google::protobuf::RepeatedPtrField< ::protobufs::UserRegionStats > region_;
 
@@ -2695,6 +2696,103 @@ class MatchResult : public ::google::protobuf::Message {
   void InitAsDefaultInstance();
   static MatchResult* default_instance_;
 };
+// -------------------------------------------------------------------
+
+class BroadcastAlert : public ::google::protobuf::Message {
+ public:
+  BroadcastAlert();
+  virtual ~BroadcastAlert();
+
+  BroadcastAlert(const BroadcastAlert& from);
+
+  inline BroadcastAlert& operator=(const BroadcastAlert& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const BroadcastAlert& default_instance();
+
+  void Swap(BroadcastAlert* other);
+
+  // implements Message ----------------------------------------------
+
+  BroadcastAlert* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const BroadcastAlert& from);
+  void MergeFrom(const BroadcastAlert& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string message = 2;
+  inline bool has_message() const;
+  inline void clear_message();
+  static const int kMessageFieldNumber = 2;
+  inline const ::std::string& message() const;
+  inline void set_message(const ::std::string& value);
+  inline void set_message(const char* value);
+  inline void set_message(const char* value, size_t size);
+  inline ::std::string* mutable_message();
+  inline ::std::string* release_message();
+  inline void set_allocated_message(::std::string* message);
+
+  // required int32 predefined = 1;
+  inline bool has_predefined() const;
+  inline void clear_predefined();
+  static const int kPredefinedFieldNumber = 1;
+  inline ::google::protobuf::int32 predefined() const;
+  inline void set_predefined(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:protobufs.BroadcastAlert)
+ private:
+  inline void set_has_message();
+  inline void clear_has_message();
+  inline void set_has_predefined();
+  inline void clear_has_predefined();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::std::string* message_;
+  ::google::protobuf::int32 predefined_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_eros_2eproto();
+  friend void protobuf_AssignDesc_eros_2eproto();
+  friend void protobuf_ShutdownFile_eros_2eproto();
+
+  void InitAsDefaultInstance();
+  static BroadcastAlert* default_instance_;
+};
 // ===================================================================
 
 
@@ -3195,26 +3293,26 @@ inline void UserRegionStats::set_losses(::google::protobuf::int64 value) {
   losses_ = value;
 }
 
-// required int64 forefeits = 5;
-inline bool UserRegionStats::has_forefeits() const {
+// required int64 forfeits = 5;
+inline bool UserRegionStats::has_forfeits() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
-inline void UserRegionStats::set_has_forefeits() {
+inline void UserRegionStats::set_has_forfeits() {
   _has_bits_[0] |= 0x00000010u;
 }
-inline void UserRegionStats::clear_has_forefeits() {
+inline void UserRegionStats::clear_has_forfeits() {
   _has_bits_[0] &= ~0x00000010u;
 }
-inline void UserRegionStats::clear_forefeits() {
-  forefeits_ = GOOGLE_LONGLONG(0);
-  clear_has_forefeits();
+inline void UserRegionStats::clear_forfeits() {
+  forfeits_ = GOOGLE_LONGLONG(0);
+  clear_has_forfeits();
 }
-inline ::google::protobuf::int64 UserRegionStats::forefeits() const {
-  return forefeits_;
+inline ::google::protobuf::int64 UserRegionStats::forfeits() const {
+  return forfeits_;
 }
-inline void UserRegionStats::set_forefeits(::google::protobuf::int64 value) {
-  set_has_forefeits();
-  forefeits_ = value;
+inline void UserRegionStats::set_forfeits(::google::protobuf::int64 value) {
+  set_has_forfeits();
+  forfeits_ = value;
 }
 
 // required int64 walkovers = 6;
@@ -3401,26 +3499,26 @@ inline void UserStats::set_losses(::google::protobuf::int64 value) {
   losses_ = value;
 }
 
-// required int64 forefeits = 6;
-inline bool UserStats::has_forefeits() const {
+// required int64 forfeits = 6;
+inline bool UserStats::has_forfeits() const {
   return (_has_bits_[0] & 0x00000020u) != 0;
 }
-inline void UserStats::set_has_forefeits() {
+inline void UserStats::set_has_forfeits() {
   _has_bits_[0] |= 0x00000020u;
 }
-inline void UserStats::clear_has_forefeits() {
+inline void UserStats::clear_has_forfeits() {
   _has_bits_[0] &= ~0x00000020u;
 }
-inline void UserStats::clear_forefeits() {
-  forefeits_ = GOOGLE_LONGLONG(0);
-  clear_has_forefeits();
+inline void UserStats::clear_forfeits() {
+  forfeits_ = GOOGLE_LONGLONG(0);
+  clear_has_forfeits();
 }
-inline ::google::protobuf::int64 UserStats::forefeits() const {
-  return forefeits_;
+inline ::google::protobuf::int64 UserStats::forfeits() const {
+  return forfeits_;
 }
-inline void UserStats::set_forefeits(::google::protobuf::int64 value) {
-  set_has_forefeits();
-  forefeits_ = value;
+inline void UserStats::set_forfeits(::google::protobuf::int64 value) {
+  set_has_forfeits();
+  forfeits_ = value;
 }
 
 // required int64 walkovers = 7;
@@ -5820,6 +5918,102 @@ MatchResult::participant() const {
 inline ::google::protobuf::RepeatedPtrField< ::protobufs::MatchParticipant >*
 MatchResult::mutable_participant() {
   return &participant_;
+}
+
+// -------------------------------------------------------------------
+
+// BroadcastAlert
+
+// required string message = 2;
+inline bool BroadcastAlert::has_message() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void BroadcastAlert::set_has_message() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void BroadcastAlert::clear_has_message() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void BroadcastAlert::clear_message() {
+  if (message_ != &::google::protobuf::internal::kEmptyString) {
+    message_->clear();
+  }
+  clear_has_message();
+}
+inline const ::std::string& BroadcastAlert::message() const {
+  return *message_;
+}
+inline void BroadcastAlert::set_message(const ::std::string& value) {
+  set_has_message();
+  if (message_ == &::google::protobuf::internal::kEmptyString) {
+    message_ = new ::std::string;
+  }
+  message_->assign(value);
+}
+inline void BroadcastAlert::set_message(const char* value) {
+  set_has_message();
+  if (message_ == &::google::protobuf::internal::kEmptyString) {
+    message_ = new ::std::string;
+  }
+  message_->assign(value);
+}
+inline void BroadcastAlert::set_message(const char* value, size_t size) {
+  set_has_message();
+  if (message_ == &::google::protobuf::internal::kEmptyString) {
+    message_ = new ::std::string;
+  }
+  message_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* BroadcastAlert::mutable_message() {
+  set_has_message();
+  if (message_ == &::google::protobuf::internal::kEmptyString) {
+    message_ = new ::std::string;
+  }
+  return message_;
+}
+inline ::std::string* BroadcastAlert::release_message() {
+  clear_has_message();
+  if (message_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = message_;
+    message_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void BroadcastAlert::set_allocated_message(::std::string* message) {
+  if (message_ != &::google::protobuf::internal::kEmptyString) {
+    delete message_;
+  }
+  if (message) {
+    set_has_message();
+    message_ = message;
+  } else {
+    clear_has_message();
+    message_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required int32 predefined = 1;
+inline bool BroadcastAlert::has_predefined() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void BroadcastAlert::set_has_predefined() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void BroadcastAlert::clear_has_predefined() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void BroadcastAlert::clear_predefined() {
+  predefined_ = 0;
+  clear_has_predefined();
+}
+inline ::google::protobuf::int32 BroadcastAlert::predefined() const {
+  return predefined_;
+}
+inline void BroadcastAlert::set_predefined(::google::protobuf::int32 value) {
+  set_has_predefined();
+  predefined_ = value;
 }
 
 

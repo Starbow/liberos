@@ -50,13 +50,13 @@ void User::update(const protobufs::UserStats &stats)
 {
 	this->state_ = ErosUserState::Known;
 	this->username_ = QString::fromStdString(stats.username());
-	this->ladder_stats_global_ = new UserLadderStats(this, stats.wins(), stats.losses(), stats.forefeits(), stats.walkovers(), stats.points());
+	this->ladder_stats_global_ = new UserLadderStats(this, stats.wins(), stats.losses(), stats.forfeits(), stats.walkovers(), stats.points());
 	this->search_radius_ = stats.search_radius();
 	
 	for (int i = 0; i < stats.region_size(); i++)
 	{
 		const protobufs::UserRegionStats &region = stats.region(i);
-		this->ladder_stats_[(ErosRegion)region.region()] = new UserLadderStats(this, region.wins(), region.losses(), region.forefeits(), region.walkovers(), region.points());
+		this->ladder_stats_[(ErosRegion)region.region()] = new UserLadderStats(this, region.wins(), region.losses(), region.forfeits(), region.walkovers(), region.points());
 	}
 
 	if (this->first_update_)

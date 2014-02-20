@@ -1,11 +1,11 @@
 #include "userladderstats.h"
 
-UserLadderStats::UserLadderStats(QObject *parent, int wins, int losses, int forefeits, int walkovers, int points)
+UserLadderStats::UserLadderStats(QObject *parent, int wins, int losses, int forfeits, int walkovers, int points)
 	: QObject(parent)
 {
 	this->wins_ = wins;
 	this->losses_ = losses;
-	this->forefeits_ = forefeits;
+	this->forfeits_ = forfeits;
 	this->walkovers_ = walkovers;
 	this->points_ = points;
 }
@@ -23,9 +23,9 @@ int UserLadderStats::losses() const
 {
 	return this->losses_;
 }
-int UserLadderStats::forefeits() const
+int UserLadderStats::forfeits() const
 {
-	return this->forefeits_;
+	return this->forfeits_;
 }
 int UserLadderStats::walkovers() const
 {

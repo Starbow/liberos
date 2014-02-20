@@ -87,6 +87,9 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* MatchResult_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   MatchResult_reflection_ = NULL;
+const ::google::protobuf::Descriptor* BroadcastAlert_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  BroadcastAlert_reflection_ = NULL;
 const ::google::protobuf::EnumDescriptor* Region_descriptor_ = NULL;
 
 }  // namespace
@@ -157,7 +160,7 @@ void protobuf_AssignDesc_eros_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserRegionStats, points_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserRegionStats, wins_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserRegionStats, losses_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserRegionStats, forefeits_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserRegionStats, forfeits_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserRegionStats, walkovers_),
   };
   UserRegionStats_reflection_ =
@@ -178,7 +181,7 @@ void protobuf_AssignDesc_eros_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserStats, points_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserStats, wins_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserStats, losses_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserStats, forefeits_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserStats, forfeits_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserStats, walkovers_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserStats, region_),
   };
@@ -491,6 +494,22 @@ void protobuf_AssignDesc_eros_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(MatchResult));
+  BroadcastAlert_descriptor_ = file->message_type(22);
+  static const int BroadcastAlert_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BroadcastAlert, message_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BroadcastAlert, predefined_),
+  };
+  BroadcastAlert_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      BroadcastAlert_descriptor_,
+      BroadcastAlert::default_instance_,
+      BroadcastAlert_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BroadcastAlert, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BroadcastAlert, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(BroadcastAlert));
   Region_descriptor_ = file->enum_type(0);
 }
 
@@ -548,6 +567,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
     MatchParticipant_descriptor_, &MatchParticipant::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     MatchResult_descriptor_, &MatchResult::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    BroadcastAlert_descriptor_, &BroadcastAlert::default_instance());
 }
 
 }  // namespace
@@ -597,6 +618,8 @@ void protobuf_ShutdownFile_eros_2eproto() {
   delete MatchParticipant_reflection_;
   delete MatchResult::default_instance_;
   delete MatchResult_reflection_;
+  delete BroadcastAlert::default_instance_;
+  delete BroadcastAlert_reflection_;
 }
 
 void protobuf_AddDesc_eros_2eproto() {
@@ -616,62 +639,64 @@ void protobuf_AddDesc_eros_2eproto() {
     "aracter\022%\n\010division\030\005 \003(\0132\023.protobufs.Di"
     "vision\022(\n\ractive_region\030\006 \003(\0162\021.protobuf"
     "s.Region\"(\n\017HandshakeStatus\022\010\n\004FAIL\020\000\022\013\n"
-    "\007SUCCESS\020\001\"\210\001\n\017UserRegionStats\022!\n\006region"
+    "\007SUCCESS\020\001\"\207\001\n\017UserRegionStats\022!\n\006region"
     "\030\001 \002(\0162\021.protobufs.Region\022\016\n\006points\030\002 \002("
-    "\003\022\014\n\004wins\030\003 \002(\003\022\016\n\006losses\030\004 \002(\003\022\021\n\tforef"
-    "eits\030\005 \002(\003\022\021\n\twalkovers\030\006 \002(\003\"\264\001\n\tUserSt"
-    "ats\022\020\n\010username\030\001 \002(\t\022\025\n\rsearch_radius\030\002"
-    " \002(\003\022\016\n\006points\030\003 \002(\003\022\014\n\004wins\030\004 \002(\003\022\016\n\006lo"
-    "sses\030\005 \002(\003\022\021\n\tforefeits\030\006 \002(\003\022\021\n\twalkove"
-    "rs\030\007 \002(\003\022*\n\006region\030\010 \003(\0132\032.protobufs.Use"
-    "rRegionStats\"&\n\007MapPool\022\033\n\003map\030\001 \003(\0132\016.p"
-    "rotobufs.Map\"X\n\003Map\022!\n\006region\030\001 \002(\0162\021.pr"
-    "otobufs.Region\022\027\n\017battle_net_name\030\002 \002(\t\022"
-    "\025\n\rbattle_net_id\030\003 \002(\005\"b\n\020SimulationResu"
-    "lt\022&\n\010opponent\030\001 \002(\0132\024.protobufs.UserSta"
-    "ts\022\017\n\007victory\030\002 \002(\010\022\025\n\rmatch_quality\030\003 \002"
-    "(\001\"E\n\020MatchmakingQueue\022!\n\006region\030\001 \002(\0162\021"
-    ".protobufs.Region\022\016\n\006radius\030\002 \002(\003\"\271\001\n\021Ma"
-    "tchmakingResult\022\020\n\010timespan\030\001 \002(\003\022\017\n\007qua"
-    "lity\030\002 \002(\001\022&\n\010opponent\030\003 \002(\0132\024.protobufs"
-    ".UserStats\022\030\n\020opponent_latency\030\004 \002(\003\022\017\n\007"
-    "channel\030\005 \002(\t\022\021\n\tchat_room\030\006 \002(\t\022\033\n\003map\030"
-    "\007 \002(\0132\016.protobufs.Map\"\230\001\n\014ChatRoomInfo\022\013"
-    "\n\003key\030\001 \002(\t\022\014\n\004name\030\002 \002(\t\022\022\n\npassworded\030"
-    "\003 \002(\010\022\020\n\010joinable\030\004 \002(\010\022\r\n\005fixed\030\005 \002(\010\022\r"
-    "\n\005users\030\006 \002(\003\022)\n\013participant\030\007 \003(\0132\024.pro"
-    "tobufs.UserStats\"6\n\rChatRoomIndex\022%\n\004roo"
-    "m\030\001 \003(\0132\027.protobufs.ChatRoomInfo\">\n\013Chat"
-    "Message\022\016\n\006sender\030\001 \002(\t\022\016\n\006target\030\002 \002(\t\022"
-    "\017\n\007message\030\003 \002(\t\"o\n\017ChatRoomMessage\022%\n\004r"
-    "oom\030\001 \002(\0132\027.protobufs.ChatRoomInfo\022$\n\006se"
-    "nder\030\002 \002(\0132\024.protobufs.UserStats\022\017\n\007mess"
-    "age\030\003 \002(\t\"K\n\022ChatPrivateMessage\022$\n\006sende"
-    "r\030\001 \002(\0132\024.protobufs.UserStats\022\017\n\007message"
-    "\030\002 \002(\t\"Y\n\014ChatRoomUser\022%\n\004room\030\001 \002(\0132\027.p"
-    "rotobufs.ChatRoomInfo\022\"\n\004user\030\002 \002(\0132\024.pr"
-    "otobufs.UserStats\"1\n\017ChatRoomRequest\022\014\n\004"
-    "room\030\001 \002(\t\022\020\n\010password\030\002 \002(\t\"N\n\020Matchmak"
-    "ingStats\022!\n\006region\030\001 \002(\0162\021.protobufs.Reg"
-    "ion\022\027\n\017searching_users\030\002 \002(\003\"i\n\013ServerSt"
-    "ats\022\024\n\014active_users\030\001 \002(\003\022\027\n\017searching_u"
-    "sers\030\002 \002(\003\022+\n\006region\030\003 \003(\0132\033.protobufs.M"
-    "atchmakingStats\"\351\001\n\tCharacter\022!\n\006region\030"
-    "\001 \002(\0162\021.protobufs.Region\022\021\n\tsubregion\030\002 "
-    "\002(\005\022\022\n\nprofile_id\030\003 \002(\005\022\026\n\016character_nam"
-    "e\030\004 \002(\t\022\026\n\016character_code\030\005 \001(\005\022\024\n\014profi"
-    "le_link\030\006 \001(\t\022\033\n\023ingame_profile_link\030\007 \001"
-    "(\t\022\020\n\010verified\030\010 \001(\010\022\035\n\025verification_por"
-    "trait\030\t \001(\005\"\306\001\n\020MatchParticipant\022\"\n\004user"
-    "\030\001 \001(\0132\024.protobufs.UserStats\022\'\n\tcharacte"
-    "r\030\002 \001(\0132\024.protobufs.Character\022\025\n\rpoints_"
-    "before\030\003 \002(\003\022\024\n\014points_after\030\004 \002(\003\022\031\n\021po"
-    "ints_difference\030\005 \002(\003\022\017\n\007victory\030\006 \002(\010\022\014"
-    "\n\004race\030\007 \002(\t\"\177\n\013MatchResult\022!\n\006region\030\001 "
-    "\002(\0162\021.protobufs.Region\022\033\n\003map\030\002 \002(\0132\016.pr"
-    "otobufs.Map\0220\n\013participant\030\003 \003(\0132\033.proto"
-    "bufs.MatchParticipant*1\n\006Region\022\006\n\002NA\020\001\022"
-    "\006\n\002EU\020\002\022\006\n\002KR\020\003\022\006\n\002CN\020\005\022\007\n\003SEA\020\006", 2632);
+    "\003\022\014\n\004wins\030\003 \002(\003\022\016\n\006losses\030\004 \002(\003\022\020\n\010forfe"
+    "its\030\005 \002(\003\022\021\n\twalkovers\030\006 \002(\003\"\263\001\n\tUserSta"
+    "ts\022\020\n\010username\030\001 \002(\t\022\025\n\rsearch_radius\030\002 "
+    "\002(\003\022\016\n\006points\030\003 \002(\003\022\014\n\004wins\030\004 \002(\003\022\016\n\006los"
+    "ses\030\005 \002(\003\022\020\n\010forfeits\030\006 \002(\003\022\021\n\twalkovers"
+    "\030\007 \002(\003\022*\n\006region\030\010 \003(\0132\032.protobufs.UserR"
+    "egionStats\"&\n\007MapPool\022\033\n\003map\030\001 \003(\0132\016.pro"
+    "tobufs.Map\"X\n\003Map\022!\n\006region\030\001 \002(\0162\021.prot"
+    "obufs.Region\022\027\n\017battle_net_name\030\002 \002(\t\022\025\n"
+    "\rbattle_net_id\030\003 \002(\005\"b\n\020SimulationResult"
+    "\022&\n\010opponent\030\001 \002(\0132\024.protobufs.UserStats"
+    "\022\017\n\007victory\030\002 \002(\010\022\025\n\rmatch_quality\030\003 \002(\001"
+    "\"E\n\020MatchmakingQueue\022!\n\006region\030\001 \002(\0162\021.p"
+    "rotobufs.Region\022\016\n\006radius\030\002 \002(\003\"\271\001\n\021Matc"
+    "hmakingResult\022\020\n\010timespan\030\001 \002(\003\022\017\n\007quali"
+    "ty\030\002 \002(\001\022&\n\010opponent\030\003 \002(\0132\024.protobufs.U"
+    "serStats\022\030\n\020opponent_latency\030\004 \002(\003\022\017\n\007ch"
+    "annel\030\005 \002(\t\022\021\n\tchat_room\030\006 \002(\t\022\033\n\003map\030\007 "
+    "\002(\0132\016.protobufs.Map\"\230\001\n\014ChatRoomInfo\022\013\n\003"
+    "key\030\001 \002(\t\022\014\n\004name\030\002 \002(\t\022\022\n\npassworded\030\003 "
+    "\002(\010\022\020\n\010joinable\030\004 \002(\010\022\r\n\005fixed\030\005 \002(\010\022\r\n\005"
+    "users\030\006 \002(\003\022)\n\013participant\030\007 \003(\0132\024.proto"
+    "bufs.UserStats\"6\n\rChatRoomIndex\022%\n\004room\030"
+    "\001 \003(\0132\027.protobufs.ChatRoomInfo\">\n\013ChatMe"
+    "ssage\022\016\n\006sender\030\001 \002(\t\022\016\n\006target\030\002 \002(\t\022\017\n"
+    "\007message\030\003 \002(\t\"o\n\017ChatRoomMessage\022%\n\004roo"
+    "m\030\001 \002(\0132\027.protobufs.ChatRoomInfo\022$\n\006send"
+    "er\030\002 \002(\0132\024.protobufs.UserStats\022\017\n\007messag"
+    "e\030\003 \002(\t\"K\n\022ChatPrivateMessage\022$\n\006sender\030"
+    "\001 \002(\0132\024.protobufs.UserStats\022\017\n\007message\030\002"
+    " \002(\t\"Y\n\014ChatRoomUser\022%\n\004room\030\001 \002(\0132\027.pro"
+    "tobufs.ChatRoomInfo\022\"\n\004user\030\002 \002(\0132\024.prot"
+    "obufs.UserStats\"1\n\017ChatRoomRequest\022\014\n\004ro"
+    "om\030\001 \002(\t\022\020\n\010password\030\002 \002(\t\"N\n\020Matchmakin"
+    "gStats\022!\n\006region\030\001 \002(\0162\021.protobufs.Regio"
+    "n\022\027\n\017searching_users\030\002 \002(\003\"i\n\013ServerStat"
+    "s\022\024\n\014active_users\030\001 \002(\003\022\027\n\017searching_use"
+    "rs\030\002 \002(\003\022+\n\006region\030\003 \003(\0132\033.protobufs.Mat"
+    "chmakingStats\"\351\001\n\tCharacter\022!\n\006region\030\001 "
+    "\002(\0162\021.protobufs.Region\022\021\n\tsubregion\030\002 \002("
+    "\005\022\022\n\nprofile_id\030\003 \002(\005\022\026\n\016character_name\030"
+    "\004 \002(\t\022\026\n\016character_code\030\005 \001(\005\022\024\n\014profile"
+    "_link\030\006 \001(\t\022\033\n\023ingame_profile_link\030\007 \001(\t"
+    "\022\020\n\010verified\030\010 \001(\010\022\035\n\025verification_portr"
+    "ait\030\t \001(\005\"\306\001\n\020MatchParticipant\022\"\n\004user\030\001"
+    " \001(\0132\024.protobufs.UserStats\022\'\n\tcharacter\030"
+    "\002 \001(\0132\024.protobufs.Character\022\025\n\rpoints_be"
+    "fore\030\003 \002(\003\022\024\n\014points_after\030\004 \002(\003\022\031\n\021poin"
+    "ts_difference\030\005 \002(\003\022\017\n\007victory\030\006 \002(\010\022\014\n\004"
+    "race\030\007 \002(\t\"\177\n\013MatchResult\022!\n\006region\030\001 \002("
+    "\0162\021.protobufs.Region\022\033\n\003map\030\002 \002(\0132\016.prot"
+    "obufs.Map\0220\n\013participant\030\003 \003(\0132\033.protobu"
+    "fs.MatchParticipant\"5\n\016BroadcastAlert\022\017\n"
+    "\007message\030\002 \002(\t\022\022\n\npredefined\030\001 \002(\005*1\n\006Re"
+    "gion\022\006\n\002NA\020\001\022\006\n\002EU\020\002\022\006\n\002KR\020\003\022\006\n\002CN\020\005\022\007\n\003"
+    "SEA\020\006", 2685);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "eros.proto", &protobuf_RegisterTypes);
   Handshake::default_instance_ = new Handshake();
@@ -696,6 +721,7 @@ void protobuf_AddDesc_eros_2eproto() {
   Character::default_instance_ = new Character();
   MatchParticipant::default_instance_ = new MatchParticipant();
   MatchResult::default_instance_ = new MatchResult();
+  BroadcastAlert::default_instance_ = new BroadcastAlert();
   Handshake::default_instance_->InitAsDefaultInstance();
   Division::default_instance_->InitAsDefaultInstance();
   HandshakeResponse::default_instance_->InitAsDefaultInstance();
@@ -718,6 +744,7 @@ void protobuf_AddDesc_eros_2eproto() {
   Character::default_instance_->InitAsDefaultInstance();
   MatchParticipant::default_instance_->InitAsDefaultInstance();
   MatchResult::default_instance_->InitAsDefaultInstance();
+  BroadcastAlert::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_eros_2eproto);
 }
 
@@ -1765,7 +1792,7 @@ const int UserRegionStats::kRegionFieldNumber;
 const int UserRegionStats::kPointsFieldNumber;
 const int UserRegionStats::kWinsFieldNumber;
 const int UserRegionStats::kLossesFieldNumber;
-const int UserRegionStats::kForefeitsFieldNumber;
+const int UserRegionStats::kForfeitsFieldNumber;
 const int UserRegionStats::kWalkoversFieldNumber;
 #endif  // !_MSC_VER
 
@@ -1789,7 +1816,7 @@ void UserRegionStats::SharedCtor() {
   points_ = GOOGLE_LONGLONG(0);
   wins_ = GOOGLE_LONGLONG(0);
   losses_ = GOOGLE_LONGLONG(0);
-  forefeits_ = GOOGLE_LONGLONG(0);
+  forfeits_ = GOOGLE_LONGLONG(0);
   walkovers_ = GOOGLE_LONGLONG(0);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -1830,7 +1857,7 @@ void UserRegionStats::Clear() {
     points_ = GOOGLE_LONGLONG(0);
     wins_ = GOOGLE_LONGLONG(0);
     losses_ = GOOGLE_LONGLONG(0);
-    forefeits_ = GOOGLE_LONGLONG(0);
+    forfeits_ = GOOGLE_LONGLONG(0);
     walkovers_ = GOOGLE_LONGLONG(0);
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -1907,19 +1934,19 @@ bool UserRegionStats::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(40)) goto parse_forefeits;
+        if (input->ExpectTag(40)) goto parse_forfeits;
         break;
       }
 
-      // required int64 forefeits = 5;
+      // required int64 forfeits = 5;
       case 5: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_forefeits:
+         parse_forfeits:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &forefeits_)));
-          set_has_forefeits();
+                 input, &forfeits_)));
+          set_has_forfeits();
         } else {
           goto handle_uninterpreted;
         }
@@ -1982,9 +2009,9 @@ void UserRegionStats::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt64(4, this->losses(), output);
   }
 
-  // required int64 forefeits = 5;
-  if (has_forefeits()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(5, this->forefeits(), output);
+  // required int64 forfeits = 5;
+  if (has_forfeits()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(5, this->forfeits(), output);
   }
 
   // required int64 walkovers = 6;
@@ -2021,9 +2048,9 @@ void UserRegionStats::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(4, this->losses(), target);
   }
 
-  // required int64 forefeits = 5;
-  if (has_forefeits()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(5, this->forefeits(), target);
+  // required int64 forfeits = 5;
+  if (has_forfeits()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(5, this->forfeits(), target);
   }
 
   // required int64 walkovers = 6;
@@ -2069,11 +2096,11 @@ int UserRegionStats::ByteSize() const {
           this->losses());
     }
 
-    // required int64 forefeits = 5;
-    if (has_forefeits()) {
+    // required int64 forfeits = 5;
+    if (has_forfeits()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int64Size(
-          this->forefeits());
+          this->forfeits());
     }
 
     // required int64 walkovers = 6;
@@ -2122,8 +2149,8 @@ void UserRegionStats::MergeFrom(const UserRegionStats& from) {
     if (from.has_losses()) {
       set_losses(from.losses());
     }
-    if (from.has_forefeits()) {
-      set_forefeits(from.forefeits());
+    if (from.has_forfeits()) {
+      set_forfeits(from.forfeits());
     }
     if (from.has_walkovers()) {
       set_walkovers(from.walkovers());
@@ -2156,7 +2183,7 @@ void UserRegionStats::Swap(UserRegionStats* other) {
     std::swap(points_, other->points_);
     std::swap(wins_, other->wins_);
     std::swap(losses_, other->losses_);
-    std::swap(forefeits_, other->forefeits_);
+    std::swap(forfeits_, other->forfeits_);
     std::swap(walkovers_, other->walkovers_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
@@ -2181,7 +2208,7 @@ const int UserStats::kSearchRadiusFieldNumber;
 const int UserStats::kPointsFieldNumber;
 const int UserStats::kWinsFieldNumber;
 const int UserStats::kLossesFieldNumber;
-const int UserStats::kForefeitsFieldNumber;
+const int UserStats::kForfeitsFieldNumber;
 const int UserStats::kWalkoversFieldNumber;
 const int UserStats::kRegionFieldNumber;
 #endif  // !_MSC_VER
@@ -2207,7 +2234,7 @@ void UserStats::SharedCtor() {
   points_ = GOOGLE_LONGLONG(0);
   wins_ = GOOGLE_LONGLONG(0);
   losses_ = GOOGLE_LONGLONG(0);
-  forefeits_ = GOOGLE_LONGLONG(0);
+  forfeits_ = GOOGLE_LONGLONG(0);
   walkovers_ = GOOGLE_LONGLONG(0);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -2256,7 +2283,7 @@ void UserStats::Clear() {
     points_ = GOOGLE_LONGLONG(0);
     wins_ = GOOGLE_LONGLONG(0);
     losses_ = GOOGLE_LONGLONG(0);
-    forefeits_ = GOOGLE_LONGLONG(0);
+    forfeits_ = GOOGLE_LONGLONG(0);
     walkovers_ = GOOGLE_LONGLONG(0);
   }
   region_.Clear();
@@ -2346,19 +2373,19 @@ bool UserStats::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(48)) goto parse_forefeits;
+        if (input->ExpectTag(48)) goto parse_forfeits;
         break;
       }
 
-      // required int64 forefeits = 6;
+      // required int64 forfeits = 6;
       case 6: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_forefeits:
+         parse_forfeits:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &forefeits_)));
-          set_has_forefeits();
+                 input, &forfeits_)));
+          set_has_forfeits();
         } else {
           goto handle_uninterpreted;
         }
@@ -2444,9 +2471,9 @@ void UserStats::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt64(5, this->losses(), output);
   }
 
-  // required int64 forefeits = 6;
-  if (has_forefeits()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(6, this->forefeits(), output);
+  // required int64 forfeits = 6;
+  if (has_forfeits()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(6, this->forfeits(), output);
   }
 
   // required int64 walkovers = 7;
@@ -2498,9 +2525,9 @@ void UserStats::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(5, this->losses(), target);
   }
 
-  // required int64 forefeits = 6;
-  if (has_forefeits()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(6, this->forefeits(), target);
+  // required int64 forfeits = 6;
+  if (has_forfeits()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(6, this->forfeits(), target);
   }
 
   // required int64 walkovers = 7;
@@ -2561,11 +2588,11 @@ int UserStats::ByteSize() const {
           this->losses());
     }
 
-    // required int64 forefeits = 6;
-    if (has_forefeits()) {
+    // required int64 forfeits = 6;
+    if (has_forfeits()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int64Size(
-          this->forefeits());
+          this->forfeits());
     }
 
     // required int64 walkovers = 7;
@@ -2626,8 +2653,8 @@ void UserStats::MergeFrom(const UserStats& from) {
     if (from.has_losses()) {
       set_losses(from.losses());
     }
-    if (from.has_forefeits()) {
-      set_forefeits(from.forefeits());
+    if (from.has_forfeits()) {
+      set_forfeits(from.forfeits());
     }
     if (from.has_walkovers()) {
       set_walkovers(from.walkovers());
@@ -2664,7 +2691,7 @@ void UserStats::Swap(UserStats* other) {
     std::swap(points_, other->points_);
     std::swap(wins_, other->wins_);
     std::swap(losses_, other->losses_);
-    std::swap(forefeits_, other->forefeits_);
+    std::swap(forfeits_, other->forfeits_);
     std::swap(walkovers_, other->walkovers_);
     region_.Swap(&other->region_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
@@ -8334,6 +8361,272 @@ void MatchResult::Swap(MatchResult* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = MatchResult_descriptor_;
   metadata.reflection = MatchResult_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int BroadcastAlert::kMessageFieldNumber;
+const int BroadcastAlert::kPredefinedFieldNumber;
+#endif  // !_MSC_VER
+
+BroadcastAlert::BroadcastAlert()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void BroadcastAlert::InitAsDefaultInstance() {
+}
+
+BroadcastAlert::BroadcastAlert(const BroadcastAlert& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void BroadcastAlert::SharedCtor() {
+  _cached_size_ = 0;
+  message_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  predefined_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+BroadcastAlert::~BroadcastAlert() {
+  SharedDtor();
+}
+
+void BroadcastAlert::SharedDtor() {
+  if (message_ != &::google::protobuf::internal::kEmptyString) {
+    delete message_;
+  }
+  if (this != default_instance_) {
+  }
+}
+
+void BroadcastAlert::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* BroadcastAlert::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return BroadcastAlert_descriptor_;
+}
+
+const BroadcastAlert& BroadcastAlert::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_eros_2eproto();
+  return *default_instance_;
+}
+
+BroadcastAlert* BroadcastAlert::default_instance_ = NULL;
+
+BroadcastAlert* BroadcastAlert::New() const {
+  return new BroadcastAlert;
+}
+
+void BroadcastAlert::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_message()) {
+      if (message_ != &::google::protobuf::internal::kEmptyString) {
+        message_->clear();
+      }
+    }
+    predefined_ = 0;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool BroadcastAlert::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required int32 predefined = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &predefined_)));
+          set_has_predefined();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_message;
+        break;
+      }
+
+      // required string message = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_message:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_message()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->message().data(), this->message().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void BroadcastAlert::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required int32 predefined = 1;
+  if (has_predefined()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->predefined(), output);
+  }
+
+  // required string message = 2;
+  if (has_message()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->message().data(), this->message().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      2, this->message(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* BroadcastAlert::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required int32 predefined = 1;
+  if (has_predefined()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->predefined(), target);
+  }
+
+  // required string message = 2;
+  if (has_message()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->message().data(), this->message().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        2, this->message(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int BroadcastAlert::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required string message = 2;
+    if (has_message()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->message());
+    }
+
+    // required int32 predefined = 1;
+    if (has_predefined()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->predefined());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void BroadcastAlert::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const BroadcastAlert* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const BroadcastAlert*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void BroadcastAlert::MergeFrom(const BroadcastAlert& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_message()) {
+      set_message(from.message());
+    }
+    if (from.has_predefined()) {
+      set_predefined(from.predefined());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void BroadcastAlert::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void BroadcastAlert::CopyFrom(const BroadcastAlert& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool BroadcastAlert::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+
+  return true;
+}
+
+void BroadcastAlert::Swap(BroadcastAlert* other) {
+  if (other != this) {
+    std::swap(message_, other->message_);
+    std::swap(predefined_, other->predefined_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata BroadcastAlert::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = BroadcastAlert_descriptor_;
+  metadata.reflection = BroadcastAlert_reflection_;
   return metadata;
 }
 

@@ -1,4 +1,4 @@
-#include "matchmakingforefeitrequest.h"
+#include "matchmakingforfeitrequest.h"
 
 MatchmakingForefeitRequest::MatchmakingForefeitRequest(Eros *parent)
 	: Request(parent, "MMF")

@@ -242,14 +242,14 @@
     <ClCompile Include="GeneratedFiles\Release\moc_userladderstats.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_matchmakingforefeitrequest.cpp">
+    <ClCompile Include="requests\matchmakingforfeitrequest.cpp">
+      <Filter>Source Files\requests</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_matchmakingforfeitrequest.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_matchmakingforefeitrequest.cpp">
+    <ClCompile Include="GeneratedFiles\Release\moc_matchmakingforfeitrequest.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="requests\matchmakingforefeitrequest.cpp">
-      <Filter>Source Files\requests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -319,7 +319,7 @@
     <CustomBuild Include="userladderstats.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="requests\matchmakingforefeitrequest.h">
+    <CustomBuild Include="requests\matchmakingforfeitrequest.h">
       <Filter>Header Files\requests</Filter>
     </CustomBuild>
   </ItemGroup>

@@ -85,7 +85,7 @@ public slots:
 	// Matchmaking slots
 	void queueMatchmaking(ErosRegion region, int search_radius);
 	void dequeueMatchmaking();
-	void forefeitMatchmaking();
+	void forfeitMatchmaking();
 
 	// Chat slots
 	void sendMessage(ChatRoom *room, const QString message);
@@ -192,6 +192,7 @@ signals:
 	void statsUpdated(int active, int searching);
 	void regionStatsUpdated(ErosRegion region, int searching);
 	void uploadProgress(qint64 written, qint64 total);
+	void broadcastAlert(const QString message, int predefined_hint);
 
 	// User signals
 	void userAdded(User *user);
