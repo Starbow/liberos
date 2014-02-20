@@ -25,14 +25,14 @@ public:
 	~Divisions();
 
 	int size() const;
-	const QList<QPair<int, QString>> &divisions() const;
+    const QList< QPair<int, QString> > &divisions() const;
 	const QPair<int, QString> &division(int points) const;
 	int difference(int points, int points2) const;
 
 	static QPair<int, QString> unknownDivision;
 
 private:
-	QList<QPair<int, QString>> divisions_;
+    QList< QPair<int, QString> > divisions_;
 };
 
 #endif // LIBEROS_DIVISIONS_H

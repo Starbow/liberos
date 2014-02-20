@@ -2,9 +2,9 @@ QT       += network
 
 QT       -= gui
 
-TARGET = liberos
+TARGET = eros
 TEMPLATE = lib
-CONFIG += staticlib
+CONFIG += staticlib c++11
 
 SOURCES += character.cpp\
            chatroom.cpp\
@@ -15,13 +15,14 @@ SOURCES += character.cpp\
            matchmakingmatch.cpp\
            request.cpp\
            user.cpp\
+           userladderstats.cpp\
            requests/chatindexrequest.cpp\
            requests/chatjoinrequest.cpp\
            requests/chatleaverequest.cpp\
            requests/chatmessagerequest.cpp\
            requests/handshakerequest.cpp\
            requests/matchmakingdequeuerequest.cpp\
-		   requests/matchmakingforefeitrequest.cpp\
+           requests/matchmakingforfeitrequest.cpp\
            requests/matchmakingqueuerequest.cpp\
            requests/pingrequest.cpp\
            requests/privatemessagerequest.cpp\
@@ -33,19 +34,21 @@ SOURCES += character.cpp\
 HEADERS += character.h\
            chatroom.h\
            divisions.h\
+           enums.h\
            eros.h\
            eros.pb.h\
            localuser.h\
            matchmakingmatch.h\
            request.h\
            user.h\
+           userladderstats.h\
            requests/chatindexrequest.h\
            requests/chatjoinrequest.h\
            requests/chatleaverequest.h\
            requests/chatmessagerequest.h\
            requests/handshakerequest.h\
            requests/matchmakingdequeuerequest.h\
-		   requests/matchmakingforefeitrequest.h\
+           requests/matchmakingforfeitrequest.h\
            requests/matchmakingqueuerequest.h\
            requests/pingrequest.h\
            requests/privatemessagerequest.h\

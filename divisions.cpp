@@ -15,7 +15,7 @@ QPair<int, QString> Divisions::unknownDivision = qMakePair<int, QString>(0, "Unk
 Divisions::Divisions(QObject *parent, const protobufs::HandshakeResponse &response)
 	: QObject(parent)
 {
-	this->divisions_ = QList<QPair<int, QString>>();
+    this->divisions_ = QList< QPair<int, QString> >();
 
 	for (int i = 0; i < response.division_size(); i++)
 	{
@@ -37,14 +37,14 @@ int Divisions::size() const
 	return this->divisions_.size();
 }
 
-const QList<QPair<int, QString>> &Divisions::divisions() const
+const QList< QPair<int, QString> > &Divisions::divisions() const
 {
 	return this->divisions_;
 }
 
 const QPair<int, QString> &Divisions::division(int points) const
 {
-	QList<QPair<int, QString>>::const_iterator i = this->divisions_.end();
+    QList< QPair<int, QString> >::const_iterator i = this->divisions_.end();
 	i--;
 	while (i != this->divisions_.begin())
 	{
