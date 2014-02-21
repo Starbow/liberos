@@ -1262,6 +1262,20 @@ class MatchmakingResult : public ::google::protobuf::Message {
   inline ::protobufs::Map* release_map();
   inline void set_allocated_map(::protobufs::Map* map);
 
+  // required int64 long_unlock_time = 8;
+  inline bool has_long_unlock_time() const;
+  inline void clear_long_unlock_time();
+  static const int kLongUnlockTimeFieldNumber = 8;
+  inline ::google::protobuf::int64 long_unlock_time() const;
+  inline void set_long_unlock_time(::google::protobuf::int64 value);
+
+  // required int64 long_response_time = 9;
+  inline bool has_long_response_time() const;
+  inline void clear_long_response_time();
+  static const int kLongResponseTimeFieldNumber = 9;
+  inline ::google::protobuf::int64 long_response_time() const;
+  inline void set_long_response_time(::google::protobuf::int64 value);
+
   // @@protoc_insertion_point(class_scope:protobufs.MatchmakingResult)
  private:
   inline void set_has_timespan();
@@ -1278,6 +1292,10 @@ class MatchmakingResult : public ::google::protobuf::Message {
   inline void clear_has_chat_room();
   inline void set_has_map();
   inline void clear_has_map();
+  inline void set_has_long_unlock_time();
+  inline void clear_has_long_unlock_time();
+  inline void set_has_long_response_time();
+  inline void clear_has_long_response_time();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -1288,9 +1306,11 @@ class MatchmakingResult : public ::google::protobuf::Message {
   ::std::string* channel_;
   ::std::string* chat_room_;
   ::protobufs::Map* map_;
+  ::google::protobuf::int64 long_unlock_time_;
+  ::google::protobuf::int64 long_response_time_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(9 + 31) / 32];
 
   friend void  protobuf_AddDesc_eros_2eproto();
   friend void protobuf_AssignDesc_eros_2eproto();
@@ -4135,6 +4155,50 @@ inline void MatchmakingResult::set_allocated_map(::protobufs::Map* map) {
   } else {
     clear_has_map();
   }
+}
+
+// required int64 long_unlock_time = 8;
+inline bool MatchmakingResult::has_long_unlock_time() const {
+  return (_has_bits_[0] & 0x00000080u) != 0;
+}
+inline void MatchmakingResult::set_has_long_unlock_time() {
+  _has_bits_[0] |= 0x00000080u;
+}
+inline void MatchmakingResult::clear_has_long_unlock_time() {
+  _has_bits_[0] &= ~0x00000080u;
+}
+inline void MatchmakingResult::clear_long_unlock_time() {
+  long_unlock_time_ = GOOGLE_LONGLONG(0);
+  clear_has_long_unlock_time();
+}
+inline ::google::protobuf::int64 MatchmakingResult::long_unlock_time() const {
+  return long_unlock_time_;
+}
+inline void MatchmakingResult::set_long_unlock_time(::google::protobuf::int64 value) {
+  set_has_long_unlock_time();
+  long_unlock_time_ = value;
+}
+
+// required int64 long_response_time = 9;
+inline bool MatchmakingResult::has_long_response_time() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+inline void MatchmakingResult::set_has_long_response_time() {
+  _has_bits_[0] |= 0x00000100u;
+}
+inline void MatchmakingResult::clear_has_long_response_time() {
+  _has_bits_[0] &= ~0x00000100u;
+}
+inline void MatchmakingResult::clear_long_response_time() {
+  long_response_time_ = GOOGLE_LONGLONG(0);
+  clear_has_long_response_time();
+}
+inline ::google::protobuf::int64 MatchmakingResult::long_response_time() const {
+  return long_response_time_;
+}
+inline void MatchmakingResult::set_long_response_time(::google::protobuf::int64 value) {
+  set_has_long_response_time();
+  long_response_time_ = value;
 }
 
 // -------------------------------------------------------------------

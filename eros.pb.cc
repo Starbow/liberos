@@ -262,7 +262,7 @@ void protobuf_AssignDesc_eros_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(MatchmakingQueue));
   MatchmakingResult_descriptor_ = file->message_type(9);
-  static const int MatchmakingResult_offsets_[7] = {
+  static const int MatchmakingResult_offsets_[9] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MatchmakingResult, timespan_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MatchmakingResult, quality_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MatchmakingResult, opponent_),
@@ -270,6 +270,8 @@ void protobuf_AssignDesc_eros_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MatchmakingResult, channel_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MatchmakingResult, chat_room_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MatchmakingResult, map_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MatchmakingResult, long_unlock_time_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MatchmakingResult, long_response_time_),
   };
   MatchmakingResult_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -654,49 +656,50 @@ void protobuf_AddDesc_eros_2eproto() {
     "\022&\n\010opponent\030\001 \002(\0132\024.protobufs.UserStats"
     "\022\017\n\007victory\030\002 \002(\010\022\025\n\rmatch_quality\030\003 \002(\001"
     "\"E\n\020MatchmakingQueue\022!\n\006region\030\001 \002(\0162\021.p"
-    "rotobufs.Region\022\016\n\006radius\030\002 \002(\003\"\271\001\n\021Matc"
+    "rotobufs.Region\022\016\n\006radius\030\002 \002(\003\"\357\001\n\021Matc"
     "hmakingResult\022\020\n\010timespan\030\001 \002(\003\022\017\n\007quali"
     "ty\030\002 \002(\001\022&\n\010opponent\030\003 \002(\0132\024.protobufs.U"
     "serStats\022\030\n\020opponent_latency\030\004 \002(\003\022\017\n\007ch"
     "annel\030\005 \002(\t\022\021\n\tchat_room\030\006 \002(\t\022\033\n\003map\030\007 "
-    "\002(\0132\016.protobufs.Map\"\230\001\n\014ChatRoomInfo\022\013\n\003"
-    "key\030\001 \002(\t\022\014\n\004name\030\002 \002(\t\022\022\n\npassworded\030\003 "
-    "\002(\010\022\020\n\010joinable\030\004 \002(\010\022\r\n\005fixed\030\005 \002(\010\022\r\n\005"
-    "users\030\006 \002(\003\022)\n\013participant\030\007 \003(\0132\024.proto"
-    "bufs.UserStats\"6\n\rChatRoomIndex\022%\n\004room\030"
-    "\001 \003(\0132\027.protobufs.ChatRoomInfo\">\n\013ChatMe"
-    "ssage\022\016\n\006sender\030\001 \002(\t\022\016\n\006target\030\002 \002(\t\022\017\n"
-    "\007message\030\003 \002(\t\"o\n\017ChatRoomMessage\022%\n\004roo"
-    "m\030\001 \002(\0132\027.protobufs.ChatRoomInfo\022$\n\006send"
-    "er\030\002 \002(\0132\024.protobufs.UserStats\022\017\n\007messag"
-    "e\030\003 \002(\t\"K\n\022ChatPrivateMessage\022$\n\006sender\030"
-    "\001 \002(\0132\024.protobufs.UserStats\022\017\n\007message\030\002"
-    " \002(\t\"Y\n\014ChatRoomUser\022%\n\004room\030\001 \002(\0132\027.pro"
-    "tobufs.ChatRoomInfo\022\"\n\004user\030\002 \002(\0132\024.prot"
-    "obufs.UserStats\"1\n\017ChatRoomRequest\022\014\n\004ro"
-    "om\030\001 \002(\t\022\020\n\010password\030\002 \002(\t\"N\n\020Matchmakin"
-    "gStats\022!\n\006region\030\001 \002(\0162\021.protobufs.Regio"
-    "n\022\027\n\017searching_users\030\002 \002(\003\"i\n\013ServerStat"
-    "s\022\024\n\014active_users\030\001 \002(\003\022\027\n\017searching_use"
-    "rs\030\002 \002(\003\022+\n\006region\030\003 \003(\0132\033.protobufs.Mat"
-    "chmakingStats\"\351\001\n\tCharacter\022!\n\006region\030\001 "
-    "\002(\0162\021.protobufs.Region\022\021\n\tsubregion\030\002 \002("
-    "\005\022\022\n\nprofile_id\030\003 \002(\005\022\026\n\016character_name\030"
-    "\004 \002(\t\022\026\n\016character_code\030\005 \001(\005\022\024\n\014profile"
-    "_link\030\006 \001(\t\022\033\n\023ingame_profile_link\030\007 \001(\t"
-    "\022\020\n\010verified\030\010 \001(\010\022\035\n\025verification_portr"
-    "ait\030\t \001(\005\"\306\001\n\020MatchParticipant\022\"\n\004user\030\001"
-    " \001(\0132\024.protobufs.UserStats\022\'\n\tcharacter\030"
-    "\002 \001(\0132\024.protobufs.Character\022\025\n\rpoints_be"
-    "fore\030\003 \002(\003\022\024\n\014points_after\030\004 \002(\003\022\031\n\021poin"
-    "ts_difference\030\005 \002(\003\022\017\n\007victory\030\006 \002(\010\022\014\n\004"
-    "race\030\007 \002(\t\"\177\n\013MatchResult\022!\n\006region\030\001 \002("
-    "\0162\021.protobufs.Region\022\033\n\003map\030\002 \002(\0132\016.prot"
-    "obufs.Map\0220\n\013participant\030\003 \003(\0132\033.protobu"
-    "fs.MatchParticipant\"5\n\016BroadcastAlert\022\017\n"
-    "\007message\030\002 \002(\t\022\022\n\npredefined\030\001 \002(\005*1\n\006Re"
-    "gion\022\006\n\002NA\020\001\022\006\n\002EU\020\002\022\006\n\002KR\020\003\022\006\n\002CN\020\005\022\007\n\003"
-    "SEA\020\006", 2685);
+    "\002(\0132\016.protobufs.Map\022\030\n\020long_unlock_time\030"
+    "\010 \002(\003\022\032\n\022long_response_time\030\t \002(\003\"\230\001\n\014Ch"
+    "atRoomInfo\022\013\n\003key\030\001 \002(\t\022\014\n\004name\030\002 \002(\t\022\022\n"
+    "\npassworded\030\003 \002(\010\022\020\n\010joinable\030\004 \002(\010\022\r\n\005f"
+    "ixed\030\005 \002(\010\022\r\n\005users\030\006 \002(\003\022)\n\013participant"
+    "\030\007 \003(\0132\024.protobufs.UserStats\"6\n\rChatRoom"
+    "Index\022%\n\004room\030\001 \003(\0132\027.protobufs.ChatRoom"
+    "Info\">\n\013ChatMessage\022\016\n\006sender\030\001 \002(\t\022\016\n\006t"
+    "arget\030\002 \002(\t\022\017\n\007message\030\003 \002(\t\"o\n\017ChatRoom"
+    "Message\022%\n\004room\030\001 \002(\0132\027.protobufs.ChatRo"
+    "omInfo\022$\n\006sender\030\002 \002(\0132\024.protobufs.UserS"
+    "tats\022\017\n\007message\030\003 \002(\t\"K\n\022ChatPrivateMess"
+    "age\022$\n\006sender\030\001 \002(\0132\024.protobufs.UserStat"
+    "s\022\017\n\007message\030\002 \002(\t\"Y\n\014ChatRoomUser\022%\n\004ro"
+    "om\030\001 \002(\0132\027.protobufs.ChatRoomInfo\022\"\n\004use"
+    "r\030\002 \002(\0132\024.protobufs.UserStats\"1\n\017ChatRoo"
+    "mRequest\022\014\n\004room\030\001 \002(\t\022\020\n\010password\030\002 \002(\t"
+    "\"N\n\020MatchmakingStats\022!\n\006region\030\001 \002(\0162\021.p"
+    "rotobufs.Region\022\027\n\017searching_users\030\002 \002(\003"
+    "\"i\n\013ServerStats\022\024\n\014active_users\030\001 \002(\003\022\027\n"
+    "\017searching_users\030\002 \002(\003\022+\n\006region\030\003 \003(\0132\033"
+    ".protobufs.MatchmakingStats\"\351\001\n\tCharacte"
+    "r\022!\n\006region\030\001 \002(\0162\021.protobufs.Region\022\021\n\t"
+    "subregion\030\002 \002(\005\022\022\n\nprofile_id\030\003 \002(\005\022\026\n\016c"
+    "haracter_name\030\004 \002(\t\022\026\n\016character_code\030\005 "
+    "\001(\005\022\024\n\014profile_link\030\006 \001(\t\022\033\n\023ingame_prof"
+    "ile_link\030\007 \001(\t\022\020\n\010verified\030\010 \001(\010\022\035\n\025veri"
+    "fication_portrait\030\t \001(\005\"\306\001\n\020MatchPartici"
+    "pant\022\"\n\004user\030\001 \001(\0132\024.protobufs.UserStats"
+    "\022\'\n\tcharacter\030\002 \001(\0132\024.protobufs.Characte"
+    "r\022\025\n\rpoints_before\030\003 \002(\003\022\024\n\014points_after"
+    "\030\004 \002(\003\022\031\n\021points_difference\030\005 \002(\003\022\017\n\007vic"
+    "tory\030\006 \002(\010\022\014\n\004race\030\007 \002(\t\"\177\n\013MatchResult\022"
+    "!\n\006region\030\001 \002(\0162\021.protobufs.Region\022\033\n\003ma"
+    "p\030\002 \002(\0132\016.protobufs.Map\0220\n\013participant\030\003"
+    " \003(\0132\033.protobufs.MatchParticipant\"5\n\016Bro"
+    "adcastAlert\022\017\n\007message\030\002 \002(\t\022\022\n\npredefin"
+    "ed\030\001 \002(\005*1\n\006Region\022\006\n\002NA\020\001\022\006\n\002EU\020\002\022\006\n\002KR"
+    "\020\003\022\006\n\002CN\020\005\022\007\n\003SEA\020\006", 2739);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "eros.proto", &protobuf_RegisterTypes);
   Handshake::default_instance_ = new Handshake();
@@ -3785,6 +3788,8 @@ const int MatchmakingResult::kOpponentLatencyFieldNumber;
 const int MatchmakingResult::kChannelFieldNumber;
 const int MatchmakingResult::kChatRoomFieldNumber;
 const int MatchmakingResult::kMapFieldNumber;
+const int MatchmakingResult::kLongUnlockTimeFieldNumber;
+const int MatchmakingResult::kLongResponseTimeFieldNumber;
 #endif  // !_MSC_VER
 
 MatchmakingResult::MatchmakingResult()
@@ -3812,6 +3817,8 @@ void MatchmakingResult::SharedCtor() {
   channel_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   chat_room_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   map_ = NULL;
+  long_unlock_time_ = GOOGLE_LONGLONG(0);
+  long_response_time_ = GOOGLE_LONGLONG(0);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -3874,6 +3881,10 @@ void MatchmakingResult::Clear() {
     if (has_map()) {
       if (map_ != NULL) map_->::protobufs::Map::Clear();
     }
+    long_unlock_time_ = GOOGLE_LONGLONG(0);
+  }
+  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    long_response_time_ = GOOGLE_LONGLONG(0);
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -3990,6 +4001,38 @@ bool MatchmakingResult::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(64)) goto parse_long_unlock_time;
+        break;
+      }
+
+      // required int64 long_unlock_time = 8;
+      case 8: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_long_unlock_time:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &long_unlock_time_)));
+          set_has_long_unlock_time();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(72)) goto parse_long_response_time;
+        break;
+      }
+
+      // required int64 long_response_time = 9;
+      case 9: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_long_response_time:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &long_response_time_)));
+          set_has_long_response_time();
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -4057,6 +4100,16 @@ void MatchmakingResult::SerializeWithCachedSizes(
       7, this->map(), output);
   }
 
+  // required int64 long_unlock_time = 8;
+  if (has_long_unlock_time()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(8, this->long_unlock_time(), output);
+  }
+
+  // required int64 long_response_time = 9;
+  if (has_long_response_time()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(9, this->long_response_time(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -4112,6 +4165,16 @@ void MatchmakingResult::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         7, this->map(), target);
+  }
+
+  // required int64 long_unlock_time = 8;
+  if (has_long_unlock_time()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(8, this->long_unlock_time(), target);
+  }
+
+  // required int64 long_response_time = 9;
+  if (has_long_response_time()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(9, this->long_response_time(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -4172,6 +4235,22 @@ int MatchmakingResult::ByteSize() const {
           this->map());
     }
 
+    // required int64 long_unlock_time = 8;
+    if (has_long_unlock_time()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int64Size(
+          this->long_unlock_time());
+    }
+
+  }
+  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    // required int64 long_response_time = 9;
+    if (has_long_response_time()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int64Size(
+          this->long_response_time());
+    }
+
   }
   if (!unknown_fields().empty()) {
     total_size +=
@@ -4220,6 +4299,14 @@ void MatchmakingResult::MergeFrom(const MatchmakingResult& from) {
     if (from.has_map()) {
       mutable_map()->::protobufs::Map::MergeFrom(from.map());
     }
+    if (from.has_long_unlock_time()) {
+      set_long_unlock_time(from.long_unlock_time());
+    }
+  }
+  if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    if (from.has_long_response_time()) {
+      set_long_response_time(from.long_response_time());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -4237,7 +4324,7 @@ void MatchmakingResult::CopyFrom(const MatchmakingResult& from) {
 }
 
 bool MatchmakingResult::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000007f) != 0x0000007f) return false;
+  if ((_has_bits_[0] & 0x000001ff) != 0x000001ff) return false;
 
   if (has_opponent()) {
     if (!this->opponent().IsInitialized()) return false;
@@ -4257,6 +4344,8 @@ void MatchmakingResult::Swap(MatchmakingResult* other) {
     std::swap(channel_, other->channel_);
     std::swap(chat_room_, other->chat_room_);
     std::swap(map_, other->map_);
+    std::swap(long_unlock_time_, other->long_unlock_time_);
+    std::swap(long_response_time_, other->long_response_time_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

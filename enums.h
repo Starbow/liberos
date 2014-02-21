@@ -74,6 +74,7 @@ enum ErosError
 
 	NoCharacterForRegion = 401,
 	MatchmakingAborted = 402,
+	LongProcessRequestFailed = 403,
 
 	RoomNotJoinable = 501,
 	BadPassword = 502,
@@ -88,4 +89,15 @@ enum ErosError
 
 
 Q_DECLARE_METATYPE(ErosError)
+
+enum ErosLongProcessState
+{
+	LongProcessIdle,
+	FlaggedNoShow,
+	OpponentFlaggedNoShow,
+	DrawRequest,
+	OpponentFlaggedDrawRequest,
+};
+
+Q_DECLARE_METATYPE(ErosLongProcessState)
 #endif

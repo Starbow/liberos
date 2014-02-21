@@ -251,6 +251,24 @@
     <ClCompile Include="GeneratedFiles\Release\moc_matchmakingforfeitrequest.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_longprocessrequest.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_longprocessrequest.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="requests\longprocessrequest.cpp">
+      <Filter>Source Files\requests</Filter>
+    </ClCompile>
+    <ClCompile Include="requests\longprocessresponserequest.cpp">
+      <Filter>Source Files\requests</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_longprocessresponserequest.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_longprocessresponserequest.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="eros.h">
@@ -320,6 +338,12 @@
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="requests\matchmakingforfeitrequest.h">
+      <Filter>Header Files\requests</Filter>
+    </CustomBuild>
+    <CustomBuild Include="requests\longprocessrequest.h">
+      <Filter>Header Files\requests</Filter>
+    </CustomBuild>
+    <CustomBuild Include="requests\longprocessresponserequest.h">
       <Filter>Header Files\requests</Filter>
     </CustomBuild>
   </ItemGroup>

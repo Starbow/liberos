@@ -16,6 +16,8 @@
 #include "requests/updatecharacterrequest.h"
 #include "requests/removecharacterrequest.h"
 #include "requests/uploadreplayrequest.h"
+#include "requests/longprocessrequest.h"
+#include "requests/longprocessresponserequest.h"
 
 #include <QTimer>
 #include <QThread>
@@ -30,6 +32,7 @@ Eros::Eros(QObject *parent)
 	qRegisterMetaType<ErosState>();
 	qRegisterMetaType<ErosMatchmakingState>();
 	qRegisterMetaType<ErosUserState>();
+	qRegisterMetaType<ErosLongProcessState>();
 
 	this->users_ = QList<User *>();
 	this->chatrooms_ = QList<ChatRoom *>();
@@ -172,6 +175,7 @@ const QString Eros::regionToLanguageString(ErosRegion region)
 void Eros::socketConnected()
 {
 	this->matchmaking_state_ = ErosMatchmakingState::Idle;
+	this->long_process_state_ = ErosLongProcessState::LongProcessIdle;
 	this->matchmaking_match_ = nullptr;
 
 	HandshakeRequest *request = new HandshakeRequest(this, this->username_, this->password_);
@@ -456,6 +460,10 @@ ErosMatchmakingState Eros::matchmakingState() const
 	return this->matchmaking_state_;
 }
 
+ErosLongProcessState Eros::longProcessState() const
+{
+	return this->long_process_state_;
+}
 
 void Eros::handleCommand(const QString &command, const int &transaction_id, const QByteArray &data)
 {
@@ -681,7 +689,7 @@ void Eros::handleServerCommand(const QString &command, const QByteArray &data)
 
 		this->matchmaking_match_ = new MatchmakingMatch(this, result);
 		this->matchmaking_state_ = ErosMatchmakingState::Matched;
-
+		this->long_process_state_ = ErosLongProcessState::LongProcessIdle;
 		emit matchmakingStateChanged(this->matchmaking_state_);
 		emit matchmakingMatchFound(this->matchmaking_match_);
 	}
@@ -692,6 +700,23 @@ void Eros::handleServerCommand(const QString &command, const QByteArray &data)
 
 		QString message = QString::fromStdString(alert.message());
 		emit broadcastAlert(message, alert.predefined());
+	}
+	else if (command == "LPF")
+	{
+		this->long_process_state_ = ErosLongProcessState::FlaggedNoShow;
+		emit longProcessStateChanged(this->long_process_state_);
+		emit noShowRequested();
+	}
+	else if (command == "LPD")
+	{
+		this->long_process_state_ = ErosLongProcessState::DrawRequest;
+		emit longProcessStateChanged(this->long_process_state_);
+		emit drawRequested();
+	}
+	else if (command == "LPA" || command == "LPR")
+	{
+		this->long_process_state_ = ErosLongProcessState::LongProcessIdle;
+		emit longProcessStateChanged(this->long_process_state_);
 	}
 }
 void Eros::sendRequest(Request *request)
@@ -803,13 +828,10 @@ void Eros::matchmakingRequestComplete(Request *request)
 		if (matchmaking_request->status() == ErosMatchmakingState::Matched)
 		{
 			this->matchmaking_match_ = matchmaking_request->match();
+			this->long_process_state_ = ErosLongProcessState::LongProcessIdle;
 		}
 		
-
-		
-
 		setMatchmakingState(matchmaking_request->status());
-
 	}
 }
 
@@ -1164,4 +1186,76 @@ void Eros::uploadReplay(QIODevice *device)
 	UploadReplayRequest	 *request = new UploadReplayRequest(this, device);
 	QObject::connect(request, SIGNAL(complete(Request*)), this, SLOT(replayRequestComplete(Request*)));
 	sendRequest(request);
+}
+
+
+void Eros::requestDraw()
+{
+	LongProcessRequest *request = new LongProcessRequest(this, 2);
+	QObject::connect(request, SIGNAL(complete(Request*)), this, SLOT(drawRequestComplete(Request*)));
+	sendRequest(request);
+}
+
+void Eros::drawRequestComplete(Request *request)
+{
+	if(LongProcessRequest* lp_request = dynamic_cast<LongProcessRequest*>(request))
+    {
+		if (lp_request->error() == ErosError::None)
+		{
+			this->long_process_state_ = ErosLongProcessState::OpponentFlaggedDrawRequest;
+			emit longProcessStateChanged(this->long_process_state_);
+		}
+		else
+		{
+			emit drawRequestFailed();
+		}
+	}
+}
+
+
+void Eros::requestNoShow()
+{
+	LongProcessRequest *request = new LongProcessRequest(this, 1);
+	QObject::connect(request, SIGNAL(complete(Request*)), this, SLOT(noShowRequestComplete(Request*)));
+	sendRequest(request);
+}
+
+void Eros::noShowRequestComplete(Request *request)
+{
+	if(LongProcessRequest* lp_request = dynamic_cast<LongProcessRequest*>(request))
+    {
+		if (lp_request->error() == ErosError::None)
+		{
+			this->long_process_state_ = ErosLongProcessState::OpponentFlaggedNoShow;
+			emit longProcessStateChanged(this->long_process_state_);
+		}
+		else
+		{
+			emit noShowRequestFailed();
+		}
+	}
+}
+
+void Eros::acknowledgeLongProcess(bool response)
+{
+	LongProcessResponseRequest *request = new LongProcessResponseRequest(this, response);
+	QObject::connect(request, SIGNAL(complete(Request*)), this, SLOT(longProcessResponseRequestComplete(Request*)));
+	sendRequest(request);
+}
+
+void Eros::longProcessResponseRequestComplete(Request *request)
+{
+	if(LongProcessResponseRequest* lp_request = dynamic_cast<LongProcessResponseRequest*>(request))
+    {
+		if (lp_request->error() == ErosError::None)
+		{
+			this->long_process_state_ = ErosLongProcessState::LongProcessIdle;
+			emit longProcessStateChanged(this->long_process_state_);
+			emit acknowledgedLongProcess();
+		}
+		else
+		{
+			emit acknowledgeLongProcessFailed();
+		}
+	}
 }

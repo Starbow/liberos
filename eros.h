@@ -54,6 +54,7 @@ public:
 
 	ErosState state() const;
 	ErosMatchmakingState matchmakingState() const;
+	ErosLongProcessState longProcessState() const;
 
 	int regionSearchingUserCount(ErosRegion region) const;
 	int searchingUserCount() const;
@@ -104,6 +105,12 @@ public slots:
 	void uploadReplay(const QString path);
 	void uploadReplay(QIODevice *device);
 
+	void requestDraw();
+	void requestNoShow();
+
+	// Are we agreeing with what the opponent is saying?
+	void acknowledgeLongProcess(bool response);
+
 private:
 	QString server_hostname_;
 	quint16 server_port_;
@@ -125,6 +132,7 @@ private:
 
 	ErosState state_;
 	ErosMatchmakingState matchmaking_state_;
+	ErosLongProcessState long_process_state_;
 
 	// I don't even know if this is necessary, but it's better safe than sorry
 	bool awaiting_data_;
@@ -156,12 +164,12 @@ private slots:
 	void socketConnected();
     void socketDisconnected();
     void socketReadyRead();
-	void socketError(QAbstractSocket::SocketError socketError);
+	void socketError(QAbstractSocket::SocketError );
 	void requestComplete(Request *);
 	void requestError(Request *, int);
 	
 	void userUpdatedHandler(User *user);
-	void characterUpdatedHandler(Character* character);
+	void characterUpdatedHandler(Character *);
 
 	void handshakeRequestComplete(Request *);
 	void matchmakingRequestQueued(Request *);
@@ -174,10 +182,14 @@ private slots:
 
 	void characterRequestComplete(Request *);
 
-    void replayRequestComplete(Request *request);
+	void drawRequestComplete(Request *);
+	void noShowRequestComplete(Request *);
+	void longProcessResponseRequestComplete(Request *);
 
-	void ensureUserParent(User *user);
-	void ensureChatParent(ChatRoom *room);
+    void replayRequestComplete(Request *);
+
+	void ensureUserParent(User *);
+	void ensureChatParent(ChatRoom *);
 signals:
 
 	// Low level connection signals.
@@ -230,7 +242,20 @@ signals:
 	void chatMessageFailed(ChatRoom *room, const QString message, ErosError code);
 	void chatMessageFailed(User *user, const QString message, ErosError code);
 	
+	void longProcessStateChanged(ErosLongProcessState);
+	
+	
 
+	//Incoming
+	void noShowRequested();
+	void drawRequested();
+
+	//Outgoing
+	void noShowRequestFailed();
+	void drawRequestFailed();
+
+	void acknowledgeLongProcessFailed();
+	void acknowledgedLongProcess();
 };
 
 #endif // LIBEROS_EROS_H

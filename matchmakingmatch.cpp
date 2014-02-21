@@ -17,11 +17,23 @@ MatchmakingMatch::MatchmakingMatch(Eros *parent, const protobufs::MatchmakingRes
 	const protobufs::Map &map = result.map();
 	this->map_name_ = QString::fromStdString(map.battle_net_name());
 	this->map_id_ = map.battle_net_id();
+	this->long_process_unlock_time_ = result.long_unlock_time();
+	this->long_process_response_time_ = result.long_unlock_time();
 }
 
 MatchmakingMatch::~MatchmakingMatch()
 {
 
+}
+
+int MatchmakingMatch::longProcessUnlockTime() const
+{
+	return this->long_process_unlock_time_;
+}
+
+int MatchmakingMatch::longProcessResponseTime() const
+{
+	return this->long_process_response_time_;
 }
 
 User *MatchmakingMatch::opponent() const

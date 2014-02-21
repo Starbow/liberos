@@ -28,6 +28,9 @@ public:
 	int opponentLatency() const;
 	const QString &mapName() const;
 	int mapId() const;
+	int longProcessUnlockTime() const;
+	int longProcessResponseTime() const;
+
 
 private:
 	User *opponent_;
@@ -37,6 +40,8 @@ private:
 	int opponent_latency_;
 	QString map_name_;
 	int map_id_;
+	int long_process_unlock_time_;
+	int long_process_response_time_;
 
 };
 

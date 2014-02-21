@@ -29,7 +29,9 @@ SOURCES += character.cpp\
            requests/uploadreplayrequest.cpp\
            requests/addcharacterrequest.cpp\
            requests/removecharacterrequest.cpp\
-           requests/updatecharacterrequest.cpp
+           requests/updatecharacterrequest.cpp\
+           requests/longprocessrequest.cpp\
+           requests/longprocessresponserequest.cpp
 
 HEADERS += character.h\
            chatroom.h\
@@ -55,7 +57,10 @@ HEADERS += character.h\
            requests/uploadreplayrequest.h\
            requests/addcharacterrequest.h\
            requests/removecharacterrequest.h\
-           requests/updatecharacterrequest.h
+           requests/updatecharacterrequest.h\
+           requests/longprocessrequest.h\
+           requests/longprocessresponserequest.h
+
 unix {
     target.path = /usr/lib
     INSTALLS += target
