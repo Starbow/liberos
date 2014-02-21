@@ -18,7 +18,7 @@ MatchmakingMatch::MatchmakingMatch(Eros *parent, const protobufs::MatchmakingRes
 	this->map_name_ = QString::fromStdString(map.battle_net_name());
 	this->map_id_ = map.battle_net_id();
 	this->long_process_unlock_time_ = result.long_unlock_time();
-	this->long_process_response_time_ = result.long_unlock_time();
+	this->long_process_response_time_ = result.long_response_time();
 }
 
 MatchmakingMatch::~MatchmakingMatch()
