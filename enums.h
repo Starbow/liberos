@@ -85,6 +85,7 @@ enum ErosError
 	UserNotFound = 507,
 	BadMessage = 508,
 	NameTooShort = 509,
+	RateLimited = 511,
 };
 
 

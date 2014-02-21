@@ -274,8 +274,26 @@ const QString Eros::errorString(ErosError code)
 {
 	switch (code)
 	{
+	case 101:
+		return tr("Server database read error.");
+		break;
+	case 102:
+		return tr("Server database write error.");
+		break;
+	case 103:
+		return tr("Server disk read error.");
+		break;
+	case 104:
+		return tr("Server disk write error.");
+		break;
+	case 105:
+		return tr("Authentication error.");
+		break;
+	case 106:
+		return tr("Internal server error.");
+		break;
 	case 201:
-		return tr("Invalid Battle.net character information.");
+		return tr("Invalid Battle.net character information. Please ensure you have provided the correct URL.");
 		break;
 	case 202:
 		return tr("Battle.net character already exists.");
@@ -318,6 +336,9 @@ const QString Eros::errorString(ErosError code)
 		break;
 	case 311:
 		return tr("Games must be played on the Faster speed settings.");
+		break;
+	case 401:
+		return tr("You cannot queue on this region without a verified character on this region.");
 		break;
 	default:
 		return tr("Unknown error");

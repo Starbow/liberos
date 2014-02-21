@@ -19,6 +19,7 @@ public:
 		Success = 0,
 		BadMessage = 508,
 		NotOnChannel = 506,
+		RateLimit = 511,
 	};
 	ChatMessageRequest(Eros *parent, ChatRoom *room, const QString &message);
 	~ChatMessageRequest();

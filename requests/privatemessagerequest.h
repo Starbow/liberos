@@ -19,6 +19,7 @@ public:
 		Success = 0,
 		BadMessage = 508,
 		UserOffline = 507,
+		RateLimit = 511,
 	};
 	PrivateMessageRequest(Eros *parent, User *user, const QString &message);
 	~PrivateMessageRequest();
