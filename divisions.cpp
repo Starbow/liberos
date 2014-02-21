@@ -46,12 +46,15 @@ const QPair<int, QString> &Divisions::division(int points) const
 {
     QList< QPair<int, QString> >::const_iterator i = this->divisions_.end();
 	i--;
-	while (i != this->divisions_.begin())
+	while (true)
 	{
 		if (points >= i->first)
 		{
 			return (*i);
 		}
+
+		if (i == this->divisions_.begin())
+			break;
 
 		i--;
 	}
