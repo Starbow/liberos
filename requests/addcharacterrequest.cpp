@@ -6,7 +6,7 @@ AddCharacterRequest::AddCharacterRequest(Eros *parent, const QString &battle_net
 {
 	data_ = new QBuffer();
 	data_->open(QIODevice::ReadWrite);
-	data_->write(battle_net_url.toLocal8Bit());
+	data_->write(battle_net_url.toUtf8());
 	data_->close();
 	data_->open(QIODevice::ReadOnly);
 

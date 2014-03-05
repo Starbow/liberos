@@ -770,7 +770,7 @@ void Eros::sendRequest(Request *request)
 
 	
 	const QString &command = request->command();
-	QByteArray header = QString("%1 %2 %3").arg(command, QString::number(transaction_id), QString::number(dataLength)).toLocal8Bit();
+	QByteArray header = QString("%1 %2 %3").arg(command, QString::number(transaction_id), QString::number(dataLength)).toUtf8();
 	QByteArray newline = QByteArray(1, '\n');
 	//qDebug() << "<<" << header << endl;
 	this->socket_->write(header);
