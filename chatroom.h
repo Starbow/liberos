@@ -24,6 +24,7 @@ public:
 	bool joinable() const;
 	bool fixed() const;
 	bool passworded() const;
+	bool forced() const;
 
 	const QString &name() const;
 	const QString &key() const;
@@ -42,6 +43,7 @@ private:
 	bool fixed_;
 	bool passworded_;
 	bool joined_;
+	bool forced_;
 	int user_count_;
 	Eros *eros_;
 

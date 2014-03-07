@@ -14,7 +14,7 @@ ChatRoom::ChatRoom(Eros *parent, const QString &name)
 	this->fixed_ = false;
 	this->joined_ = false;
 	this->passworded_ = false;
-
+	this->forced_ = false;
 	QObject::connect(parent, SIGNAL(chatRoomUserJoined(ChatRoom *, User *)), this, SLOT(userJoined(ChatRoom *, User *)));
 	QObject::connect(parent, SIGNAL(chatRoomUserLeft(ChatRoom *, User *)), this, SLOT(userLeft(ChatRoom *, User *)));
 }
@@ -28,6 +28,7 @@ void ChatRoom::update(const protobufs::ChatRoomInfo &info)
 {
 	this->fixed_ = info.fixed();
 	this->joinable_ = info.joinable();
+	this->forced_ = info.forced();
 	this->key_ = QString::fromStdString(info.key());
 	this->name_ = QString::fromStdString(info.name());
 	this->user_count_ = info.users();
@@ -67,6 +68,11 @@ bool ChatRoom::joinable() const
 bool ChatRoom::fixed() const
 {
 	return this->fixed_;
+}
+
+bool ChatRoom::forced() const
+{
+	return this->forced_;
 }
 
 bool ChatRoom::passworded() const
