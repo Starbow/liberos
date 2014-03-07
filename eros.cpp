@@ -347,6 +347,9 @@ const QString Eros::errorString(ErosError code)
 	case 313:
 		return tr("You have reached your maximum number of vetoes.");
 		break;
+	case 314:
+		return tr("Games that are not pre-arranged on Eros cannot be used for ladder ranking.");
+		break;
 	case 401:
 		return tr("You cannot queue on this region without a verified character on this region.");
 		break;

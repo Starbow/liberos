@@ -74,6 +74,7 @@ enum ErosError
 	BadSpeed = 311,
 	CannotVetoUnrankedMap = 312,
 	MaxVetoesReached = 313, // Put your motherf**kin' hands up and follow me
+	GameNotPrearranged = 314,
 
 	NoCharacterForRegion = 401,
 	MatchmakingAborted = 402,
