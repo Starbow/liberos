@@ -18,6 +18,7 @@ User::User(Eros *parent)
 	this->first_update_ = true;
 	this->eros_ = parent;
 }
+
 User::~User()
 {
 
@@ -36,17 +37,22 @@ int User::searchRadius() const
 	return this->search_radius_;
 }
 
-
 const QMap<ErosRegion, UserLadderStats*> &User::ladderStats() const
 {
 	return this->ladder_stats_;
 }
+
 const UserLadderStats *User::ladderStatsGlobal() const
 {
 	return this->ladder_stats_global_;
 }
 
-void User::update(const protobufs::UserStats &stats)
+const QList<Map*> &User::vetoes() const
+{
+	return this->vetoes_;
+}
+
+void User::update(const protobufs::UserStats &stats, const QList<Map*> &map_pool)
 {
 	this->state_ = ErosUserState::Known;
 	this->username_ = QString::fromStdString(stats.username());
@@ -59,6 +65,21 @@ void User::update(const protobufs::UserStats &stats)
 		this->ladder_stats_[(ErosRegion)region.region()] = new UserLadderStats(this, region.wins(), region.losses(), region.forfeits(), region.walkovers(), region.points());
 	}
 
+	this->vetoes_.clear();
+
+	for (int i = 0; i < stats.vetoes_size(); i++)
+	{
+		const protobufs::Map &map_buffer = stats.vetoes(i);
+		for (int j = 0; j < map_pool.size(); j++)
+		{
+			if (map_pool[j]->battleNetId() == map_buffer.battle_net_id() && map_pool[j]->region() == map_buffer.region())
+			{
+				this->vetoes_ << map_pool[j];
+				break;
+			}
+		}
+	}
+
 	if (this->first_update_)
 	{
 		this->first_update_ = false;
@@ -67,4 +88,34 @@ void User::update(const protobufs::UserStats &stats)
 	{
 		emit updated(this);
 	}	
+}
+
+void User::update(const protobufs::UserStats &stats)
+{
+	update(stats, eros_->mapPool());
+}
+
+void User::update(const protobufs::MapPool &vetoes, const QList<Map*> &map_pool)
+{
+	this->vetoes_.clear();
+
+	for (int i = 0; i < vetoes.map_size(); i++)
+	{
+		const protobufs::Map &map_buffer = vetoes.map(i);
+		for (int j = 0; j < map_pool.size(); j++)
+		{
+			if (map_pool[j]->battleNetId() == map_buffer.battle_net_id() && map_pool[j]->region() == map_buffer.region())
+			{
+				this->vetoes_ << map_pool[j];
+				break;
+			}
+		}
+	}
+
+	emit updated(this);	
+}
+
+void User::update(const protobufs::MapPool &vetoes)
+{
+	update(vetoes, eros_->mapPool());
 }

@@ -13,7 +13,7 @@ class LocalUser : public User
 	Q_OBJECT
 
 public:
-	LocalUser(Eros *parent, const protobufs::HandshakeResponse& handshake);
+	LocalUser(Eros *parent, const protobufs::HandshakeResponse& handshake, const QList<Map*> &map_pool);
 	~LocalUser();
 
 	const QList<Character *> &characters() const;

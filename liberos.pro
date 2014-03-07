@@ -12,6 +12,7 @@ SOURCES += character.cpp\
            eros.cpp\
            eros.pb.cc\
            localuser.cpp\
+           map.cpp\
            matchmakingmatch.cpp\
            request.cpp\
            user.cpp\
@@ -31,7 +32,8 @@ SOURCES += character.cpp\
            requests/removecharacterrequest.cpp\
            requests/updatecharacterrequest.cpp\
            requests/longprocessrequest.cpp\
-           requests/longprocessresponserequest.cpp
+           requests/longprocessresponserequest.cpp\
+           requests/togglevetorequest.cpp
 
 HEADERS += character.h\
            chatroom.h\
@@ -40,6 +42,7 @@ HEADERS += character.h\
            eros.h\
            eros.pb.h\
            localuser.h\
+           map.h\
            matchmakingmatch.h\
            request.h\
            user.h\
@@ -59,7 +62,8 @@ HEADERS += character.h\
            requests/removecharacterrequest.h\
            requests/updatecharacterrequest.h\
            requests/longprocessrequest.h\
-           requests/longprocessresponserequest.h
+           requests/longprocessresponserequest.h\
+           requests/togglevetorequest.h
 
 unix {
     target.path = /usr/lib

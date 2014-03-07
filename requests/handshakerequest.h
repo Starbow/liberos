@@ -4,6 +4,7 @@
 #include "../request.h"
 #include <QBuffer>
 
+class Map;
 class HandshakeRequest : public Request
 {
 	Q_OBJECT
@@ -16,6 +17,7 @@ public:
 		NotReady = -1,
 		Fail = 0,
 		Success = 1,
+		AlreadyLoggedIn = 2,
 	};
 
 	HandshakeRequest(Eros *parent, const QString &username, const QString &password);
@@ -28,8 +30,8 @@ public:
 	Divisions *divisions() const;
 	ResponseStatus status() const;
 	const QList<ErosRegion> &activeRegions() const;
-	
-
+	const QList<Map*> &mapPool() const;
+	int maxVetoes() const;
 
 private:
 	
@@ -37,6 +39,8 @@ private:
 	LocalUser *user_;
 	Divisions *divisions_;
 	QList<ErosRegion> active_regions_;
+	QList<Map*> map_pool_;
+	int max_vetoes_;
 
 	bool processHandshakeResponse(const QString &command, const QByteArray &data);
 };

@@ -54,6 +54,7 @@ enum ErosError
 	GenericError = 106,
 	BadName = 107,
 	NameInUse = 108,
+	CannotPerformActionWhileMatchmaking = 109,
 
 	BadCharacterInfo = 201,
 	CharacterExists = 202,
@@ -71,6 +72,8 @@ enum ErosError
 	PlayerNotInDatabase = 309,
 	NotAssignedOpponent = 310,
 	BadSpeed = 311,
+	CannotVetoUnrankedMap = 312,
+	MaxVetoesReached = 313, // Put your motherf**kin' hands up and follow me
 
 	NoCharacterForRegion = 401,
 	MatchmakingAborted = 402,

@@ -134,13 +134,15 @@ void protobuf_AssignDesc_eros_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(Division));
   HandshakeResponse_descriptor_ = file->message_type(2);
-  static const int HandshakeResponse_offsets_[6] = {
+  static const int HandshakeResponse_offsets_[8] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HandshakeResponse, status_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HandshakeResponse, user_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HandshakeResponse, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HandshakeResponse, character_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HandshakeResponse, division_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HandshakeResponse, active_region_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HandshakeResponse, map_pool_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HandshakeResponse, max_vetoes_),
   };
   HandshakeResponse_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -175,7 +177,7 @@ void protobuf_AssignDesc_eros_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(UserRegionStats));
   UserStats_descriptor_ = file->message_type(4);
-  static const int UserStats_offsets_[8] = {
+  static const int UserStats_offsets_[9] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserStats, username_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserStats, search_radius_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserStats, points_),
@@ -184,6 +186,7 @@ void protobuf_AssignDesc_eros_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserStats, forfeits_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserStats, walkovers_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserStats, region_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserStats, vetoes_),
   };
   UserStats_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -212,10 +215,13 @@ void protobuf_AssignDesc_eros_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(MapPool));
   Map_descriptor_ = file->message_type(6);
-  static const int Map_offsets_[3] = {
+  static const int Map_offsets_[6] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Map, region_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Map, battle_net_name_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Map, battle_net_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Map, description_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Map, info_url_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Map, preview_url_),
   };
   Map_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -285,7 +291,7 @@ void protobuf_AssignDesc_eros_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(MatchmakingResult));
   ChatRoomInfo_descriptor_ = file->message_type(10);
-  static const int ChatRoomInfo_offsets_[7] = {
+  static const int ChatRoomInfo_offsets_[8] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ChatRoomInfo, key_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ChatRoomInfo, name_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ChatRoomInfo, passworded_),
@@ -293,6 +299,7 @@ void protobuf_AssignDesc_eros_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ChatRoomInfo, fixed_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ChatRoomInfo, users_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ChatRoomInfo, participant_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ChatRoomInfo, forced_),
   };
   ChatRoomInfo_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -633,73 +640,78 @@ void protobuf_AddDesc_eros_2eproto() {
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\neros.proto\022\tprotobufs\"/\n\tHandshake\022\020\n\010"
     "username\030\001 \001(\t\022\020\n\010auth_key\030\002 \001(\t\"(\n\010Divi"
-    "sion\022\014\n\004name\030\001 \002(\t\022\016\n\006points\030\002 \002(\003\"\245\002\n\021H"
+    "sion\022\014\n\004name\030\001 \002(\t\022\016\n\006points\030\002 \002(\003\"\366\002\n\021H"
     "andshakeResponse\022<\n\006status\030\001 \002(\0162,.proto"
     "bufs.HandshakeResponse.HandshakeStatus\022\""
     "\n\004user\030\002 \001(\0132\024.protobufs.UserStats\022\n\n\002id"
     "\030\003 \001(\003\022\'\n\tcharacter\030\004 \003(\0132\024.protobufs.Ch"
     "aracter\022%\n\010division\030\005 \003(\0132\023.protobufs.Di"
     "vision\022(\n\ractive_region\030\006 \003(\0162\021.protobuf"
-    "s.Region\"(\n\017HandshakeStatus\022\010\n\004FAIL\020\000\022\013\n"
-    "\007SUCCESS\020\001\"\207\001\n\017UserRegionStats\022!\n\006region"
-    "\030\001 \002(\0162\021.protobufs.Region\022\016\n\006points\030\002 \002("
-    "\003\022\014\n\004wins\030\003 \002(\003\022\016\n\006losses\030\004 \002(\003\022\020\n\010forfe"
-    "its\030\005 \002(\003\022\021\n\twalkovers\030\006 \002(\003\"\263\001\n\tUserSta"
-    "ts\022\020\n\010username\030\001 \002(\t\022\025\n\rsearch_radius\030\002 "
-    "\002(\003\022\016\n\006points\030\003 \002(\003\022\014\n\004wins\030\004 \002(\003\022\016\n\006los"
-    "ses\030\005 \002(\003\022\020\n\010forfeits\030\006 \002(\003\022\021\n\twalkovers"
-    "\030\007 \002(\003\022*\n\006region\030\010 \003(\0132\032.protobufs.UserR"
-    "egionStats\"&\n\007MapPool\022\033\n\003map\030\001 \003(\0132\016.pro"
-    "tobufs.Map\"X\n\003Map\022!\n\006region\030\001 \002(\0162\021.prot"
-    "obufs.Region\022\027\n\017battle_net_name\030\002 \002(\t\022\025\n"
-    "\rbattle_net_id\030\003 \002(\005\"b\n\020SimulationResult"
-    "\022&\n\010opponent\030\001 \002(\0132\024.protobufs.UserStats"
-    "\022\017\n\007victory\030\002 \002(\010\022\025\n\rmatch_quality\030\003 \002(\001"
-    "\"E\n\020MatchmakingQueue\022!\n\006region\030\001 \002(\0162\021.p"
-    "rotobufs.Region\022\016\n\006radius\030\002 \002(\003\"\357\001\n\021Matc"
-    "hmakingResult\022\020\n\010timespan\030\001 \002(\003\022\017\n\007quali"
-    "ty\030\002 \002(\001\022&\n\010opponent\030\003 \002(\0132\024.protobufs.U"
-    "serStats\022\030\n\020opponent_latency\030\004 \002(\003\022\017\n\007ch"
-    "annel\030\005 \002(\t\022\021\n\tchat_room\030\006 \002(\t\022\033\n\003map\030\007 "
-    "\002(\0132\016.protobufs.Map\022\030\n\020long_unlock_time\030"
-    "\010 \002(\003\022\032\n\022long_response_time\030\t \002(\003\"\230\001\n\014Ch"
-    "atRoomInfo\022\013\n\003key\030\001 \002(\t\022\014\n\004name\030\002 \002(\t\022\022\n"
-    "\npassworded\030\003 \002(\010\022\020\n\010joinable\030\004 \002(\010\022\r\n\005f"
-    "ixed\030\005 \002(\010\022\r\n\005users\030\006 \002(\003\022)\n\013participant"
-    "\030\007 \003(\0132\024.protobufs.UserStats\"6\n\rChatRoom"
-    "Index\022%\n\004room\030\001 \003(\0132\027.protobufs.ChatRoom"
-    "Info\">\n\013ChatMessage\022\016\n\006sender\030\001 \002(\t\022\016\n\006t"
-    "arget\030\002 \002(\t\022\017\n\007message\030\003 \002(\t\"o\n\017ChatRoom"
-    "Message\022%\n\004room\030\001 \002(\0132\027.protobufs.ChatRo"
-    "omInfo\022$\n\006sender\030\002 \002(\0132\024.protobufs.UserS"
-    "tats\022\017\n\007message\030\003 \002(\t\"K\n\022ChatPrivateMess"
-    "age\022$\n\006sender\030\001 \002(\0132\024.protobufs.UserStat"
-    "s\022\017\n\007message\030\002 \002(\t\"Y\n\014ChatRoomUser\022%\n\004ro"
-    "om\030\001 \002(\0132\027.protobufs.ChatRoomInfo\022\"\n\004use"
-    "r\030\002 \002(\0132\024.protobufs.UserStats\"1\n\017ChatRoo"
-    "mRequest\022\014\n\004room\030\001 \002(\t\022\020\n\010password\030\002 \002(\t"
-    "\"N\n\020MatchmakingStats\022!\n\006region\030\001 \002(\0162\021.p"
-    "rotobufs.Region\022\027\n\017searching_users\030\002 \002(\003"
-    "\"i\n\013ServerStats\022\024\n\014active_users\030\001 \002(\003\022\027\n"
-    "\017searching_users\030\002 \002(\003\022+\n\006region\030\003 \003(\0132\033"
-    ".protobufs.MatchmakingStats\"\351\001\n\tCharacte"
-    "r\022!\n\006region\030\001 \002(\0162\021.protobufs.Region\022\021\n\t"
-    "subregion\030\002 \002(\005\022\022\n\nprofile_id\030\003 \002(\005\022\026\n\016c"
-    "haracter_name\030\004 \002(\t\022\026\n\016character_code\030\005 "
-    "\001(\005\022\024\n\014profile_link\030\006 \001(\t\022\033\n\023ingame_prof"
-    "ile_link\030\007 \001(\t\022\020\n\010verified\030\010 \001(\010\022\035\n\025veri"
-    "fication_portrait\030\t \001(\005\"\306\001\n\020MatchPartici"
-    "pant\022\"\n\004user\030\001 \001(\0132\024.protobufs.UserStats"
-    "\022\'\n\tcharacter\030\002 \001(\0132\024.protobufs.Characte"
-    "r\022\025\n\rpoints_before\030\003 \002(\003\022\024\n\014points_after"
-    "\030\004 \002(\003\022\031\n\021points_difference\030\005 \002(\003\022\017\n\007vic"
-    "tory\030\006 \002(\010\022\014\n\004race\030\007 \002(\t\"\177\n\013MatchResult\022"
-    "!\n\006region\030\001 \002(\0162\021.protobufs.Region\022\033\n\003ma"
-    "p\030\002 \002(\0132\016.protobufs.Map\0220\n\013participant\030\003"
-    " \003(\0132\033.protobufs.MatchParticipant\"5\n\016Bro"
-    "adcastAlert\022\017\n\007message\030\002 \002(\t\022\022\n\npredefin"
-    "ed\030\001 \002(\005*1\n\006Region\022\006\n\002NA\020\001\022\006\n\002EU\020\002\022\006\n\002KR"
-    "\020\003\022\006\n\002CN\020\005\022\007\n\003SEA\020\006", 2739);
+    "s.Region\022$\n\010map_pool\030\007 \001(\0132\022.protobufs.M"
+    "apPool\022\022\n\nmax_vetoes\030\010 \001(\003\"\?\n\017HandshakeS"
+    "tatus\022\010\n\004FAIL\020\000\022\013\n\007SUCCESS\020\001\022\025\n\021ALREADY_"
+    "LOGGED_IN\020\002\"\207\001\n\017UserRegionStats\022!\n\006regio"
+    "n\030\001 \002(\0162\021.protobufs.Region\022\016\n\006points\030\002 \002"
+    "(\003\022\014\n\004wins\030\003 \002(\003\022\016\n\006losses\030\004 \002(\003\022\020\n\010forf"
+    "eits\030\005 \002(\003\022\021\n\twalkovers\030\006 \002(\003\"\323\001\n\tUserSt"
+    "ats\022\020\n\010username\030\001 \002(\t\022\025\n\rsearch_radius\030\002"
+    " \002(\003\022\016\n\006points\030\003 \002(\003\022\014\n\004wins\030\004 \002(\003\022\016\n\006lo"
+    "sses\030\005 \002(\003\022\020\n\010forfeits\030\006 \002(\003\022\021\n\twalkover"
+    "s\030\007 \002(\003\022*\n\006region\030\010 \003(\0132\032.protobufs.User"
+    "RegionStats\022\036\n\006vetoes\030\t \003(\0132\016.protobufs."
+    "Map\"&\n\007MapPool\022\033\n\003map\030\001 \003(\0132\016.protobufs."
+    "Map\"\224\001\n\003Map\022!\n\006region\030\001 \002(\0162\021.protobufs."
+    "Region\022\027\n\017battle_net_name\030\002 \002(\t\022\025\n\rbattl"
+    "e_net_id\030\003 \002(\005\022\023\n\013description\030\004 \001(\t\022\020\n\010i"
+    "nfo_url\030\005 \001(\t\022\023\n\013preview_url\030\006 \001(\t\"b\n\020Si"
+    "mulationResult\022&\n\010opponent\030\001 \002(\0132\024.proto"
+    "bufs.UserStats\022\017\n\007victory\030\002 \002(\010\022\025\n\rmatch"
+    "_quality\030\003 \002(\001\"E\n\020MatchmakingQueue\022!\n\006re"
+    "gion\030\001 \002(\0162\021.protobufs.Region\022\016\n\006radius\030"
+    "\002 \002(\003\"\357\001\n\021MatchmakingResult\022\020\n\010timespan\030"
+    "\001 \002(\003\022\017\n\007quality\030\002 \002(\001\022&\n\010opponent\030\003 \002(\013"
+    "2\024.protobufs.UserStats\022\030\n\020opponent_laten"
+    "cy\030\004 \002(\003\022\017\n\007channel\030\005 \002(\t\022\021\n\tchat_room\030\006"
+    " \002(\t\022\033\n\003map\030\007 \002(\0132\016.protobufs.Map\022\030\n\020lon"
+    "g_unlock_time\030\010 \002(\003\022\032\n\022long_response_tim"
+    "e\030\t \002(\003\"\250\001\n\014ChatRoomInfo\022\013\n\003key\030\001 \002(\t\022\014\n"
+    "\004name\030\002 \002(\t\022\022\n\npassworded\030\003 \002(\010\022\020\n\010joina"
+    "ble\030\004 \002(\010\022\r\n\005fixed\030\005 \002(\010\022\r\n\005users\030\006 \002(\003\022"
+    ")\n\013participant\030\007 \003(\0132\024.protobufs.UserSta"
+    "ts\022\016\n\006forced\030\010 \002(\010\"6\n\rChatRoomIndex\022%\n\004r"
+    "oom\030\001 \003(\0132\027.protobufs.ChatRoomInfo\">\n\013Ch"
+    "atMessage\022\016\n\006sender\030\001 \002(\t\022\016\n\006target\030\002 \002("
+    "\t\022\017\n\007message\030\003 \002(\t\"o\n\017ChatRoomMessage\022%\n"
+    "\004room\030\001 \002(\0132\027.protobufs.ChatRoomInfo\022$\n\006"
+    "sender\030\002 \002(\0132\024.protobufs.UserStats\022\017\n\007me"
+    "ssage\030\003 \002(\t\"K\n\022ChatPrivateMessage\022$\n\006sen"
+    "der\030\001 \002(\0132\024.protobufs.UserStats\022\017\n\007messa"
+    "ge\030\002 \002(\t\"Y\n\014ChatRoomUser\022%\n\004room\030\001 \002(\0132\027"
+    ".protobufs.ChatRoomInfo\022\"\n\004user\030\002 \002(\0132\024."
+    "protobufs.UserStats\"1\n\017ChatRoomRequest\022\014"
+    "\n\004room\030\001 \002(\t\022\020\n\010password\030\002 \002(\t\"N\n\020Matchm"
+    "akingStats\022!\n\006region\030\001 \002(\0162\021.protobufs.R"
+    "egion\022\027\n\017searching_users\030\002 \002(\003\"i\n\013Server"
+    "Stats\022\024\n\014active_users\030\001 \002(\003\022\027\n\017searching"
+    "_users\030\002 \002(\003\022+\n\006region\030\003 \003(\0132\033.protobufs"
+    ".MatchmakingStats\"\351\001\n\tCharacter\022!\n\006regio"
+    "n\030\001 \002(\0162\021.protobufs.Region\022\021\n\tsubregion\030"
+    "\002 \002(\005\022\022\n\nprofile_id\030\003 \002(\005\022\026\n\016character_n"
+    "ame\030\004 \002(\t\022\026\n\016character_code\030\005 \001(\005\022\024\n\014pro"
+    "file_link\030\006 \001(\t\022\033\n\023ingame_profile_link\030\007"
+    " \001(\t\022\020\n\010verified\030\010 \001(\010\022\035\n\025verification_p"
+    "ortrait\030\t \001(\005\"\306\001\n\020MatchParticipant\022\"\n\004us"
+    "er\030\001 \001(\0132\024.protobufs.UserStats\022\'\n\tcharac"
+    "ter\030\002 \001(\0132\024.protobufs.Character\022\025\n\rpoint"
+    "s_before\030\003 \002(\003\022\024\n\014points_after\030\004 \002(\003\022\031\n\021"
+    "points_difference\030\005 \002(\003\022\017\n\007victory\030\006 \002(\010"
+    "\022\014\n\004race\030\007 \002(\t\"\177\n\013MatchResult\022!\n\006region\030"
+    "\001 \002(\0162\021.protobufs.Region\022\033\n\003map\030\002 \002(\0132\016."
+    "protobufs.Map\0220\n\013participant\030\003 \003(\0132\033.pro"
+    "tobufs.MatchParticipant\"5\n\016BroadcastAler"
+    "t\022\017\n\007message\030\002 \002(\t\022\022\n\npredefined\030\001 \002(\005*1"
+    "\n\006Region\022\006\n\002NA\020\001\022\006\n\002EU\020\002\022\006\n\002KR\020\003\022\006\n\002CN\020\005"
+    "\022\007\n\003SEA\020\006", 2929);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "eros.proto", &protobuf_RegisterTypes);
   Handshake::default_instance_ = new Handshake();
@@ -1333,6 +1345,7 @@ bool HandshakeResponse_HandshakeStatus_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
+    case 2:
       return true;
     default:
       return false;
@@ -1342,6 +1355,7 @@ bool HandshakeResponse_HandshakeStatus_IsValid(int value) {
 #ifndef _MSC_VER
 const HandshakeResponse_HandshakeStatus HandshakeResponse::FAIL;
 const HandshakeResponse_HandshakeStatus HandshakeResponse::SUCCESS;
+const HandshakeResponse_HandshakeStatus HandshakeResponse::ALREADY_LOGGED_IN;
 const HandshakeResponse_HandshakeStatus HandshakeResponse::HandshakeStatus_MIN;
 const HandshakeResponse_HandshakeStatus HandshakeResponse::HandshakeStatus_MAX;
 const int HandshakeResponse::HandshakeStatus_ARRAYSIZE;
@@ -1353,6 +1367,8 @@ const int HandshakeResponse::kIdFieldNumber;
 const int HandshakeResponse::kCharacterFieldNumber;
 const int HandshakeResponse::kDivisionFieldNumber;
 const int HandshakeResponse::kActiveRegionFieldNumber;
+const int HandshakeResponse::kMapPoolFieldNumber;
+const int HandshakeResponse::kMaxVetoesFieldNumber;
 #endif  // !_MSC_VER
 
 HandshakeResponse::HandshakeResponse()
@@ -1362,6 +1378,7 @@ HandshakeResponse::HandshakeResponse()
 
 void HandshakeResponse::InitAsDefaultInstance() {
   user_ = const_cast< ::protobufs::UserStats*>(&::protobufs::UserStats::default_instance());
+  map_pool_ = const_cast< ::protobufs::MapPool*>(&::protobufs::MapPool::default_instance());
 }
 
 HandshakeResponse::HandshakeResponse(const HandshakeResponse& from)
@@ -1375,6 +1392,8 @@ void HandshakeResponse::SharedCtor() {
   status_ = 0;
   user_ = NULL;
   id_ = GOOGLE_LONGLONG(0);
+  map_pool_ = NULL;
+  max_vetoes_ = GOOGLE_LONGLONG(0);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -1385,6 +1404,7 @@ HandshakeResponse::~HandshakeResponse() {
 void HandshakeResponse::SharedDtor() {
   if (this != default_instance_) {
     delete user_;
+    delete map_pool_;
   }
 }
 
@@ -1416,6 +1436,10 @@ void HandshakeResponse::Clear() {
       if (user_ != NULL) user_->::protobufs::UserStats::Clear();
     }
     id_ = GOOGLE_LONGLONG(0);
+    if (has_map_pool()) {
+      if (map_pool_ != NULL) map_pool_->::protobufs::MapPool::Clear();
+    }
+    max_vetoes_ = GOOGLE_LONGLONG(0);
   }
   character_.Clear();
   division_.Clear();
@@ -1535,6 +1559,36 @@ bool HandshakeResponse::MergePartialFromCodedStream(
           goto handle_uninterpreted;
         }
         if (input->ExpectTag(48)) goto parse_active_region;
+        if (input->ExpectTag(58)) goto parse_map_pool;
+        break;
+      }
+
+      // optional .protobufs.MapPool map_pool = 7;
+      case 7: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_map_pool:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_map_pool()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(64)) goto parse_max_vetoes;
+        break;
+      }
+
+      // optional int64 max_vetoes = 8;
+      case 8: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_max_vetoes:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &max_vetoes_)));
+          set_has_max_vetoes();
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -1592,6 +1646,17 @@ void HandshakeResponse::SerializeWithCachedSizes(
       6, this->active_region(i), output);
   }
 
+  // optional .protobufs.MapPool map_pool = 7;
+  if (has_map_pool()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      7, this->map_pool(), output);
+  }
+
+  // optional int64 max_vetoes = 8;
+  if (has_max_vetoes()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(8, this->max_vetoes(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -1638,6 +1703,18 @@ void HandshakeResponse::SerializeWithCachedSizes(
       6, this->active_region(i), target);
   }
 
+  // optional .protobufs.MapPool map_pool = 7;
+  if (has_map_pool()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        7, this->map_pool(), target);
+  }
+
+  // optional int64 max_vetoes = 8;
+  if (has_max_vetoes()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(8, this->max_vetoes(), target);
+  }
+
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -1667,6 +1744,20 @@ int HandshakeResponse::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int64Size(
           this->id());
+    }
+
+    // optional .protobufs.MapPool map_pool = 7;
+    if (has_map_pool()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->map_pool());
+    }
+
+    // optional int64 max_vetoes = 8;
+    if (has_max_vetoes()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int64Size(
+          this->max_vetoes());
     }
 
   }
@@ -1734,6 +1825,12 @@ void HandshakeResponse::MergeFrom(const HandshakeResponse& from) {
     if (from.has_id()) {
       set_id(from.id());
     }
+    if (from.has_map_pool()) {
+      mutable_map_pool()->::protobufs::MapPool::MergeFrom(from.map_pool());
+    }
+    if (from.has_max_vetoes()) {
+      set_max_vetoes(from.max_vetoes());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -1762,6 +1859,9 @@ bool HandshakeResponse::IsInitialized() const {
   for (int i = 0; i < division_size(); i++) {
     if (!this->division(i).IsInitialized()) return false;
   }
+  if (has_map_pool()) {
+    if (!this->map_pool().IsInitialized()) return false;
+  }
   return true;
 }
 
@@ -1773,6 +1873,8 @@ void HandshakeResponse::Swap(HandshakeResponse* other) {
     character_.Swap(&other->character_);
     division_.Swap(&other->division_);
     active_region_.Swap(&other->active_region_);
+    std::swap(map_pool_, other->map_pool_);
+    std::swap(max_vetoes_, other->max_vetoes_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -2214,6 +2316,7 @@ const int UserStats::kLossesFieldNumber;
 const int UserStats::kForfeitsFieldNumber;
 const int UserStats::kWalkoversFieldNumber;
 const int UserStats::kRegionFieldNumber;
+const int UserStats::kVetoesFieldNumber;
 #endif  // !_MSC_VER
 
 UserStats::UserStats()
@@ -2290,6 +2393,7 @@ void UserStats::Clear() {
     walkovers_ = GOOGLE_LONGLONG(0);
   }
   region_.Clear();
+  vetoes_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -2423,6 +2527,21 @@ bool UserStats::MergePartialFromCodedStream(
           goto handle_uninterpreted;
         }
         if (input->ExpectTag(66)) goto parse_region;
+        if (input->ExpectTag(74)) goto parse_vetoes;
+        break;
+      }
+
+      // repeated .protobufs.Map vetoes = 9;
+      case 9: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_vetoes:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_vetoes()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(74)) goto parse_vetoes;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -2490,6 +2609,12 @@ void UserStats::SerializeWithCachedSizes(
       8, this->region(i), output);
   }
 
+  // repeated .protobufs.Map vetoes = 9;
+  for (int i = 0; i < this->vetoes_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      9, this->vetoes(i), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -2543,6 +2668,13 @@ void UserStats::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         8, this->region(i), target);
+  }
+
+  // repeated .protobufs.Map vetoes = 9;
+  for (int i = 0; i < this->vetoes_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        9, this->vetoes(i), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -2614,6 +2746,14 @@ int UserStats::ByteSize() const {
         this->region(i));
   }
 
+  // repeated .protobufs.Map vetoes = 9;
+  total_size += 1 * this->vetoes_size();
+  for (int i = 0; i < this->vetoes_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->vetoes(i));
+  }
+
   if (!unknown_fields().empty()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -2640,6 +2780,7 @@ void UserStats::MergeFrom(const ::google::protobuf::Message& from) {
 void UserStats::MergeFrom(const UserStats& from) {
   GOOGLE_CHECK_NE(&from, this);
   region_.MergeFrom(from.region_);
+  vetoes_.MergeFrom(from.vetoes_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_username()) {
       set_username(from.username());
@@ -2684,6 +2825,9 @@ bool UserStats::IsInitialized() const {
   for (int i = 0; i < region_size(); i++) {
     if (!this->region(i).IsInitialized()) return false;
   }
+  for (int i = 0; i < vetoes_size(); i++) {
+    if (!this->vetoes(i).IsInitialized()) return false;
+  }
   return true;
 }
 
@@ -2697,6 +2841,7 @@ void UserStats::Swap(UserStats* other) {
     std::swap(forfeits_, other->forfeits_);
     std::swap(walkovers_, other->walkovers_);
     region_.Swap(&other->region_);
+    vetoes_.Swap(&other->vetoes_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -2924,6 +3069,9 @@ void MapPool::Swap(MapPool* other) {
 const int Map::kRegionFieldNumber;
 const int Map::kBattleNetNameFieldNumber;
 const int Map::kBattleNetIdFieldNumber;
+const int Map::kDescriptionFieldNumber;
+const int Map::kInfoUrlFieldNumber;
+const int Map::kPreviewUrlFieldNumber;
 #endif  // !_MSC_VER
 
 Map::Map()
@@ -2945,6 +3093,9 @@ void Map::SharedCtor() {
   region_ = 1;
   battle_net_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   battle_net_id_ = 0;
+  description_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  info_url_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  preview_url_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -2955,6 +3106,15 @@ Map::~Map() {
 void Map::SharedDtor() {
   if (battle_net_name_ != &::google::protobuf::internal::kEmptyString) {
     delete battle_net_name_;
+  }
+  if (description_ != &::google::protobuf::internal::kEmptyString) {
+    delete description_;
+  }
+  if (info_url_ != &::google::protobuf::internal::kEmptyString) {
+    delete info_url_;
+  }
+  if (preview_url_ != &::google::protobuf::internal::kEmptyString) {
+    delete preview_url_;
   }
   if (this != default_instance_) {
   }
@@ -2990,6 +3150,21 @@ void Map::Clear() {
       }
     }
     battle_net_id_ = 0;
+    if (has_description()) {
+      if (description_ != &::google::protobuf::internal::kEmptyString) {
+        description_->clear();
+      }
+    }
+    if (has_info_url()) {
+      if (info_url_ != &::google::protobuf::internal::kEmptyString) {
+        info_url_->clear();
+      }
+    }
+    if (has_preview_url()) {
+      if (preview_url_ != &::google::protobuf::internal::kEmptyString) {
+        preview_url_->clear();
+      }
+    }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -3050,6 +3225,57 @@ bool Map::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(34)) goto parse_description;
+        break;
+      }
+
+      // optional string description = 4;
+      case 4: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_description:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_description()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->description().data(), this->description().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(42)) goto parse_info_url;
+        break;
+      }
+
+      // optional string info_url = 5;
+      case 5: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_info_url:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_info_url()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->info_url().data(), this->info_url().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(50)) goto parse_preview_url;
+        break;
+      }
+
+      // optional string preview_url = 6;
+      case 6: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_preview_url:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_preview_url()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->preview_url().data(), this->preview_url().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -3092,6 +3318,33 @@ void Map::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->battle_net_id(), output);
   }
 
+  // optional string description = 4;
+  if (has_description()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->description().data(), this->description().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      4, this->description(), output);
+  }
+
+  // optional string info_url = 5;
+  if (has_info_url()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->info_url().data(), this->info_url().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      5, this->info_url(), output);
+  }
+
+  // optional string preview_url = 6;
+  if (has_preview_url()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->preview_url().data(), this->preview_url().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      6, this->preview_url(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -3119,6 +3372,36 @@ void Map::SerializeWithCachedSizes(
   // required int32 battle_net_id = 3;
   if (has_battle_net_id()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->battle_net_id(), target);
+  }
+
+  // optional string description = 4;
+  if (has_description()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->description().data(), this->description().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        4, this->description(), target);
+  }
+
+  // optional string info_url = 5;
+  if (has_info_url()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->info_url().data(), this->info_url().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        5, this->info_url(), target);
+  }
+
+  // optional string preview_url = 6;
+  if (has_preview_url()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->preview_url().data(), this->preview_url().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        6, this->preview_url(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -3150,6 +3433,27 @@ int Map::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->battle_net_id());
+    }
+
+    // optional string description = 4;
+    if (has_description()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->description());
+    }
+
+    // optional string info_url = 5;
+    if (has_info_url()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->info_url());
+    }
+
+    // optional string preview_url = 6;
+    if (has_preview_url()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->preview_url());
     }
 
   }
@@ -3188,6 +3492,15 @@ void Map::MergeFrom(const Map& from) {
     if (from.has_battle_net_id()) {
       set_battle_net_id(from.battle_net_id());
     }
+    if (from.has_description()) {
+      set_description(from.description());
+    }
+    if (from.has_info_url()) {
+      set_info_url(from.info_url());
+    }
+    if (from.has_preview_url()) {
+      set_preview_url(from.preview_url());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -3215,6 +3528,9 @@ void Map::Swap(Map* other) {
     std::swap(region_, other->region_);
     std::swap(battle_net_name_, other->battle_net_name_);
     std::swap(battle_net_id_, other->battle_net_id_);
+    std::swap(description_, other->description_);
+    std::swap(info_url_, other->info_url_);
+    std::swap(preview_url_, other->preview_url_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -4371,6 +4687,7 @@ const int ChatRoomInfo::kJoinableFieldNumber;
 const int ChatRoomInfo::kFixedFieldNumber;
 const int ChatRoomInfo::kUsersFieldNumber;
 const int ChatRoomInfo::kParticipantFieldNumber;
+const int ChatRoomInfo::kForcedFieldNumber;
 #endif  // !_MSC_VER
 
 ChatRoomInfo::ChatRoomInfo()
@@ -4395,6 +4712,7 @@ void ChatRoomInfo::SharedCtor() {
   joinable_ = false;
   fixed_ = false;
   users_ = GOOGLE_LONGLONG(0);
+  forced_ = false;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -4450,6 +4768,7 @@ void ChatRoomInfo::Clear() {
     joinable_ = false;
     fixed_ = false;
     users_ = GOOGLE_LONGLONG(0);
+    forced_ = false;
   }
   participant_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -4570,6 +4889,22 @@ bool ChatRoomInfo::MergePartialFromCodedStream(
           goto handle_uninterpreted;
         }
         if (input->ExpectTag(58)) goto parse_participant;
+        if (input->ExpectTag(64)) goto parse_forced;
+        break;
+      }
+
+      // required bool forced = 8;
+      case 8: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_forced:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &forced_)));
+          set_has_forced();
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -4636,6 +4971,11 @@ void ChatRoomInfo::SerializeWithCachedSizes(
       7, this->participant(i), output);
   }
 
+  // required bool forced = 8;
+  if (has_forced()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(8, this->forced(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -4691,6 +5031,11 @@ void ChatRoomInfo::SerializeWithCachedSizes(
         7, this->participant(i), target);
   }
 
+  // required bool forced = 8;
+  if (has_forced()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(8, this->forced(), target);
+  }
+
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -4736,6 +5081,11 @@ int ChatRoomInfo::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int64Size(
           this->users());
+    }
+
+    // required bool forced = 8;
+    if (has_forced()) {
+      total_size += 1 + 1;
     }
 
   }
@@ -4792,6 +5142,9 @@ void ChatRoomInfo::MergeFrom(const ChatRoomInfo& from) {
     if (from.has_users()) {
       set_users(from.users());
     }
+    if (from.has_forced()) {
+      set_forced(from.forced());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -4809,7 +5162,7 @@ void ChatRoomInfo::CopyFrom(const ChatRoomInfo& from) {
 }
 
 bool ChatRoomInfo::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000003f) != 0x0000003f) return false;
+  if ((_has_bits_[0] & 0x000000bf) != 0x000000bf) return false;
 
   for (int i = 0; i < participant_size(); i++) {
     if (!this->participant(i).IsInitialized()) return false;
@@ -4826,6 +5179,7 @@ void ChatRoomInfo::Swap(ChatRoomInfo* other) {
     std::swap(fixed_, other->fixed_);
     std::swap(users_, other->users_);
     participant_.Swap(&other->participant_);
+    std::swap(forced_, other->forced_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

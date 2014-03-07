@@ -60,11 +60,12 @@ class BroadcastAlert;
 
 enum HandshakeResponse_HandshakeStatus {
   HandshakeResponse_HandshakeStatus_FAIL = 0,
-  HandshakeResponse_HandshakeStatus_SUCCESS = 1
+  HandshakeResponse_HandshakeStatus_SUCCESS = 1,
+  HandshakeResponse_HandshakeStatus_ALREADY_LOGGED_IN = 2
 };
 bool HandshakeResponse_HandshakeStatus_IsValid(int value);
 const HandshakeResponse_HandshakeStatus HandshakeResponse_HandshakeStatus_HandshakeStatus_MIN = HandshakeResponse_HandshakeStatus_FAIL;
-const HandshakeResponse_HandshakeStatus HandshakeResponse_HandshakeStatus_HandshakeStatus_MAX = HandshakeResponse_HandshakeStatus_SUCCESS;
+const HandshakeResponse_HandshakeStatus HandshakeResponse_HandshakeStatus_HandshakeStatus_MAX = HandshakeResponse_HandshakeStatus_ALREADY_LOGGED_IN;
 const int HandshakeResponse_HandshakeStatus_HandshakeStatus_ARRAYSIZE = HandshakeResponse_HandshakeStatus_HandshakeStatus_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* HandshakeResponse_HandshakeStatus_descriptor();
@@ -355,6 +356,7 @@ class HandshakeResponse : public ::google::protobuf::Message {
   typedef HandshakeResponse_HandshakeStatus HandshakeStatus;
   static const HandshakeStatus FAIL = HandshakeResponse_HandshakeStatus_FAIL;
   static const HandshakeStatus SUCCESS = HandshakeResponse_HandshakeStatus_SUCCESS;
+  static const HandshakeStatus ALREADY_LOGGED_IN = HandshakeResponse_HandshakeStatus_ALREADY_LOGGED_IN;
   static inline bool HandshakeStatus_IsValid(int value) {
     return HandshakeResponse_HandshakeStatus_IsValid(value);
   }
@@ -435,6 +437,22 @@ class HandshakeResponse : public ::google::protobuf::Message {
   inline const ::google::protobuf::RepeatedField<int>& active_region() const;
   inline ::google::protobuf::RepeatedField<int>* mutable_active_region();
 
+  // optional .protobufs.MapPool map_pool = 7;
+  inline bool has_map_pool() const;
+  inline void clear_map_pool();
+  static const int kMapPoolFieldNumber = 7;
+  inline const ::protobufs::MapPool& map_pool() const;
+  inline ::protobufs::MapPool* mutable_map_pool();
+  inline ::protobufs::MapPool* release_map_pool();
+  inline void set_allocated_map_pool(::protobufs::MapPool* map_pool);
+
+  // optional int64 max_vetoes = 8;
+  inline bool has_max_vetoes() const;
+  inline void clear_max_vetoes();
+  static const int kMaxVetoesFieldNumber = 8;
+  inline ::google::protobuf::int64 max_vetoes() const;
+  inline void set_max_vetoes(::google::protobuf::int64 value);
+
   // @@protoc_insertion_point(class_scope:protobufs.HandshakeResponse)
  private:
   inline void set_has_status();
@@ -443,6 +461,10 @@ class HandshakeResponse : public ::google::protobuf::Message {
   inline void clear_has_user();
   inline void set_has_id();
   inline void clear_has_id();
+  inline void set_has_map_pool();
+  inline void clear_has_map_pool();
+  inline void set_has_max_vetoes();
+  inline void clear_has_max_vetoes();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -451,10 +473,12 @@ class HandshakeResponse : public ::google::protobuf::Message {
   ::google::protobuf::RepeatedPtrField< ::protobufs::Character > character_;
   ::google::protobuf::RepeatedPtrField< ::protobufs::Division > division_;
   ::google::protobuf::RepeatedField<int> active_region_;
+  ::protobufs::MapPool* map_pool_;
+  ::google::protobuf::int64 max_vetoes_;
   int status_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(8 + 31) / 32];
 
   friend void  protobuf_AddDesc_eros_2eproto();
   friend void protobuf_AssignDesc_eros_2eproto();
@@ -717,6 +741,18 @@ class UserStats : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedPtrField< ::protobufs::UserRegionStats >*
       mutable_region();
 
+  // repeated .protobufs.Map vetoes = 9;
+  inline int vetoes_size() const;
+  inline void clear_vetoes();
+  static const int kVetoesFieldNumber = 9;
+  inline const ::protobufs::Map& vetoes(int index) const;
+  inline ::protobufs::Map* mutable_vetoes(int index);
+  inline ::protobufs::Map* add_vetoes();
+  inline const ::google::protobuf::RepeatedPtrField< ::protobufs::Map >&
+      vetoes() const;
+  inline ::google::protobuf::RepeatedPtrField< ::protobufs::Map >*
+      mutable_vetoes();
+
   // @@protoc_insertion_point(class_scope:protobufs.UserStats)
  private:
   inline void set_has_username();
@@ -744,9 +780,10 @@ class UserStats : public ::google::protobuf::Message {
   ::google::protobuf::int64 forfeits_;
   ::google::protobuf::int64 walkovers_;
   ::google::protobuf::RepeatedPtrField< ::protobufs::UserRegionStats > region_;
+  ::google::protobuf::RepeatedPtrField< ::protobufs::Map > vetoes_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(8 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(9 + 31) / 32];
 
   friend void  protobuf_AddDesc_eros_2eproto();
   friend void protobuf_AssignDesc_eros_2eproto();
@@ -922,6 +959,42 @@ class Map : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 battle_net_id() const;
   inline void set_battle_net_id(::google::protobuf::int32 value);
 
+  // optional string description = 4;
+  inline bool has_description() const;
+  inline void clear_description();
+  static const int kDescriptionFieldNumber = 4;
+  inline const ::std::string& description() const;
+  inline void set_description(const ::std::string& value);
+  inline void set_description(const char* value);
+  inline void set_description(const char* value, size_t size);
+  inline ::std::string* mutable_description();
+  inline ::std::string* release_description();
+  inline void set_allocated_description(::std::string* description);
+
+  // optional string info_url = 5;
+  inline bool has_info_url() const;
+  inline void clear_info_url();
+  static const int kInfoUrlFieldNumber = 5;
+  inline const ::std::string& info_url() const;
+  inline void set_info_url(const ::std::string& value);
+  inline void set_info_url(const char* value);
+  inline void set_info_url(const char* value, size_t size);
+  inline ::std::string* mutable_info_url();
+  inline ::std::string* release_info_url();
+  inline void set_allocated_info_url(::std::string* info_url);
+
+  // optional string preview_url = 6;
+  inline bool has_preview_url() const;
+  inline void clear_preview_url();
+  static const int kPreviewUrlFieldNumber = 6;
+  inline const ::std::string& preview_url() const;
+  inline void set_preview_url(const ::std::string& value);
+  inline void set_preview_url(const char* value);
+  inline void set_preview_url(const char* value, size_t size);
+  inline ::std::string* mutable_preview_url();
+  inline ::std::string* release_preview_url();
+  inline void set_allocated_preview_url(::std::string* preview_url);
+
   // @@protoc_insertion_point(class_scope:protobufs.Map)
  private:
   inline void set_has_region();
@@ -930,15 +1003,24 @@ class Map : public ::google::protobuf::Message {
   inline void clear_has_battle_net_name();
   inline void set_has_battle_net_id();
   inline void clear_has_battle_net_id();
+  inline void set_has_description();
+  inline void clear_has_description();
+  inline void set_has_info_url();
+  inline void clear_has_info_url();
+  inline void set_has_preview_url();
+  inline void clear_has_preview_url();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::std::string* battle_net_name_;
   int region_;
   ::google::protobuf::int32 battle_net_id_;
+  ::std::string* description_;
+  ::std::string* info_url_;
+  ::std::string* preview_url_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
 
   friend void  protobuf_AddDesc_eros_2eproto();
   friend void protobuf_AssignDesc_eros_2eproto();
@@ -1439,6 +1521,13 @@ class ChatRoomInfo : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedPtrField< ::protobufs::UserStats >*
       mutable_participant();
 
+  // required bool forced = 8;
+  inline bool has_forced() const;
+  inline void clear_forced();
+  static const int kForcedFieldNumber = 8;
+  inline bool forced() const;
+  inline void set_forced(bool value);
+
   // @@protoc_insertion_point(class_scope:protobufs.ChatRoomInfo)
  private:
   inline void set_has_key();
@@ -1453,6 +1542,8 @@ class ChatRoomInfo : public ::google::protobuf::Message {
   inline void clear_has_fixed();
   inline void set_has_users();
   inline void clear_has_users();
+  inline void set_has_forced();
+  inline void clear_has_forced();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -1463,9 +1554,10 @@ class ChatRoomInfo : public ::google::protobuf::Message {
   bool passworded_;
   bool joinable_;
   bool fixed_;
+  bool forced_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(8 + 31) / 32];
 
   friend void  protobuf_AddDesc_eros_2eproto();
   friend void protobuf_AssignDesc_eros_2eproto();
@@ -3220,6 +3312,66 @@ HandshakeResponse::mutable_active_region() {
   return &active_region_;
 }
 
+// optional .protobufs.MapPool map_pool = 7;
+inline bool HandshakeResponse::has_map_pool() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void HandshakeResponse::set_has_map_pool() {
+  _has_bits_[0] |= 0x00000040u;
+}
+inline void HandshakeResponse::clear_has_map_pool() {
+  _has_bits_[0] &= ~0x00000040u;
+}
+inline void HandshakeResponse::clear_map_pool() {
+  if (map_pool_ != NULL) map_pool_->::protobufs::MapPool::Clear();
+  clear_has_map_pool();
+}
+inline const ::protobufs::MapPool& HandshakeResponse::map_pool() const {
+  return map_pool_ != NULL ? *map_pool_ : *default_instance_->map_pool_;
+}
+inline ::protobufs::MapPool* HandshakeResponse::mutable_map_pool() {
+  set_has_map_pool();
+  if (map_pool_ == NULL) map_pool_ = new ::protobufs::MapPool;
+  return map_pool_;
+}
+inline ::protobufs::MapPool* HandshakeResponse::release_map_pool() {
+  clear_has_map_pool();
+  ::protobufs::MapPool* temp = map_pool_;
+  map_pool_ = NULL;
+  return temp;
+}
+inline void HandshakeResponse::set_allocated_map_pool(::protobufs::MapPool* map_pool) {
+  delete map_pool_;
+  map_pool_ = map_pool;
+  if (map_pool) {
+    set_has_map_pool();
+  } else {
+    clear_has_map_pool();
+  }
+}
+
+// optional int64 max_vetoes = 8;
+inline bool HandshakeResponse::has_max_vetoes() const {
+  return (_has_bits_[0] & 0x00000080u) != 0;
+}
+inline void HandshakeResponse::set_has_max_vetoes() {
+  _has_bits_[0] |= 0x00000080u;
+}
+inline void HandshakeResponse::clear_has_max_vetoes() {
+  _has_bits_[0] &= ~0x00000080u;
+}
+inline void HandshakeResponse::clear_max_vetoes() {
+  max_vetoes_ = GOOGLE_LONGLONG(0);
+  clear_has_max_vetoes();
+}
+inline ::google::protobuf::int64 HandshakeResponse::max_vetoes() const {
+  return max_vetoes_;
+}
+inline void HandshakeResponse::set_max_vetoes(::google::protobuf::int64 value) {
+  set_has_max_vetoes();
+  max_vetoes_ = value;
+}
+
 // -------------------------------------------------------------------
 
 // UserRegionStats
@@ -3588,6 +3740,31 @@ UserStats::mutable_region() {
   return &region_;
 }
 
+// repeated .protobufs.Map vetoes = 9;
+inline int UserStats::vetoes_size() const {
+  return vetoes_.size();
+}
+inline void UserStats::clear_vetoes() {
+  vetoes_.Clear();
+}
+inline const ::protobufs::Map& UserStats::vetoes(int index) const {
+  return vetoes_.Get(index);
+}
+inline ::protobufs::Map* UserStats::mutable_vetoes(int index) {
+  return vetoes_.Mutable(index);
+}
+inline ::protobufs::Map* UserStats::add_vetoes() {
+  return vetoes_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::protobufs::Map >&
+UserStats::vetoes() const {
+  return vetoes_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::protobufs::Map >*
+UserStats::mutable_vetoes() {
+  return &vetoes_;
+}
+
 // -------------------------------------------------------------------
 
 // MapPool
@@ -3734,6 +3911,216 @@ inline ::google::protobuf::int32 Map::battle_net_id() const {
 inline void Map::set_battle_net_id(::google::protobuf::int32 value) {
   set_has_battle_net_id();
   battle_net_id_ = value;
+}
+
+// optional string description = 4;
+inline bool Map::has_description() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void Map::set_has_description() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void Map::clear_has_description() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void Map::clear_description() {
+  if (description_ != &::google::protobuf::internal::kEmptyString) {
+    description_->clear();
+  }
+  clear_has_description();
+}
+inline const ::std::string& Map::description() const {
+  return *description_;
+}
+inline void Map::set_description(const ::std::string& value) {
+  set_has_description();
+  if (description_ == &::google::protobuf::internal::kEmptyString) {
+    description_ = new ::std::string;
+  }
+  description_->assign(value);
+}
+inline void Map::set_description(const char* value) {
+  set_has_description();
+  if (description_ == &::google::protobuf::internal::kEmptyString) {
+    description_ = new ::std::string;
+  }
+  description_->assign(value);
+}
+inline void Map::set_description(const char* value, size_t size) {
+  set_has_description();
+  if (description_ == &::google::protobuf::internal::kEmptyString) {
+    description_ = new ::std::string;
+  }
+  description_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Map::mutable_description() {
+  set_has_description();
+  if (description_ == &::google::protobuf::internal::kEmptyString) {
+    description_ = new ::std::string;
+  }
+  return description_;
+}
+inline ::std::string* Map::release_description() {
+  clear_has_description();
+  if (description_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = description_;
+    description_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void Map::set_allocated_description(::std::string* description) {
+  if (description_ != &::google::protobuf::internal::kEmptyString) {
+    delete description_;
+  }
+  if (description) {
+    set_has_description();
+    description_ = description;
+  } else {
+    clear_has_description();
+    description_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional string info_url = 5;
+inline bool Map::has_info_url() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void Map::set_has_info_url() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void Map::clear_has_info_url() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void Map::clear_info_url() {
+  if (info_url_ != &::google::protobuf::internal::kEmptyString) {
+    info_url_->clear();
+  }
+  clear_has_info_url();
+}
+inline const ::std::string& Map::info_url() const {
+  return *info_url_;
+}
+inline void Map::set_info_url(const ::std::string& value) {
+  set_has_info_url();
+  if (info_url_ == &::google::protobuf::internal::kEmptyString) {
+    info_url_ = new ::std::string;
+  }
+  info_url_->assign(value);
+}
+inline void Map::set_info_url(const char* value) {
+  set_has_info_url();
+  if (info_url_ == &::google::protobuf::internal::kEmptyString) {
+    info_url_ = new ::std::string;
+  }
+  info_url_->assign(value);
+}
+inline void Map::set_info_url(const char* value, size_t size) {
+  set_has_info_url();
+  if (info_url_ == &::google::protobuf::internal::kEmptyString) {
+    info_url_ = new ::std::string;
+  }
+  info_url_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Map::mutable_info_url() {
+  set_has_info_url();
+  if (info_url_ == &::google::protobuf::internal::kEmptyString) {
+    info_url_ = new ::std::string;
+  }
+  return info_url_;
+}
+inline ::std::string* Map::release_info_url() {
+  clear_has_info_url();
+  if (info_url_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = info_url_;
+    info_url_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void Map::set_allocated_info_url(::std::string* info_url) {
+  if (info_url_ != &::google::protobuf::internal::kEmptyString) {
+    delete info_url_;
+  }
+  if (info_url) {
+    set_has_info_url();
+    info_url_ = info_url;
+  } else {
+    clear_has_info_url();
+    info_url_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional string preview_url = 6;
+inline bool Map::has_preview_url() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void Map::set_has_preview_url() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void Map::clear_has_preview_url() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void Map::clear_preview_url() {
+  if (preview_url_ != &::google::protobuf::internal::kEmptyString) {
+    preview_url_->clear();
+  }
+  clear_has_preview_url();
+}
+inline const ::std::string& Map::preview_url() const {
+  return *preview_url_;
+}
+inline void Map::set_preview_url(const ::std::string& value) {
+  set_has_preview_url();
+  if (preview_url_ == &::google::protobuf::internal::kEmptyString) {
+    preview_url_ = new ::std::string;
+  }
+  preview_url_->assign(value);
+}
+inline void Map::set_preview_url(const char* value) {
+  set_has_preview_url();
+  if (preview_url_ == &::google::protobuf::internal::kEmptyString) {
+    preview_url_ = new ::std::string;
+  }
+  preview_url_->assign(value);
+}
+inline void Map::set_preview_url(const char* value, size_t size) {
+  set_has_preview_url();
+  if (preview_url_ == &::google::protobuf::internal::kEmptyString) {
+    preview_url_ = new ::std::string;
+  }
+  preview_url_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Map::mutable_preview_url() {
+  set_has_preview_url();
+  if (preview_url_ == &::google::protobuf::internal::kEmptyString) {
+    preview_url_ = new ::std::string;
+  }
+  return preview_url_;
+}
+inline ::std::string* Map::release_preview_url() {
+  clear_has_preview_url();
+  if (preview_url_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = preview_url_;
+    preview_url_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void Map::set_allocated_preview_url(::std::string* preview_url) {
+  if (preview_url_ != &::google::protobuf::internal::kEmptyString) {
+    delete preview_url_;
+  }
+  if (preview_url) {
+    set_has_preview_url();
+    preview_url_ = preview_url;
+  } else {
+    clear_has_preview_url();
+    preview_url_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // -------------------------------------------------------------------
@@ -4456,6 +4843,28 @@ ChatRoomInfo::participant() const {
 inline ::google::protobuf::RepeatedPtrField< ::protobufs::UserStats >*
 ChatRoomInfo::mutable_participant() {
   return &participant_;
+}
+
+// required bool forced = 8;
+inline bool ChatRoomInfo::has_forced() const {
+  return (_has_bits_[0] & 0x00000080u) != 0;
+}
+inline void ChatRoomInfo::set_has_forced() {
+  _has_bits_[0] |= 0x00000080u;
+}
+inline void ChatRoomInfo::clear_has_forced() {
+  _has_bits_[0] &= ~0x00000080u;
+}
+inline void ChatRoomInfo::clear_forced() {
+  forced_ = false;
+  clear_has_forced();
+}
+inline bool ChatRoomInfo::forced() const {
+  return forced_;
+}
+inline void ChatRoomInfo::set_forced(bool value) {
+  set_has_forced();
+  forced_ = value;
 }
 
 // -------------------------------------------------------------------

@@ -26,6 +26,8 @@ bool LongProcessRequest::processData(const QString &command, const QByteArray &d
 		emit complete(this);
 		return true;
 	}
+
+	return false;
 }
 
 bool LongProcessRequest::processError(int code, const QByteArray &data)

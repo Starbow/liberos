@@ -16,6 +16,7 @@
 #include "chatroom.h"
 #include "matchmakingmatch.h"
 #include "divisions.h"
+#include "map.h"
 
 
 
@@ -72,6 +73,9 @@ public:
 	ChatRoom *getChatRoom(const QString &room);
 	const QList<ErosRegion> &activeRegions() const;
 
+	const QList<Map*> &mapPool() const;
+	Map *findMap(ErosRegion region, int battle_net_id);
+	int maxVetoes() const;
 
 	static const QString regionToString(ErosRegion region);
 	static const QString regionToLongString(ErosRegion region);
@@ -111,6 +115,8 @@ public slots:
 	// Are we agreeing with what the opponent is saying?
 	void acknowledgeLongProcess(bool response);
 
+	void toggleVeto(Map *map);
+
 private:
 	QString server_hostname_;
 	quint16 server_port_;
@@ -144,6 +150,8 @@ private:
 	// Server Stats
 	QMap<ErosRegion, int> eros_matchmaking_searching_regions_;
 	QList<ErosRegion> eros_active_regions_;
+	QList<Map*> map_pool_;
+	int max_vetoes_;
 
 	int eros_active_user_count_;
 	int eros_searching_user_count_;
@@ -188,6 +196,8 @@ private slots:
 
     void replayRequestComplete(Request *);
 
+	void toggleVetoRequestComplete(Request *);
+
 	void ensureUserParent(User *);
 	void ensureChatParent(ChatRoom *);
 signals:
@@ -199,7 +209,8 @@ signals:
 	// Basic operation signals
 	void connected();
 	void disconnected();
-	void handshakeFailed();
+	void authenticationFailed();
+	void alreadyLoggedIn();
 	void serverError(int);
 	void statsUpdated(int active, int searching);
 	void regionStatsUpdated(ErosRegion region, int searching);
@@ -216,6 +227,9 @@ signals:
 	void addCharacterError(const QString battle_net_profile, ErosError error);
 	void updateCharacterError(Character* character, ErosError error);
 	void removeCharacterError(Character* character, ErosError error);
+
+	void vetoesUpdated();
+	void toggleVetoFailed(Map *map, ErosError error);
 
 	// Match signals
 	void matchmakingStateChanged(ErosMatchmakingState status);

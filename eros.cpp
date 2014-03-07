@@ -18,6 +18,7 @@
 #include "requests/uploadreplayrequest.h"
 #include "requests/longprocessrequest.h"
 #include "requests/longprocessresponserequest.h"
+#include "requests/togglevetorequest.h"
 
 #include <QTimer>
 #include <QThread>
@@ -42,6 +43,7 @@ Eros::Eros(QObject *parent)
 	this->awaiting_data_ = false;
 	this->matchmaking_state_ = ErosMatchmakingState::Idle;
 	this->eros_active_regions_ = QList<ErosRegion>();
+	this->map_pool_ = QList<Map*>();
 
 
 	QObject::connect(this->socket_, SIGNAL(connected()), this, SLOT(socketConnected()));
@@ -228,8 +230,7 @@ void Eros::socketReadyRead()
                 this->awaiting_data_ = true;
                 this->awaiting_data_command_ = split[0];
 
-                QBuffer buffer(this);
-                this->awaiting_data_buffer_ = &buffer;
+                this->awaiting_data_buffer_ = new QBuffer();
                 this->awaiting_data_buffer_->open(QBuffer::ReadWrite);
                 if (data.size() > 0)
 				{
@@ -292,6 +293,9 @@ const QString Eros::errorString(ErosError code)
 	case 106:
 		return tr("Internal server error.");
 		break;
+	case 109:
+		return tr("You cannot perform that action while in a matchmaking match.");
+		break;
 	case 201:
 		return tr("Invalid Battle.net character information. Please ensure you have provided the correct URL.");
 		break;
@@ -336,6 +340,12 @@ const QString Eros::errorString(ErosError code)
 		break;
 	case 311:
 		return tr("Games must be played on the Faster speed settings.");
+		break;
+	case 312:
+		return tr("This map is not in the ranked pool.");
+		break;
+	case 313:
+		return tr("You have reached your maximum number of vetoes.");
 		break;
 	case 401:
 		return tr("You cannot queue on this region without a verified character on this region.");
@@ -823,21 +833,29 @@ void Eros::handshakeRequestComplete(Request* request)
 {
 	if(HandshakeRequest* handshake_request = dynamic_cast<HandshakeRequest*>(request))
     {
-		if (handshake_request->status() != HandshakeRequest::ResponseStatus::Success)
-		{
-			disconnectFromEros();
-			emit handshakeFailed();
-		}
-		else
+		if (handshake_request->status() == HandshakeRequest::ResponseStatus::Success)
 		{
 			this->local_user_ = handshake_request->user();
 			this->divisions_ = handshake_request->divisions();
 			this->users_ <<  this->local_user_;
 			this->eros_active_regions_ = handshake_request->activeRegions();
+			this->map_pool_ = handshake_request->mapPool();
+			this->max_vetoes_ = handshake_request->maxVetoes();
 
 			QObject::connect(this->local_user_, SIGNAL(updated(User*)), this, SLOT(userUpdatedHandler(User*)));
 
 			setState(ErosState::ConnectedState);
+			
+		}
+		else if (handshake_request->status() == HandshakeRequest::ResponseStatus::AlreadyLoggedIn)
+		{
+			disconnectFromEros();
+			emit alreadyLoggedIn();
+		}
+		else 
+		{
+			disconnectFromEros();
+			emit authenticationFailed();
 		}
 	}
 }
@@ -1277,6 +1295,56 @@ void Eros::longProcessResponseRequestComplete(Request *request)
 		else
 		{
 			emit acknowledgeLongProcessFailed();
+		}
+	}
+}
+
+const QList<Map*> &Eros::mapPool() const 
+{
+	return this->map_pool_;
+}
+
+Map *Eros::findMap(ErosRegion region, int battle_net_id)
+{
+	QList<Map*>::const_iterator i = this->map_pool_.begin();
+	while (i != this->map_pool_.end())
+	{
+		Map *map = (Map*)*i;
+
+		if (map->region() == region && map->battleNetId() == battle_net_id)
+		{
+			return map;
+		}
+
+		i++;
+	}
+
+	return nullptr;
+}
+
+int Eros::maxVetoes() const
+{
+	return this->max_vetoes_;
+}
+
+void Eros::toggleVeto(Map *map)
+{
+	ToggleVetoRequest *request = new ToggleVetoRequest(this, map);
+	QObject::connect(request, SIGNAL(complete(Request*)), this, SLOT(toggleVetoRequestComplete(Request*)));
+	sendRequest(request);
+}
+
+void Eros::toggleVetoRequestComplete(Request *request)
+{
+	if(ToggleVetoRequest* tv_request = dynamic_cast<ToggleVetoRequest*>(request))
+    {
+		if (tv_request->error() == ErosError::None)
+		{
+			emit vetoesUpdated();
+		}
+		else
+		{
+			emit toggleVetoFailed(tv_request->map(), tv_request->error());
 		}
 	}
 }

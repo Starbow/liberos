@@ -2,7 +2,7 @@
 #include "eros.h"
 #include "eros.pb.h"
 
-LocalUser::LocalUser(Eros *parent, const protobufs::HandshakeResponse& handshake)
+LocalUser::LocalUser(Eros *parent, const protobufs::HandshakeResponse& handshake, const QList<Map*> &map_pool)
 	: User(parent)
 {
 	this->characters_ = QList<Character *>();
@@ -11,7 +11,7 @@ LocalUser::LocalUser(Eros *parent, const protobufs::HandshakeResponse& handshake
 		const protobufs::UserStats& user = handshake.user();
 
 		this->username_ = QString::fromStdString(user.username());
-		update(user);
+		update(user, map_pool);
 
 		for (int i=0; i < handshake.character_size(); i++)
 		{
