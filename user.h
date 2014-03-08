@@ -28,6 +28,7 @@ public:
 	~User();
 
 	const QString &username() const;
+	qint64  id() const;
 	int searchRadius() const;
 	void update(const protobufs::UserStats &stats);
 	void update(const protobufs::UserStats &stats, const QList<Map*> &map_pool);
@@ -45,7 +46,8 @@ protected:
 	User(Eros *parent);
 
 	QString username_;
-	
+	qint64 id_;
+
 	int search_radius_;
 	Eros *eros_;
 	bool first_update_;

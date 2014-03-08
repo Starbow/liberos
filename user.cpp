@@ -7,6 +7,7 @@ User::User(Eros *parent, const QString &username)
 {
 	this->eros_ = parent;
 	this->username_ = username;
+	this->id_ = 0;
 	this->first_update_ = true;
 	this->state_ = ErosUserState::Unknown;
 }
@@ -52,10 +53,16 @@ const QList<Map*> &User::vetoes() const
 	return this->vetoes_;
 }
 
+qint64 User::id() const
+{
+	return this->id_;
+}
+
 void User::update(const protobufs::UserStats &stats, const QList<Map*> &map_pool)
 {
 	this->state_ = ErosUserState::Known;
 	this->username_ = QString::fromStdString(stats.username());
+	this->id_ = stats.id();
 	this->ladder_stats_global_ = new UserLadderStats(this, stats.wins(), stats.losses(), stats.forfeits(), stats.walkovers(), stats.points());
 	this->search_radius_ = stats.search_radius();
 	

@@ -753,6 +753,13 @@ class UserStats : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedPtrField< ::protobufs::Map >*
       mutable_vetoes();
 
+  // required int64 id = 10;
+  inline bool has_id() const;
+  inline void clear_id();
+  static const int kIdFieldNumber = 10;
+  inline ::google::protobuf::int64 id() const;
+  inline void set_id(::google::protobuf::int64 value);
+
   // @@protoc_insertion_point(class_scope:protobufs.UserStats)
  private:
   inline void set_has_username();
@@ -769,6 +776,8 @@ class UserStats : public ::google::protobuf::Message {
   inline void clear_has_forfeits();
   inline void set_has_walkovers();
   inline void clear_has_walkovers();
+  inline void set_has_id();
+  inline void clear_has_id();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -781,9 +790,10 @@ class UserStats : public ::google::protobuf::Message {
   ::google::protobuf::int64 walkovers_;
   ::google::protobuf::RepeatedPtrField< ::protobufs::UserRegionStats > region_;
   ::google::protobuf::RepeatedPtrField< ::protobufs::Map > vetoes_;
+  ::google::protobuf::int64 id_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(9 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(10 + 31) / 32];
 
   friend void  protobuf_AddDesc_eros_2eproto();
   friend void protobuf_AssignDesc_eros_2eproto();
@@ -3763,6 +3773,28 @@ UserStats::vetoes() const {
 inline ::google::protobuf::RepeatedPtrField< ::protobufs::Map >*
 UserStats::mutable_vetoes() {
   return &vetoes_;
+}
+
+// required int64 id = 10;
+inline bool UserStats::has_id() const {
+  return (_has_bits_[0] & 0x00000200u) != 0;
+}
+inline void UserStats::set_has_id() {
+  _has_bits_[0] |= 0x00000200u;
+}
+inline void UserStats::clear_has_id() {
+  _has_bits_[0] &= ~0x00000200u;
+}
+inline void UserStats::clear_id() {
+  id_ = GOOGLE_LONGLONG(0);
+  clear_has_id();
+}
+inline ::google::protobuf::int64 UserStats::id() const {
+  return id_;
+}
+inline void UserStats::set_id(::google::protobuf::int64 value) {
+  set_has_id();
+  id_ = value;
 }
 
 // -------------------------------------------------------------------
