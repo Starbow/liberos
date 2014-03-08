@@ -66,6 +66,8 @@ HEADERS += character.h\
            requests/togglevetorequest.h
 
 unix {
-    target.path = /usr/lib
+    LIBS += -L/usr/local/lib/
+    INCLUDEPATH += /usr/local/include/
+    target.path = /usr/local/lib
     INSTALLS += target
 }
