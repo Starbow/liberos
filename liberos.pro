@@ -71,3 +71,7 @@ unix {
     target.path = /usr/local/lib
     INSTALLS += target
 }
+
+TRANSLATIONS += translations/liberos_en_GB.ts\
+                translations/liberos_ko_KR.ts\
+                translations/liberos_blank.ts
