@@ -73,5 +73,8 @@ unix {
 }
 
 TRANSLATIONS += translations/liberos_en_GB.ts\
+                translations/liberos_en_US.ts\
+                translations/liberos_de_DE.ts\
                 translations/liberos_ko_KR.ts\
+                translations/liberos_es_419.ts\
                 translations/liberos_blank.ts

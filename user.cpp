@@ -9,6 +9,7 @@ User::User(Eros *parent, const QString &username)
 	this->username_ = username;
 	this->id_ = 0;
 	this->first_update_ = true;
+	this->ladder_stats_global_ = nullptr;
 	this->state_ = ErosUserState::Unknown;
 }
 
@@ -17,6 +18,7 @@ User::User(Eros *parent)
 {
 	this->state_ = ErosUserState::Unknown;
 	this->first_update_ = true;
+	this->ladder_stats_global_ = nullptr;
 	this->eros_ = parent;
 }
 
