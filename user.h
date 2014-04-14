@@ -12,6 +12,8 @@
 
 class Eros;
 class Map;
+class Division;
+
 namespace protobufs
 {
 	class HandshakeResponse;
@@ -31,13 +33,14 @@ public:
 	qint64  id() const;
 	int searchRadius() const;
 	void update(const protobufs::UserStats &stats);
-	void update(const protobufs::UserStats &stats, const QList<Map*> &map_pool);
+	void update(const protobufs::UserStats &stats, const QList<Map*> &map_pool, const QMap<int, Division*> &divisions);
 	void update(const protobufs::MapPool &vetoes);
 	void update(const protobufs::MapPool &vetoes, const QList<Map*> &map_pool);
 	ErosUserState state() const;
 	const QMap<ErosRegion, UserLadderStats*> &ladderStats() const;
 	const UserLadderStats *ladderStatsGlobal() const;
 	const QList<Map*> &vetoes() const;
+	Division *division() const;
 
 signals:
 	void updated(User* user);
@@ -54,6 +57,7 @@ protected:
 	UserLadderStats *ladder_stats_global_;
 	QMap<ErosRegion, UserLadderStats*> ladder_stats_;
 	QList<Map*> vetoes_;
+	Division *division_;
 
 	ErosUserState state_;
 };

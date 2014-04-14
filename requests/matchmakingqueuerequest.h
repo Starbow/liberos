@@ -10,7 +10,7 @@ class MatchmakingQueueRequest : public Request
 	Q_OBJECT
 
 public:
-	MatchmakingQueueRequest(Eros *parent, ErosRegion region, int search_radius);
+	MatchmakingQueueRequest(Eros *parent, QList<ErosRegion> &regions, int search_radius);
 	~MatchmakingQueueRequest();
 
 	bool processData(const QString &command, const QByteArray &data);

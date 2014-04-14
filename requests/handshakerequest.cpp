@@ -38,7 +38,7 @@ LocalUser* HandshakeRequest::user() const
 	return this->user_;  
 }
 
-Divisions* HandshakeRequest::divisions() const
+const QMap<int, Division*> &HandshakeRequest::divisions() const
 {
 	return this->divisions_;  
 }
@@ -76,10 +76,20 @@ bool HandshakeRequest::processHandshakeResponse(const QString &command, const QB
 					this->map_pool_ << new Map(this->parent(), (ErosRegion)map_buffer.region(), map_buffer.battle_net_id(), QString::fromStdString(map_buffer.battle_net_name()), QString::fromStdString(map_buffer.description()), QString::fromStdString(map_buffer.info_url()), QString::fromStdString(map_buffer.preview_url()));
 				}
 			}
+
+			this->divisions_ = QMap<int, Division*>();
+			this->divisions_.insert(0, new Division(this));
+			for (int i = 0; i < response.division_size(); i++)
+			{
+				Division *division = new Division(this, response.division(i));
+				this->divisions_.insert(division->id(), division);
+			}
+
 			if (response.has_user())
 			{
-				this->user_ = new LocalUser(this->eros_, response, this->map_pool_);
-				this->divisions_ = new Divisions(this->parent(), response);
+				this->user_ = new LocalUser(this->eros_, response, this->map_pool_, this->divisions_);
+				
+
 				for (int i = 0; i < response.active_region_size(); i++)
 				{
 					this->active_regions_ << (ErosRegion)response.active_region(i);

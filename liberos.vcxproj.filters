@@ -206,15 +206,6 @@
     <ClCompile Include="GeneratedFiles\Release\moc_updatecharacterrequest.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="divisions.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_divisions.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_divisions.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_removecharacterrequest.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
@@ -287,6 +278,15 @@
     <ClCompile Include="GeneratedFiles\Release\moc_togglevetorequest.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="division.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_division.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_division.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="eros.h">
@@ -343,9 +343,6 @@
     <CustomBuild Include="requests\updatecharacterrequest.h">
       <Filter>Header Files\requests</Filter>
     </CustomBuild>
-    <CustomBuild Include="divisions.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="requests\removecharacterrequest.h">
       <Filter>Header Files\requests</Filter>
     </CustomBuild>
@@ -369,6 +366,9 @@
     </CustomBuild>
     <CustomBuild Include="requests\togglevetorequest.h">
       <Filter>Header Files\requests</Filter>
+    </CustomBuild>
+    <CustomBuild Include="division.h">
+      <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

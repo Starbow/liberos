@@ -118,9 +118,13 @@ void protobuf_AssignDesc_eros_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(Handshake));
   Division_descriptor_ = file->message_type(1);
-  static const int Division_offsets_[2] = {
+  static const int Division_offsets_[6] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Division, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Division, name_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Division, points_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Division, promotion_threshold_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Division, demotion_threshold_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Division, icon_url_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Division, small_icon_url_),
   };
   Division_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -157,13 +161,16 @@ void protobuf_AssignDesc_eros_2eproto() {
       sizeof(HandshakeResponse));
   HandshakeResponse_HandshakeStatus_descriptor_ = HandshakeResponse_descriptor_->enum_type(0);
   UserRegionStats_descriptor_ = file->message_type(3);
-  static const int UserRegionStats_offsets_[6] = {
+  static const int UserRegionStats_offsets_[9] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserRegionStats, region_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserRegionStats, points_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserRegionStats, wins_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserRegionStats, losses_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserRegionStats, forfeits_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserRegionStats, walkovers_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserRegionStats, mmr_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserRegionStats, placements_remaining_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserRegionStats, division_),
   };
   UserRegionStats_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -177,7 +184,7 @@ void protobuf_AssignDesc_eros_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(UserRegionStats));
   UserStats_descriptor_ = file->message_type(4);
-  static const int UserStats_offsets_[10] = {
+  static const int UserStats_offsets_[13] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserStats, username_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserStats, search_radius_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserStats, points_),
@@ -188,6 +195,9 @@ void protobuf_AssignDesc_eros_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserStats, region_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserStats, vetoes_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserStats, id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserStats, mmr_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserStats, placements_remaining_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserStats, division_),
   };
   UserStats_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -640,79 +650,84 @@ void protobuf_AddDesc_eros_2eproto() {
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\neros.proto\022\tprotobufs\"/\n\tHandshake\022\020\n\010"
-    "username\030\001 \001(\t\022\020\n\010auth_key\030\002 \001(\t\"(\n\010Divi"
-    "sion\022\014\n\004name\030\001 \002(\t\022\016\n\006points\030\002 \002(\003\"\366\002\n\021H"
-    "andshakeResponse\022<\n\006status\030\001 \002(\0162,.proto"
-    "bufs.HandshakeResponse.HandshakeStatus\022\""
-    "\n\004user\030\002 \001(\0132\024.protobufs.UserStats\022\n\n\002id"
-    "\030\003 \001(\003\022\'\n\tcharacter\030\004 \003(\0132\024.protobufs.Ch"
-    "aracter\022%\n\010division\030\005 \003(\0132\023.protobufs.Di"
-    "vision\022(\n\ractive_region\030\006 \003(\0162\021.protobuf"
-    "s.Region\022$\n\010map_pool\030\007 \001(\0132\022.protobufs.M"
-    "apPool\022\022\n\nmax_vetoes\030\010 \001(\003\"\?\n\017HandshakeS"
-    "tatus\022\010\n\004FAIL\020\000\022\013\n\007SUCCESS\020\001\022\025\n\021ALREADY_"
-    "LOGGED_IN\020\002\"\207\001\n\017UserRegionStats\022!\n\006regio"
-    "n\030\001 \002(\0162\021.protobufs.Region\022\016\n\006points\030\002 \002"
-    "(\003\022\014\n\004wins\030\003 \002(\003\022\016\n\006losses\030\004 \002(\003\022\020\n\010forf"
-    "eits\030\005 \002(\003\022\021\n\twalkovers\030\006 \002(\003\"\337\001\n\tUserSt"
-    "ats\022\020\n\010username\030\001 \002(\t\022\025\n\rsearch_radius\030\002"
-    " \002(\003\022\016\n\006points\030\003 \002(\003\022\014\n\004wins\030\004 \002(\003\022\016\n\006lo"
-    "sses\030\005 \002(\003\022\020\n\010forfeits\030\006 \002(\003\022\021\n\twalkover"
-    "s\030\007 \002(\003\022*\n\006region\030\010 \003(\0132\032.protobufs.User"
-    "RegionStats\022\036\n\006vetoes\030\t \003(\0132\016.protobufs."
-    "Map\022\n\n\002id\030\n \002(\003\"&\n\007MapPool\022\033\n\003map\030\001 \003(\0132"
-    "\016.protobufs.Map\"\224\001\n\003Map\022!\n\006region\030\001 \002(\0162"
-    "\021.protobufs.Region\022\027\n\017battle_net_name\030\002 "
-    "\002(\t\022\025\n\rbattle_net_id\030\003 \002(\005\022\023\n\013descriptio"
-    "n\030\004 \001(\t\022\020\n\010info_url\030\005 \001(\t\022\023\n\013preview_url"
-    "\030\006 \001(\t\"b\n\020SimulationResult\022&\n\010opponent\030\001"
-    " \002(\0132\024.protobufs.UserStats\022\017\n\007victory\030\002 "
-    "\002(\010\022\025\n\rmatch_quality\030\003 \002(\001\"E\n\020Matchmakin"
-    "gQueue\022!\n\006region\030\001 \002(\0162\021.protobufs.Regio"
-    "n\022\016\n\006radius\030\002 \002(\003\"\357\001\n\021MatchmakingResult\022"
-    "\020\n\010timespan\030\001 \002(\003\022\017\n\007quality\030\002 \002(\001\022&\n\010op"
-    "ponent\030\003 \002(\0132\024.protobufs.UserStats\022\030\n\020op"
-    "ponent_latency\030\004 \002(\003\022\017\n\007channel\030\005 \002(\t\022\021\n"
-    "\tchat_room\030\006 \002(\t\022\033\n\003map\030\007 \002(\0132\016.protobuf"
-    "s.Map\022\030\n\020long_unlock_time\030\010 \002(\003\022\032\n\022long_"
-    "response_time\030\t \002(\003\"\250\001\n\014ChatRoomInfo\022\013\n\003"
-    "key\030\001 \002(\t\022\014\n\004name\030\002 \002(\t\022\022\n\npassworded\030\003 "
-    "\002(\010\022\020\n\010joinable\030\004 \002(\010\022\r\n\005fixed\030\005 \002(\010\022\r\n\005"
-    "users\030\006 \002(\003\022)\n\013participant\030\007 \003(\0132\024.proto"
-    "bufs.UserStats\022\016\n\006forced\030\010 \002(\010\"6\n\rChatRo"
-    "omIndex\022%\n\004room\030\001 \003(\0132\027.protobufs.ChatRo"
-    "omInfo\">\n\013ChatMessage\022\016\n\006sender\030\001 \002(\t\022\016\n"
-    "\006target\030\002 \002(\t\022\017\n\007message\030\003 \002(\t\"o\n\017ChatRo"
-    "omMessage\022%\n\004room\030\001 \002(\0132\027.protobufs.Chat"
-    "RoomInfo\022$\n\006sender\030\002 \002(\0132\024.protobufs.Use"
-    "rStats\022\017\n\007message\030\003 \002(\t\"K\n\022ChatPrivateMe"
-    "ssage\022$\n\006sender\030\001 \002(\0132\024.protobufs.UserSt"
-    "ats\022\017\n\007message\030\002 \002(\t\"Y\n\014ChatRoomUser\022%\n\004"
-    "room\030\001 \002(\0132\027.protobufs.ChatRoomInfo\022\"\n\004u"
-    "ser\030\002 \002(\0132\024.protobufs.UserStats\"1\n\017ChatR"
-    "oomRequest\022\014\n\004room\030\001 \002(\t\022\020\n\010password\030\002 \002"
-    "(\t\"N\n\020MatchmakingStats\022!\n\006region\030\001 \002(\0162\021"
-    ".protobufs.Region\022\027\n\017searching_users\030\002 \002"
-    "(\003\"i\n\013ServerStats\022\024\n\014active_users\030\001 \002(\003\022"
-    "\027\n\017searching_users\030\002 \002(\003\022+\n\006region\030\003 \003(\013"
-    "2\033.protobufs.MatchmakingStats\"\351\001\n\tCharac"
-    "ter\022!\n\006region\030\001 \002(\0162\021.protobufs.Region\022\021"
-    "\n\tsubregion\030\002 \002(\005\022\022\n\nprofile_id\030\003 \002(\005\022\026\n"
-    "\016character_name\030\004 \002(\t\022\026\n\016character_code\030"
-    "\005 \001(\005\022\024\n\014profile_link\030\006 \001(\t\022\033\n\023ingame_pr"
-    "ofile_link\030\007 \001(\t\022\020\n\010verified\030\010 \001(\010\022\035\n\025ve"
-    "rification_portrait\030\t \001(\005\"\306\001\n\020MatchParti"
-    "cipant\022\"\n\004user\030\001 \001(\0132\024.protobufs.UserSta"
-    "ts\022\'\n\tcharacter\030\002 \001(\0132\024.protobufs.Charac"
-    "ter\022\025\n\rpoints_before\030\003 \002(\003\022\024\n\014points_aft"
-    "er\030\004 \002(\003\022\031\n\021points_difference\030\005 \002(\003\022\017\n\007v"
-    "ictory\030\006 \002(\010\022\014\n\004race\030\007 \002(\t\"\177\n\013MatchResul"
-    "t\022!\n\006region\030\001 \002(\0162\021.protobufs.Region\022\033\n\003"
-    "map\030\002 \002(\0132\016.protobufs.Map\0220\n\013participant"
-    "\030\003 \003(\0132\033.protobufs.MatchParticipant\"5\n\016B"
-    "roadcastAlert\022\017\n\007message\030\002 \002(\t\022\022\n\npredef"
-    "ined\030\001 \002(\005*1\n\006Region\022\006\n\002NA\020\001\022\006\n\002EU\020\002\022\006\n\002"
-    "KR\020\003\022\006\n\002CN\020\005\022\007\n\003SEA\020\006", 2941);
+    "username\030\001 \001(\t\022\020\n\010auth_key\030\002 \001(\t\"\207\001\n\010Div"
+    "ision\022\n\n\002id\030\001 \002(\003\022\014\n\004name\030\002 \002(\t\022\033\n\023promo"
+    "tion_threshold\030\003 \002(\001\022\032\n\022demotion_thresho"
+    "ld\030\004 \002(\001\022\020\n\010icon_url\030\005 \002(\t\022\026\n\016small_icon"
+    "_url\030\006 \002(\t\"\366\002\n\021HandshakeResponse\022<\n\006stat"
+    "us\030\001 \002(\0162,.protobufs.HandshakeResponse.H"
+    "andshakeStatus\022\"\n\004user\030\002 \001(\0132\024.protobufs"
+    ".UserStats\022\n\n\002id\030\003 \001(\003\022\'\n\tcharacter\030\004 \003("
+    "\0132\024.protobufs.Character\022%\n\010division\030\005 \003("
+    "\0132\023.protobufs.Division\022(\n\ractive_region\030"
+    "\006 \003(\0162\021.protobufs.Region\022$\n\010map_pool\030\007 \001"
+    "(\0132\022.protobufs.MapPool\022\022\n\nmax_vetoes\030\010 \001"
+    "(\003\"\?\n\017HandshakeStatus\022\010\n\004FAIL\020\000\022\013\n\007SUCCE"
+    "SS\020\001\022\025\n\021ALREADY_LOGGED_IN\020\002\"\304\001\n\017UserRegi"
+    "onStats\022!\n\006region\030\001 \002(\0162\021.protobufs.Regi"
+    "on\022\016\n\006points\030\002 \002(\003\022\014\n\004wins\030\003 \002(\003\022\016\n\006loss"
+    "es\030\004 \002(\003\022\020\n\010forfeits\030\005 \002(\003\022\021\n\twalkovers\030"
+    "\006 \002(\003\022\013\n\003mmr\030\007 \002(\001\022\034\n\024placements_remaini"
+    "ng\030\010 \002(\003\022\020\n\010division\030\t \002(\003\"\234\002\n\tUserStats"
+    "\022\020\n\010username\030\001 \002(\t\022\025\n\rsearch_radius\030\002 \002("
+    "\003\022\016\n\006points\030\003 \002(\003\022\014\n\004wins\030\004 \002(\003\022\016\n\006losse"
+    "s\030\005 \002(\003\022\020\n\010forfeits\030\006 \002(\003\022\021\n\twalkovers\030\007"
+    " \002(\003\022*\n\006region\030\010 \003(\0132\032.protobufs.UserReg"
+    "ionStats\022\036\n\006vetoes\030\t \003(\0132\016.protobufs.Map"
+    "\022\n\n\002id\030\n \002(\003\022\013\n\003mmr\030\013 \002(\001\022\034\n\024placements_"
+    "remaining\030\014 \002(\003\022\020\n\010division\030\r \002(\003\"&\n\007Map"
+    "Pool\022\033\n\003map\030\001 \003(\0132\016.protobufs.Map\"\224\001\n\003Ma"
+    "p\022!\n\006region\030\001 \002(\0162\021.protobufs.Region\022\027\n\017"
+    "battle_net_name\030\002 \002(\t\022\025\n\rbattle_net_id\030\003"
+    " \002(\005\022\023\n\013description\030\004 \001(\t\022\020\n\010info_url\030\005 "
+    "\001(\t\022\023\n\013preview_url\030\006 \001(\t\"b\n\020SimulationRe"
+    "sult\022&\n\010opponent\030\001 \002(\0132\024.protobufs.UserS"
+    "tats\022\017\n\007victory\030\002 \002(\010\022\025\n\rmatch_quality\030\003"
+    " \002(\001\"E\n\020MatchmakingQueue\022!\n\006region\030\001 \003(\016"
+    "2\021.protobufs.Region\022\016\n\006radius\030\002 \002(\003\"\357\001\n\021"
+    "MatchmakingResult\022\020\n\010timespan\030\001 \002(\003\022\017\n\007q"
+    "uality\030\002 \002(\001\022&\n\010opponent\030\003 \002(\0132\024.protobu"
+    "fs.UserStats\022\030\n\020opponent_latency\030\004 \002(\003\022\017"
+    "\n\007channel\030\005 \002(\t\022\021\n\tchat_room\030\006 \002(\t\022\033\n\003ma"
+    "p\030\007 \002(\0132\016.protobufs.Map\022\030\n\020long_unlock_t"
+    "ime\030\010 \002(\003\022\032\n\022long_response_time\030\t \002(\003\"\250\001"
+    "\n\014ChatRoomInfo\022\013\n\003key\030\001 \002(\t\022\014\n\004name\030\002 \002("
+    "\t\022\022\n\npassworded\030\003 \002(\010\022\020\n\010joinable\030\004 \002(\010\022"
+    "\r\n\005fixed\030\005 \002(\010\022\r\n\005users\030\006 \002(\003\022)\n\013partici"
+    "pant\030\007 \003(\0132\024.protobufs.UserStats\022\016\n\006forc"
+    "ed\030\010 \002(\010\"6\n\rChatRoomIndex\022%\n\004room\030\001 \003(\0132"
+    "\027.protobufs.ChatRoomInfo\">\n\013ChatMessage\022"
+    "\016\n\006sender\030\001 \002(\t\022\016\n\006target\030\002 \002(\t\022\017\n\007messa"
+    "ge\030\003 \002(\t\"o\n\017ChatRoomMessage\022%\n\004room\030\001 \002("
+    "\0132\027.protobufs.ChatRoomInfo\022$\n\006sender\030\002 \002"
+    "(\0132\024.protobufs.UserStats\022\017\n\007message\030\003 \002("
+    "\t\"K\n\022ChatPrivateMessage\022$\n\006sender\030\001 \002(\0132"
+    "\024.protobufs.UserStats\022\017\n\007message\030\002 \002(\t\"Y"
+    "\n\014ChatRoomUser\022%\n\004room\030\001 \002(\0132\027.protobufs"
+    ".ChatRoomInfo\022\"\n\004user\030\002 \002(\0132\024.protobufs."
+    "UserStats\"1\n\017ChatRoomRequest\022\014\n\004room\030\001 \002"
+    "(\t\022\020\n\010password\030\002 \002(\t\"N\n\020MatchmakingStats"
+    "\022!\n\006region\030\001 \002(\0162\021.protobufs.Region\022\027\n\017s"
+    "earching_users\030\002 \002(\003\"i\n\013ServerStats\022\024\n\014a"
+    "ctive_users\030\001 \002(\003\022\027\n\017searching_users\030\002 \002"
+    "(\003\022+\n\006region\030\003 \003(\0132\033.protobufs.Matchmaki"
+    "ngStats\"\351\001\n\tCharacter\022!\n\006region\030\001 \002(\0162\021."
+    "protobufs.Region\022\021\n\tsubregion\030\002 \002(\005\022\022\n\np"
+    "rofile_id\030\003 \002(\005\022\026\n\016character_name\030\004 \002(\t\022"
+    "\026\n\016character_code\030\005 \001(\005\022\024\n\014profile_link\030"
+    "\006 \001(\t\022\033\n\023ingame_profile_link\030\007 \001(\t\022\020\n\010ve"
+    "rified\030\010 \001(\010\022\035\n\025verification_portrait\030\t "
+    "\001(\005\"\306\001\n\020MatchParticipant\022\"\n\004user\030\001 \001(\0132\024"
+    ".protobufs.UserStats\022\'\n\tcharacter\030\002 \001(\0132"
+    "\024.protobufs.Character\022\025\n\rpoints_before\030\003"
+    " \002(\003\022\024\n\014points_after\030\004 \002(\003\022\031\n\021points_dif"
+    "ference\030\005 \002(\003\022\017\n\007victory\030\006 \002(\010\022\014\n\004race\030\007"
+    " \002(\t\"\177\n\013MatchResult\022!\n\006region\030\001 \002(\0162\021.pr"
+    "otobufs.Region\022\033\n\003map\030\002 \002(\0132\016.protobufs."
+    "Map\0220\n\013participant\030\003 \003(\0132\033.protobufs.Mat"
+    "chParticipant\"5\n\016BroadcastAlert\022\017\n\007messa"
+    "ge\030\002 \002(\t\022\022\n\npredefined\030\001 \002(\005*1\n\006Region\022\006"
+    "\n\002NA\020\001\022\006\n\002EU\020\002\022\006\n\002KR\020\003\022\006\n\002CN\020\005\022\007\n\003SEA\020\006", 3159);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "eros.proto", &protobuf_RegisterTypes);
   Handshake::default_instance_ = new Handshake();
@@ -1073,8 +1088,12 @@ void Handshake::Swap(Handshake* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
+const int Division::kIdFieldNumber;
 const int Division::kNameFieldNumber;
-const int Division::kPointsFieldNumber;
+const int Division::kPromotionThresholdFieldNumber;
+const int Division::kDemotionThresholdFieldNumber;
+const int Division::kIconUrlFieldNumber;
+const int Division::kSmallIconUrlFieldNumber;
 #endif  // !_MSC_VER
 
 Division::Division()
@@ -1093,8 +1112,12 @@ Division::Division(const Division& from)
 
 void Division::SharedCtor() {
   _cached_size_ = 0;
+  id_ = GOOGLE_LONGLONG(0);
   name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  points_ = GOOGLE_LONGLONG(0);
+  promotion_threshold_ = 0;
+  demotion_threshold_ = 0;
+  icon_url_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  small_icon_url_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -1105,6 +1128,12 @@ Division::~Division() {
 void Division::SharedDtor() {
   if (name_ != &::google::protobuf::internal::kEmptyString) {
     delete name_;
+  }
+  if (icon_url_ != &::google::protobuf::internal::kEmptyString) {
+    delete icon_url_;
+  }
+  if (small_icon_url_ != &::google::protobuf::internal::kEmptyString) {
+    delete small_icon_url_;
   }
   if (this != default_instance_) {
   }
@@ -1133,12 +1162,24 @@ Division* Division::New() const {
 
 void Division::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    id_ = GOOGLE_LONGLONG(0);
     if (has_name()) {
       if (name_ != &::google::protobuf::internal::kEmptyString) {
         name_->clear();
       }
     }
-    points_ = GOOGLE_LONGLONG(0);
+    promotion_threshold_ = 0;
+    demotion_threshold_ = 0;
+    if (has_icon_url()) {
+      if (icon_url_ != &::google::protobuf::internal::kEmptyString) {
+        icon_url_->clear();
+      }
+    }
+    if (has_small_icon_url()) {
+      if (small_icon_url_ != &::google::protobuf::internal::kEmptyString) {
+        small_icon_url_->clear();
+      }
+    }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -1150,10 +1191,26 @@ bool Division::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string name = 1;
+      // required int64 id = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &id_)));
+          set_has_id();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_name;
+        break;
+      }
+
+      // required string name = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_name:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_name()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8String(
@@ -1162,19 +1219,69 @@ bool Division::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(16)) goto parse_points;
+        if (input->ExpectTag(25)) goto parse_promotion_threshold;
         break;
       }
 
-      // required int64 points = 2;
-      case 2: {
+      // required double promotion_threshold = 3;
+      case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_points:
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED64) {
+         parse_promotion_threshold:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &points_)));
-          set_has_points();
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, &promotion_threshold_)));
+          set_has_promotion_threshold();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(33)) goto parse_demotion_threshold;
+        break;
+      }
+
+      // required double demotion_threshold = 4;
+      case 4: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED64) {
+         parse_demotion_threshold:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, &demotion_threshold_)));
+          set_has_demotion_threshold();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(42)) goto parse_icon_url;
+        break;
+      }
+
+      // required string icon_url = 5;
+      case 5: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_icon_url:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_icon_url()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->icon_url().data(), this->icon_url().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(50)) goto parse_small_icon_url;
+        break;
+      }
+
+      // required string small_icon_url = 6;
+      case 6: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_small_icon_url:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_small_icon_url()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->small_icon_url().data(), this->small_icon_url().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -1200,18 +1307,46 @@ bool Division::MergePartialFromCodedStream(
 
 void Division::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required string name = 1;
+  // required int64 id = 1;
+  if (has_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->id(), output);
+  }
+
+  // required string name = 2;
   if (has_name()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->name().data(), this->name().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      1, this->name(), output);
+      2, this->name(), output);
   }
 
-  // required int64 points = 2;
-  if (has_points()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(2, this->points(), output);
+  // required double promotion_threshold = 3;
+  if (has_promotion_threshold()) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(3, this->promotion_threshold(), output);
+  }
+
+  // required double demotion_threshold = 4;
+  if (has_demotion_threshold()) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(4, this->demotion_threshold(), output);
+  }
+
+  // required string icon_url = 5;
+  if (has_icon_url()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->icon_url().data(), this->icon_url().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      5, this->icon_url(), output);
+  }
+
+  // required string small_icon_url = 6;
+  if (has_small_icon_url()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->small_icon_url().data(), this->small_icon_url().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      6, this->small_icon_url(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -1222,19 +1357,49 @@ void Division::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* Division::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required string name = 1;
+  // required int64 id = 1;
+  if (has_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->id(), target);
+  }
+
+  // required string name = 2;
   if (has_name()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->name().data(), this->name().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->name(), target);
+        2, this->name(), target);
   }
 
-  // required int64 points = 2;
-  if (has_points()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(2, this->points(), target);
+  // required double promotion_threshold = 3;
+  if (has_promotion_threshold()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(3, this->promotion_threshold(), target);
+  }
+
+  // required double demotion_threshold = 4;
+  if (has_demotion_threshold()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(4, this->demotion_threshold(), target);
+  }
+
+  // required string icon_url = 5;
+  if (has_icon_url()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->icon_url().data(), this->icon_url().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        5, this->icon_url(), target);
+  }
+
+  // required string small_icon_url = 6;
+  if (has_small_icon_url()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->small_icon_url().data(), this->small_icon_url().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        6, this->small_icon_url(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -1248,18 +1413,42 @@ int Division::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required string name = 1;
+    // required int64 id = 1;
+    if (has_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int64Size(
+          this->id());
+    }
+
+    // required string name = 2;
     if (has_name()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
           this->name());
     }
 
-    // required int64 points = 2;
-    if (has_points()) {
+    // required double promotion_threshold = 3;
+    if (has_promotion_threshold()) {
+      total_size += 1 + 8;
+    }
+
+    // required double demotion_threshold = 4;
+    if (has_demotion_threshold()) {
+      total_size += 1 + 8;
+    }
+
+    // required string icon_url = 5;
+    if (has_icon_url()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int64Size(
-          this->points());
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->icon_url());
+    }
+
+    // required string small_icon_url = 6;
+    if (has_small_icon_url()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->small_icon_url());
     }
 
   }
@@ -1289,11 +1478,23 @@ void Division::MergeFrom(const ::google::protobuf::Message& from) {
 void Division::MergeFrom(const Division& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_id()) {
+      set_id(from.id());
+    }
     if (from.has_name()) {
       set_name(from.name());
     }
-    if (from.has_points()) {
-      set_points(from.points());
+    if (from.has_promotion_threshold()) {
+      set_promotion_threshold(from.promotion_threshold());
+    }
+    if (from.has_demotion_threshold()) {
+      set_demotion_threshold(from.demotion_threshold());
+    }
+    if (from.has_icon_url()) {
+      set_icon_url(from.icon_url());
+    }
+    if (from.has_small_icon_url()) {
+      set_small_icon_url(from.small_icon_url());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -1312,15 +1513,19 @@ void Division::CopyFrom(const Division& from) {
 }
 
 bool Division::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+  if ((_has_bits_[0] & 0x0000003f) != 0x0000003f) return false;
 
   return true;
 }
 
 void Division::Swap(Division* other) {
   if (other != this) {
+    std::swap(id_, other->id_);
     std::swap(name_, other->name_);
-    std::swap(points_, other->points_);
+    std::swap(promotion_threshold_, other->promotion_threshold_);
+    std::swap(demotion_threshold_, other->demotion_threshold_);
+    std::swap(icon_url_, other->icon_url_);
+    std::swap(small_icon_url_, other->small_icon_url_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -1900,6 +2105,9 @@ const int UserRegionStats::kWinsFieldNumber;
 const int UserRegionStats::kLossesFieldNumber;
 const int UserRegionStats::kForfeitsFieldNumber;
 const int UserRegionStats::kWalkoversFieldNumber;
+const int UserRegionStats::kMmrFieldNumber;
+const int UserRegionStats::kPlacementsRemainingFieldNumber;
+const int UserRegionStats::kDivisionFieldNumber;
 #endif  // !_MSC_VER
 
 UserRegionStats::UserRegionStats()
@@ -1924,6 +2132,9 @@ void UserRegionStats::SharedCtor() {
   losses_ = GOOGLE_LONGLONG(0);
   forfeits_ = GOOGLE_LONGLONG(0);
   walkovers_ = GOOGLE_LONGLONG(0);
+  mmr_ = 0;
+  placements_remaining_ = GOOGLE_LONGLONG(0);
+  division_ = GOOGLE_LONGLONG(0);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -1965,6 +2176,11 @@ void UserRegionStats::Clear() {
     losses_ = GOOGLE_LONGLONG(0);
     forfeits_ = GOOGLE_LONGLONG(0);
     walkovers_ = GOOGLE_LONGLONG(0);
+    mmr_ = 0;
+    placements_remaining_ = GOOGLE_LONGLONG(0);
+  }
+  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    division_ = GOOGLE_LONGLONG(0);
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -2072,6 +2288,54 @@ bool UserRegionStats::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(57)) goto parse_mmr;
+        break;
+      }
+
+      // required double mmr = 7;
+      case 7: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED64) {
+         parse_mmr:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, &mmr_)));
+          set_has_mmr();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(64)) goto parse_placements_remaining;
+        break;
+      }
+
+      // required int64 placements_remaining = 8;
+      case 8: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_placements_remaining:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &placements_remaining_)));
+          set_has_placements_remaining();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(72)) goto parse_division;
+        break;
+      }
+
+      // required int64 division = 9;
+      case 9: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_division:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &division_)));
+          set_has_division();
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -2125,6 +2389,21 @@ void UserRegionStats::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt64(6, this->walkovers(), output);
   }
 
+  // required double mmr = 7;
+  if (has_mmr()) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(7, this->mmr(), output);
+  }
+
+  // required int64 placements_remaining = 8;
+  if (has_placements_remaining()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(8, this->placements_remaining(), output);
+  }
+
+  // required int64 division = 9;
+  if (has_division()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(9, this->division(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -2162,6 +2441,21 @@ void UserRegionStats::SerializeWithCachedSizes(
   // required int64 walkovers = 6;
   if (has_walkovers()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(6, this->walkovers(), target);
+  }
+
+  // required double mmr = 7;
+  if (has_mmr()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(7, this->mmr(), target);
+  }
+
+  // required int64 placements_remaining = 8;
+  if (has_placements_remaining()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(8, this->placements_remaining(), target);
+  }
+
+  // required int64 division = 9;
+  if (has_division()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(9, this->division(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -2216,6 +2510,27 @@ int UserRegionStats::ByteSize() const {
           this->walkovers());
     }
 
+    // required double mmr = 7;
+    if (has_mmr()) {
+      total_size += 1 + 8;
+    }
+
+    // required int64 placements_remaining = 8;
+    if (has_placements_remaining()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int64Size(
+          this->placements_remaining());
+    }
+
+  }
+  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    // required int64 division = 9;
+    if (has_division()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int64Size(
+          this->division());
+    }
+
   }
   if (!unknown_fields().empty()) {
     total_size +=
@@ -2261,6 +2576,17 @@ void UserRegionStats::MergeFrom(const UserRegionStats& from) {
     if (from.has_walkovers()) {
       set_walkovers(from.walkovers());
     }
+    if (from.has_mmr()) {
+      set_mmr(from.mmr());
+    }
+    if (from.has_placements_remaining()) {
+      set_placements_remaining(from.placements_remaining());
+    }
+  }
+  if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    if (from.has_division()) {
+      set_division(from.division());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -2278,7 +2604,7 @@ void UserRegionStats::CopyFrom(const UserRegionStats& from) {
 }
 
 bool UserRegionStats::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000003f) != 0x0000003f) return false;
+  if ((_has_bits_[0] & 0x000001ff) != 0x000001ff) return false;
 
   return true;
 }
@@ -2291,6 +2617,9 @@ void UserRegionStats::Swap(UserRegionStats* other) {
     std::swap(losses_, other->losses_);
     std::swap(forfeits_, other->forfeits_);
     std::swap(walkovers_, other->walkovers_);
+    std::swap(mmr_, other->mmr_);
+    std::swap(placements_remaining_, other->placements_remaining_);
+    std::swap(division_, other->division_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -2319,6 +2648,9 @@ const int UserStats::kWalkoversFieldNumber;
 const int UserStats::kRegionFieldNumber;
 const int UserStats::kVetoesFieldNumber;
 const int UserStats::kIdFieldNumber;
+const int UserStats::kMmrFieldNumber;
+const int UserStats::kPlacementsRemainingFieldNumber;
+const int UserStats::kDivisionFieldNumber;
 #endif  // !_MSC_VER
 
 UserStats::UserStats()
@@ -2345,6 +2677,9 @@ void UserStats::SharedCtor() {
   forfeits_ = GOOGLE_LONGLONG(0);
   walkovers_ = GOOGLE_LONGLONG(0);
   id_ = GOOGLE_LONGLONG(0);
+  mmr_ = 0;
+  placements_remaining_ = GOOGLE_LONGLONG(0);
+  division_ = GOOGLE_LONGLONG(0);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -2397,6 +2732,9 @@ void UserStats::Clear() {
   }
   if (_has_bits_[9 / 32] & (0xffu << (9 % 32))) {
     id_ = GOOGLE_LONGLONG(0);
+    mmr_ = 0;
+    placements_remaining_ = GOOGLE_LONGLONG(0);
+    division_ = GOOGLE_LONGLONG(0);
   }
   region_.Clear();
   vetoes_.Clear();
@@ -2564,6 +2902,54 @@ bool UserStats::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(89)) goto parse_mmr;
+        break;
+      }
+
+      // required double mmr = 11;
+      case 11: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED64) {
+         parse_mmr:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, &mmr_)));
+          set_has_mmr();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(96)) goto parse_placements_remaining;
+        break;
+      }
+
+      // required int64 placements_remaining = 12;
+      case 12: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_placements_remaining:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &placements_remaining_)));
+          set_has_placements_remaining();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(104)) goto parse_division;
+        break;
+      }
+
+      // required int64 division = 13;
+      case 13: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_division:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &division_)));
+          set_has_division();
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -2642,6 +3028,21 @@ void UserStats::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt64(10, this->id(), output);
   }
 
+  // required double mmr = 11;
+  if (has_mmr()) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(11, this->mmr(), output);
+  }
+
+  // required int64 placements_remaining = 12;
+  if (has_placements_remaining()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(12, this->placements_remaining(), output);
+  }
+
+  // required int64 division = 13;
+  if (has_division()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(13, this->division(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -2707,6 +3108,21 @@ void UserStats::SerializeWithCachedSizes(
   // required int64 id = 10;
   if (has_id()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(10, this->id(), target);
+  }
+
+  // required double mmr = 11;
+  if (has_mmr()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(11, this->mmr(), target);
+  }
+
+  // required int64 placements_remaining = 12;
+  if (has_placements_remaining()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(12, this->placements_remaining(), target);
+  }
+
+  // required int64 division = 13;
+  if (has_division()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(13, this->division(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -2776,6 +3192,25 @@ int UserStats::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int64Size(
           this->id());
+    }
+
+    // required double mmr = 11;
+    if (has_mmr()) {
+      total_size += 1 + 8;
+    }
+
+    // required int64 placements_remaining = 12;
+    if (has_placements_remaining()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int64Size(
+          this->placements_remaining());
+    }
+
+    // required int64 division = 13;
+    if (has_division()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int64Size(
+          this->division());
     }
 
   }
@@ -2849,6 +3284,15 @@ void UserStats::MergeFrom(const UserStats& from) {
     if (from.has_id()) {
       set_id(from.id());
     }
+    if (from.has_mmr()) {
+      set_mmr(from.mmr());
+    }
+    if (from.has_placements_remaining()) {
+      set_placements_remaining(from.placements_remaining());
+    }
+    if (from.has_division()) {
+      set_division(from.division());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -2866,7 +3310,7 @@ void UserStats::CopyFrom(const UserStats& from) {
 }
 
 bool UserStats::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000027f) != 0x0000027f) return false;
+  if ((_has_bits_[0] & 0x00001e7f) != 0x00001e7f) return false;
 
   for (int i = 0; i < region_size(); i++) {
     if (!this->region(i).IsInitialized()) return false;
@@ -2889,6 +3333,9 @@ void UserStats::Swap(UserStats* other) {
     region_.Swap(&other->region_);
     vetoes_.Swap(&other->vetoes_);
     std::swap(id_, other->id_);
+    std::swap(mmr_, other->mmr_);
+    std::swap(placements_remaining_, other->placements_remaining_);
+    std::swap(division_, other->division_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -3909,7 +4356,6 @@ MatchmakingQueue::MatchmakingQueue(const MatchmakingQueue& from)
 
 void MatchmakingQueue::SharedCtor() {
   _cached_size_ = 0;
-  region_ = 1;
   radius_ = GOOGLE_LONGLONG(0);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -3945,10 +4391,10 @@ MatchmakingQueue* MatchmakingQueue::New() const {
 }
 
 void MatchmakingQueue::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    region_ = 1;
+  if (_has_bits_[1 / 32] & (0xffu << (1 % 32))) {
     radius_ = GOOGLE_LONGLONG(0);
   }
+  region_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -3959,22 +4405,31 @@ bool MatchmakingQueue::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .protobufs.Region region = 1;
+      // repeated .protobufs.Region region = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_region:
           int value;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
           if (::protobufs::Region_IsValid(value)) {
-            set_region(static_cast< ::protobufs::Region >(value));
+            add_region(static_cast< ::protobufs::Region >(value));
           } else {
             mutable_unknown_fields()->AddVarint(1, value);
           }
+        } else if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag)
+                   == ::google::protobuf::internal::WireFormatLite::
+                      WIRETYPE_LENGTH_DELIMITED) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedEnumNoInline(
+                 input,
+                 &::protobufs::Region_IsValid,
+                 this->mutable_region())));
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(8)) goto parse_region;
         if (input->ExpectTag(16)) goto parse_radius;
         break;
       }
@@ -4013,10 +4468,10 @@ bool MatchmakingQueue::MergePartialFromCodedStream(
 
 void MatchmakingQueue::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required .protobufs.Region region = 1;
-  if (has_region()) {
+  // repeated .protobufs.Region region = 1;
+  for (int i = 0; i < this->region_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      1, this->region(), output);
+      1, this->region(i), output);
   }
 
   // required int64 radius = 2;
@@ -4032,10 +4487,10 @@ void MatchmakingQueue::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* MatchmakingQueue::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required .protobufs.Region region = 1;
-  if (has_region()) {
+  // repeated .protobufs.Region region = 1;
+  for (int i = 0; i < this->region_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      1, this->region(), target);
+      1, this->region(i), target);
   }
 
   // required int64 radius = 2;
@@ -4053,13 +4508,7 @@ void MatchmakingQueue::SerializeWithCachedSizes(
 int MatchmakingQueue::ByteSize() const {
   int total_size = 0;
 
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .protobufs.Region region = 1;
-    if (has_region()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::EnumSize(this->region());
-    }
-
+  if (_has_bits_[1 / 32] & (0xffu << (1 % 32))) {
     // required int64 radius = 2;
     if (has_radius()) {
       total_size += 1 +
@@ -4068,6 +4517,16 @@ int MatchmakingQueue::ByteSize() const {
     }
 
   }
+  // repeated .protobufs.Region region = 1;
+  {
+    int data_size = 0;
+    for (int i = 0; i < this->region_size(); i++) {
+      data_size += ::google::protobuf::internal::WireFormatLite::EnumSize(
+        this->region(i));
+    }
+    total_size += 1 * this->region_size() + data_size;
+  }
+
   if (!unknown_fields().empty()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -4093,10 +4552,8 @@ void MatchmakingQueue::MergeFrom(const ::google::protobuf::Message& from) {
 
 void MatchmakingQueue::MergeFrom(const MatchmakingQueue& from) {
   GOOGLE_CHECK_NE(&from, this);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_region()) {
-      set_region(from.region());
-    }
+  region_.MergeFrom(from.region_);
+  if (from._has_bits_[1 / 32] & (0xffu << (1 % 32))) {
     if (from.has_radius()) {
       set_radius(from.radius());
     }
@@ -4117,14 +4574,14 @@ void MatchmakingQueue::CopyFrom(const MatchmakingQueue& from) {
 }
 
 bool MatchmakingQueue::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+  if ((_has_bits_[0] & 0x00000002) != 0x00000002) return false;
 
   return true;
 }
 
 void MatchmakingQueue::Swap(MatchmakingQueue* other) {
   if (other != this) {
-    std::swap(region_, other->region_);
+    region_.Swap(&other->region_);
     std::swap(radius_, other->radius_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);

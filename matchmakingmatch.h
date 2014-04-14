@@ -2,6 +2,7 @@
 #define LIBEROS_MATCHMAKINGMATCH_H
 
 #include <QObject>
+#include "enums.h"
 
 class User;
 class Eros;
@@ -30,7 +31,7 @@ public:
 	int mapId() const;
 	int longProcessUnlockTime() const;
 	int longProcessResponseTime() const;
-
+	ErosRegion region() const;
 
 private:
 	User *opponent_;
@@ -42,6 +43,7 @@ private:
 	int map_id_;
 	int long_process_unlock_time_;
 	int long_process_response_time_;
+	ErosRegion region_;
 
 };
 

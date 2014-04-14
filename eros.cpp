@@ -34,9 +34,11 @@ Eros::Eros(QObject *parent)
 	qRegisterMetaType<ErosMatchmakingState>();
 	qRegisterMetaType<ErosUserState>();
 	qRegisterMetaType<ErosLongProcessState>();
+	qRegisterMetaType<ErosRegionList>("ErosRegionList");
 
 	this->users_ = QList<User *>();
 	this->chatrooms_ = QList<ChatRoom *>();
+	this->divisions_ = QMap<int, Division*>();
 	this->last_error_ = ErosError::None;
 	this->socket_ = new QTcpSocket(this);
 	this->state_ = ErosState::UnconnectedState;
@@ -445,7 +447,7 @@ void Eros::setMatchmakingState(ErosMatchmakingState state)
 	
 }
 
-const Divisions *Eros::divisions() const
+const QMap<int, Division*> &Eros::divisions() const
 {
 	return this->divisions_;
 }
@@ -572,17 +574,26 @@ ChatRoom *Eros::getChatRoom(const QString &room)
 	return new_room;
 }
 
-void Eros::queueMatchmaking(ErosRegion region, int radius)
+
+void Eros::queueMatchmaking(QList<ErosRegion> regions, int radius)
 {
 	if (this->matchmaking_state_ == ErosMatchmakingState::Queued)
 		return;
 	if (state_ == ErosState::ConnectedState)
 	{	
-		MatchmakingQueueRequest *request = new MatchmakingQueueRequest(this, region, radius);
+		MatchmakingQueueRequest *request = new MatchmakingQueueRequest(this, regions, radius);
 		QObject::connect(request, SIGNAL(queued(Request*)), this, SLOT(matchmakingRequestQueued(Request*)));
 		QObject::connect(request, SIGNAL(complete(Request*)), this, SLOT(matchmakingRequestComplete(Request*)));
 		sendRequest(request);
 	}
+}
+
+void Eros::queueMatchmaking(ErosRegion region, int radius)
+{
+	QList<ErosRegion> regions;
+	regions << region;
+
+	queueMatchmaking(regions, radius);
 }
 
 void Eros::dequeueMatchmaking()

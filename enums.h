@@ -1,6 +1,8 @@
 #ifndef LIBEROS_ENUMS_H
 #define LIBEROS_ENUMS_H
 
+#include <QList>
+
 enum ErosState
 {
 	UnconnectedState,
@@ -22,6 +24,10 @@ enum ErosRegion
 };
 
 Q_DECLARE_METATYPE(ErosRegion)
+
+typedef QList<ErosRegion> ErosRegionList;
+Q_DECLARE_METATYPE(ErosRegionList)
+
 
 enum ErosMatchmakingState
 {
@@ -105,4 +111,5 @@ enum ErosLongProcessState
 };
 
 Q_DECLARE_METATYPE(ErosLongProcessState)
+
 #endif

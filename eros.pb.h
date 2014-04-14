@@ -258,10 +258,17 @@ class Division : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required string name = 1;
+  // required int64 id = 1;
+  inline bool has_id() const;
+  inline void clear_id();
+  static const int kIdFieldNumber = 1;
+  inline ::google::protobuf::int64 id() const;
+  inline void set_id(::google::protobuf::int64 value);
+
+  // required string name = 2;
   inline bool has_name() const;
   inline void clear_name();
-  static const int kNameFieldNumber = 1;
+  static const int kNameFieldNumber = 2;
   inline const ::std::string& name() const;
   inline void set_name(const ::std::string& value);
   inline void set_name(const char* value);
@@ -270,27 +277,70 @@ class Division : public ::google::protobuf::Message {
   inline ::std::string* release_name();
   inline void set_allocated_name(::std::string* name);
 
-  // required int64 points = 2;
-  inline bool has_points() const;
-  inline void clear_points();
-  static const int kPointsFieldNumber = 2;
-  inline ::google::protobuf::int64 points() const;
-  inline void set_points(::google::protobuf::int64 value);
+  // required double promotion_threshold = 3;
+  inline bool has_promotion_threshold() const;
+  inline void clear_promotion_threshold();
+  static const int kPromotionThresholdFieldNumber = 3;
+  inline double promotion_threshold() const;
+  inline void set_promotion_threshold(double value);
+
+  // required double demotion_threshold = 4;
+  inline bool has_demotion_threshold() const;
+  inline void clear_demotion_threshold();
+  static const int kDemotionThresholdFieldNumber = 4;
+  inline double demotion_threshold() const;
+  inline void set_demotion_threshold(double value);
+
+  // required string icon_url = 5;
+  inline bool has_icon_url() const;
+  inline void clear_icon_url();
+  static const int kIconUrlFieldNumber = 5;
+  inline const ::std::string& icon_url() const;
+  inline void set_icon_url(const ::std::string& value);
+  inline void set_icon_url(const char* value);
+  inline void set_icon_url(const char* value, size_t size);
+  inline ::std::string* mutable_icon_url();
+  inline ::std::string* release_icon_url();
+  inline void set_allocated_icon_url(::std::string* icon_url);
+
+  // required string small_icon_url = 6;
+  inline bool has_small_icon_url() const;
+  inline void clear_small_icon_url();
+  static const int kSmallIconUrlFieldNumber = 6;
+  inline const ::std::string& small_icon_url() const;
+  inline void set_small_icon_url(const ::std::string& value);
+  inline void set_small_icon_url(const char* value);
+  inline void set_small_icon_url(const char* value, size_t size);
+  inline ::std::string* mutable_small_icon_url();
+  inline ::std::string* release_small_icon_url();
+  inline void set_allocated_small_icon_url(::std::string* small_icon_url);
 
   // @@protoc_insertion_point(class_scope:protobufs.Division)
  private:
+  inline void set_has_id();
+  inline void clear_has_id();
   inline void set_has_name();
   inline void clear_has_name();
-  inline void set_has_points();
-  inline void clear_has_points();
+  inline void set_has_promotion_threshold();
+  inline void clear_has_promotion_threshold();
+  inline void set_has_demotion_threshold();
+  inline void clear_has_demotion_threshold();
+  inline void set_has_icon_url();
+  inline void clear_has_icon_url();
+  inline void set_has_small_icon_url();
+  inline void clear_has_small_icon_url();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::google::protobuf::int64 id_;
   ::std::string* name_;
-  ::google::protobuf::int64 points_;
+  double promotion_threshold_;
+  double demotion_threshold_;
+  ::std::string* icon_url_;
+  ::std::string* small_icon_url_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
 
   friend void  protobuf_AddDesc_eros_2eproto();
   friend void protobuf_AssignDesc_eros_2eproto();
@@ -585,6 +635,27 @@ class UserRegionStats : public ::google::protobuf::Message {
   inline ::google::protobuf::int64 walkovers() const;
   inline void set_walkovers(::google::protobuf::int64 value);
 
+  // required double mmr = 7;
+  inline bool has_mmr() const;
+  inline void clear_mmr();
+  static const int kMmrFieldNumber = 7;
+  inline double mmr() const;
+  inline void set_mmr(double value);
+
+  // required int64 placements_remaining = 8;
+  inline bool has_placements_remaining() const;
+  inline void clear_placements_remaining();
+  static const int kPlacementsRemainingFieldNumber = 8;
+  inline ::google::protobuf::int64 placements_remaining() const;
+  inline void set_placements_remaining(::google::protobuf::int64 value);
+
+  // required int64 division = 9;
+  inline bool has_division() const;
+  inline void clear_division();
+  static const int kDivisionFieldNumber = 9;
+  inline ::google::protobuf::int64 division() const;
+  inline void set_division(::google::protobuf::int64 value);
+
   // @@protoc_insertion_point(class_scope:protobufs.UserRegionStats)
  private:
   inline void set_has_region();
@@ -599,6 +670,12 @@ class UserRegionStats : public ::google::protobuf::Message {
   inline void clear_has_forfeits();
   inline void set_has_walkovers();
   inline void clear_has_walkovers();
+  inline void set_has_mmr();
+  inline void clear_has_mmr();
+  inline void set_has_placements_remaining();
+  inline void clear_has_placements_remaining();
+  inline void set_has_division();
+  inline void clear_has_division();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -607,10 +684,13 @@ class UserRegionStats : public ::google::protobuf::Message {
   ::google::protobuf::int64 losses_;
   ::google::protobuf::int64 forfeits_;
   ::google::protobuf::int64 walkovers_;
+  double mmr_;
+  ::google::protobuf::int64 placements_remaining_;
+  ::google::protobuf::int64 division_;
   int region_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(9 + 31) / 32];
 
   friend void  protobuf_AddDesc_eros_2eproto();
   friend void protobuf_AssignDesc_eros_2eproto();
@@ -760,6 +840,27 @@ class UserStats : public ::google::protobuf::Message {
   inline ::google::protobuf::int64 id() const;
   inline void set_id(::google::protobuf::int64 value);
 
+  // required double mmr = 11;
+  inline bool has_mmr() const;
+  inline void clear_mmr();
+  static const int kMmrFieldNumber = 11;
+  inline double mmr() const;
+  inline void set_mmr(double value);
+
+  // required int64 placements_remaining = 12;
+  inline bool has_placements_remaining() const;
+  inline void clear_placements_remaining();
+  static const int kPlacementsRemainingFieldNumber = 12;
+  inline ::google::protobuf::int64 placements_remaining() const;
+  inline void set_placements_remaining(::google::protobuf::int64 value);
+
+  // required int64 division = 13;
+  inline bool has_division() const;
+  inline void clear_division();
+  static const int kDivisionFieldNumber = 13;
+  inline ::google::protobuf::int64 division() const;
+  inline void set_division(::google::protobuf::int64 value);
+
   // @@protoc_insertion_point(class_scope:protobufs.UserStats)
  private:
   inline void set_has_username();
@@ -778,6 +879,12 @@ class UserStats : public ::google::protobuf::Message {
   inline void clear_has_walkovers();
   inline void set_has_id();
   inline void clear_has_id();
+  inline void set_has_mmr();
+  inline void clear_has_mmr();
+  inline void set_has_placements_remaining();
+  inline void clear_has_placements_remaining();
+  inline void set_has_division();
+  inline void clear_has_division();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -791,9 +898,12 @@ class UserStats : public ::google::protobuf::Message {
   ::google::protobuf::RepeatedPtrField< ::protobufs::UserRegionStats > region_;
   ::google::protobuf::RepeatedPtrField< ::protobufs::Map > vetoes_;
   ::google::protobuf::int64 id_;
+  double mmr_;
+  ::google::protobuf::int64 placements_remaining_;
+  ::google::protobuf::int64 division_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(10 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(13 + 31) / 32];
 
   friend void  protobuf_AddDesc_eros_2eproto();
   friend void protobuf_AssignDesc_eros_2eproto();
@@ -1199,12 +1309,15 @@ class MatchmakingQueue : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .protobufs.Region region = 1;
-  inline bool has_region() const;
+  // repeated .protobufs.Region region = 1;
+  inline int region_size() const;
   inline void clear_region();
   static const int kRegionFieldNumber = 1;
-  inline ::protobufs::Region region() const;
-  inline void set_region(::protobufs::Region value);
+  inline ::protobufs::Region region(int index) const;
+  inline void set_region(int index, ::protobufs::Region value);
+  inline void add_region(::protobufs::Region value);
+  inline const ::google::protobuf::RepeatedField<int>& region() const;
+  inline ::google::protobuf::RepeatedField<int>* mutable_region();
 
   // required int64 radius = 2;
   inline bool has_radius() const;
@@ -1215,15 +1328,13 @@ class MatchmakingQueue : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:protobufs.MatchmakingQueue)
  private:
-  inline void set_has_region();
-  inline void clear_has_region();
   inline void set_has_radius();
   inline void clear_has_radius();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::google::protobuf::RepeatedField<int> region_;
   ::google::protobuf::int64 radius_;
-  int region_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
@@ -3066,15 +3177,37 @@ inline void Handshake::set_allocated_auth_key(::std::string* auth_key) {
 
 // Division
 
-// required string name = 1;
-inline bool Division::has_name() const {
+// required int64 id = 1;
+inline bool Division::has_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void Division::set_has_name() {
+inline void Division::set_has_id() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void Division::clear_has_name() {
+inline void Division::clear_has_id() {
   _has_bits_[0] &= ~0x00000001u;
+}
+inline void Division::clear_id() {
+  id_ = GOOGLE_LONGLONG(0);
+  clear_has_id();
+}
+inline ::google::protobuf::int64 Division::id() const {
+  return id_;
+}
+inline void Division::set_id(::google::protobuf::int64 value) {
+  set_has_id();
+  id_ = value;
+}
+
+// required string name = 2;
+inline bool Division::has_name() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void Division::set_has_name() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void Division::clear_has_name() {
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void Division::clear_name() {
   if (name_ != &::google::protobuf::internal::kEmptyString) {
@@ -3136,26 +3269,188 @@ inline void Division::set_allocated_name(::std::string* name) {
   }
 }
 
-// required int64 points = 2;
-inline bool Division::has_points() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+// required double promotion_threshold = 3;
+inline bool Division::has_promotion_threshold() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void Division::set_has_points() {
-  _has_bits_[0] |= 0x00000002u;
+inline void Division::set_has_promotion_threshold() {
+  _has_bits_[0] |= 0x00000004u;
 }
-inline void Division::clear_has_points() {
-  _has_bits_[0] &= ~0x00000002u;
+inline void Division::clear_has_promotion_threshold() {
+  _has_bits_[0] &= ~0x00000004u;
 }
-inline void Division::clear_points() {
-  points_ = GOOGLE_LONGLONG(0);
-  clear_has_points();
+inline void Division::clear_promotion_threshold() {
+  promotion_threshold_ = 0;
+  clear_has_promotion_threshold();
 }
-inline ::google::protobuf::int64 Division::points() const {
-  return points_;
+inline double Division::promotion_threshold() const {
+  return promotion_threshold_;
 }
-inline void Division::set_points(::google::protobuf::int64 value) {
-  set_has_points();
-  points_ = value;
+inline void Division::set_promotion_threshold(double value) {
+  set_has_promotion_threshold();
+  promotion_threshold_ = value;
+}
+
+// required double demotion_threshold = 4;
+inline bool Division::has_demotion_threshold() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void Division::set_has_demotion_threshold() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void Division::clear_has_demotion_threshold() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void Division::clear_demotion_threshold() {
+  demotion_threshold_ = 0;
+  clear_has_demotion_threshold();
+}
+inline double Division::demotion_threshold() const {
+  return demotion_threshold_;
+}
+inline void Division::set_demotion_threshold(double value) {
+  set_has_demotion_threshold();
+  demotion_threshold_ = value;
+}
+
+// required string icon_url = 5;
+inline bool Division::has_icon_url() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void Division::set_has_icon_url() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void Division::clear_has_icon_url() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void Division::clear_icon_url() {
+  if (icon_url_ != &::google::protobuf::internal::kEmptyString) {
+    icon_url_->clear();
+  }
+  clear_has_icon_url();
+}
+inline const ::std::string& Division::icon_url() const {
+  return *icon_url_;
+}
+inline void Division::set_icon_url(const ::std::string& value) {
+  set_has_icon_url();
+  if (icon_url_ == &::google::protobuf::internal::kEmptyString) {
+    icon_url_ = new ::std::string;
+  }
+  icon_url_->assign(value);
+}
+inline void Division::set_icon_url(const char* value) {
+  set_has_icon_url();
+  if (icon_url_ == &::google::protobuf::internal::kEmptyString) {
+    icon_url_ = new ::std::string;
+  }
+  icon_url_->assign(value);
+}
+inline void Division::set_icon_url(const char* value, size_t size) {
+  set_has_icon_url();
+  if (icon_url_ == &::google::protobuf::internal::kEmptyString) {
+    icon_url_ = new ::std::string;
+  }
+  icon_url_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Division::mutable_icon_url() {
+  set_has_icon_url();
+  if (icon_url_ == &::google::protobuf::internal::kEmptyString) {
+    icon_url_ = new ::std::string;
+  }
+  return icon_url_;
+}
+inline ::std::string* Division::release_icon_url() {
+  clear_has_icon_url();
+  if (icon_url_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = icon_url_;
+    icon_url_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void Division::set_allocated_icon_url(::std::string* icon_url) {
+  if (icon_url_ != &::google::protobuf::internal::kEmptyString) {
+    delete icon_url_;
+  }
+  if (icon_url) {
+    set_has_icon_url();
+    icon_url_ = icon_url;
+  } else {
+    clear_has_icon_url();
+    icon_url_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required string small_icon_url = 6;
+inline bool Division::has_small_icon_url() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void Division::set_has_small_icon_url() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void Division::clear_has_small_icon_url() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void Division::clear_small_icon_url() {
+  if (small_icon_url_ != &::google::protobuf::internal::kEmptyString) {
+    small_icon_url_->clear();
+  }
+  clear_has_small_icon_url();
+}
+inline const ::std::string& Division::small_icon_url() const {
+  return *small_icon_url_;
+}
+inline void Division::set_small_icon_url(const ::std::string& value) {
+  set_has_small_icon_url();
+  if (small_icon_url_ == &::google::protobuf::internal::kEmptyString) {
+    small_icon_url_ = new ::std::string;
+  }
+  small_icon_url_->assign(value);
+}
+inline void Division::set_small_icon_url(const char* value) {
+  set_has_small_icon_url();
+  if (small_icon_url_ == &::google::protobuf::internal::kEmptyString) {
+    small_icon_url_ = new ::std::string;
+  }
+  small_icon_url_->assign(value);
+}
+inline void Division::set_small_icon_url(const char* value, size_t size) {
+  set_has_small_icon_url();
+  if (small_icon_url_ == &::google::protobuf::internal::kEmptyString) {
+    small_icon_url_ = new ::std::string;
+  }
+  small_icon_url_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Division::mutable_small_icon_url() {
+  set_has_small_icon_url();
+  if (small_icon_url_ == &::google::protobuf::internal::kEmptyString) {
+    small_icon_url_ = new ::std::string;
+  }
+  return small_icon_url_;
+}
+inline ::std::string* Division::release_small_icon_url() {
+  clear_has_small_icon_url();
+  if (small_icon_url_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = small_icon_url_;
+    small_icon_url_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void Division::set_allocated_small_icon_url(::std::string* small_icon_url) {
+  if (small_icon_url_ != &::google::protobuf::internal::kEmptyString) {
+    delete small_icon_url_;
+  }
+  if (small_icon_url) {
+    set_has_small_icon_url();
+    small_icon_url_ = small_icon_url;
+  } else {
+    clear_has_small_icon_url();
+    small_icon_url_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // -------------------------------------------------------------------
@@ -3519,6 +3814,72 @@ inline void UserRegionStats::set_walkovers(::google::protobuf::int64 value) {
   walkovers_ = value;
 }
 
+// required double mmr = 7;
+inline bool UserRegionStats::has_mmr() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void UserRegionStats::set_has_mmr() {
+  _has_bits_[0] |= 0x00000040u;
+}
+inline void UserRegionStats::clear_has_mmr() {
+  _has_bits_[0] &= ~0x00000040u;
+}
+inline void UserRegionStats::clear_mmr() {
+  mmr_ = 0;
+  clear_has_mmr();
+}
+inline double UserRegionStats::mmr() const {
+  return mmr_;
+}
+inline void UserRegionStats::set_mmr(double value) {
+  set_has_mmr();
+  mmr_ = value;
+}
+
+// required int64 placements_remaining = 8;
+inline bool UserRegionStats::has_placements_remaining() const {
+  return (_has_bits_[0] & 0x00000080u) != 0;
+}
+inline void UserRegionStats::set_has_placements_remaining() {
+  _has_bits_[0] |= 0x00000080u;
+}
+inline void UserRegionStats::clear_has_placements_remaining() {
+  _has_bits_[0] &= ~0x00000080u;
+}
+inline void UserRegionStats::clear_placements_remaining() {
+  placements_remaining_ = GOOGLE_LONGLONG(0);
+  clear_has_placements_remaining();
+}
+inline ::google::protobuf::int64 UserRegionStats::placements_remaining() const {
+  return placements_remaining_;
+}
+inline void UserRegionStats::set_placements_remaining(::google::protobuf::int64 value) {
+  set_has_placements_remaining();
+  placements_remaining_ = value;
+}
+
+// required int64 division = 9;
+inline bool UserRegionStats::has_division() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+inline void UserRegionStats::set_has_division() {
+  _has_bits_[0] |= 0x00000100u;
+}
+inline void UserRegionStats::clear_has_division() {
+  _has_bits_[0] &= ~0x00000100u;
+}
+inline void UserRegionStats::clear_division() {
+  division_ = GOOGLE_LONGLONG(0);
+  clear_has_division();
+}
+inline ::google::protobuf::int64 UserRegionStats::division() const {
+  return division_;
+}
+inline void UserRegionStats::set_division(::google::protobuf::int64 value) {
+  set_has_division();
+  division_ = value;
+}
+
 // -------------------------------------------------------------------
 
 // UserStats
@@ -3795,6 +4156,72 @@ inline ::google::protobuf::int64 UserStats::id() const {
 inline void UserStats::set_id(::google::protobuf::int64 value) {
   set_has_id();
   id_ = value;
+}
+
+// required double mmr = 11;
+inline bool UserStats::has_mmr() const {
+  return (_has_bits_[0] & 0x00000400u) != 0;
+}
+inline void UserStats::set_has_mmr() {
+  _has_bits_[0] |= 0x00000400u;
+}
+inline void UserStats::clear_has_mmr() {
+  _has_bits_[0] &= ~0x00000400u;
+}
+inline void UserStats::clear_mmr() {
+  mmr_ = 0;
+  clear_has_mmr();
+}
+inline double UserStats::mmr() const {
+  return mmr_;
+}
+inline void UserStats::set_mmr(double value) {
+  set_has_mmr();
+  mmr_ = value;
+}
+
+// required int64 placements_remaining = 12;
+inline bool UserStats::has_placements_remaining() const {
+  return (_has_bits_[0] & 0x00000800u) != 0;
+}
+inline void UserStats::set_has_placements_remaining() {
+  _has_bits_[0] |= 0x00000800u;
+}
+inline void UserStats::clear_has_placements_remaining() {
+  _has_bits_[0] &= ~0x00000800u;
+}
+inline void UserStats::clear_placements_remaining() {
+  placements_remaining_ = GOOGLE_LONGLONG(0);
+  clear_has_placements_remaining();
+}
+inline ::google::protobuf::int64 UserStats::placements_remaining() const {
+  return placements_remaining_;
+}
+inline void UserStats::set_placements_remaining(::google::protobuf::int64 value) {
+  set_has_placements_remaining();
+  placements_remaining_ = value;
+}
+
+// required int64 division = 13;
+inline bool UserStats::has_division() const {
+  return (_has_bits_[0] & 0x00001000u) != 0;
+}
+inline void UserStats::set_has_division() {
+  _has_bits_[0] |= 0x00001000u;
+}
+inline void UserStats::clear_has_division() {
+  _has_bits_[0] &= ~0x00001000u;
+}
+inline void UserStats::clear_division() {
+  division_ = GOOGLE_LONGLONG(0);
+  clear_has_division();
+}
+inline ::google::protobuf::int64 UserStats::division() const {
+  return division_;
+}
+inline void UserStats::set_division(::google::protobuf::int64 value) {
+  set_has_division();
+  division_ = value;
 }
 
 // -------------------------------------------------------------------
@@ -4245,27 +4672,31 @@ inline void SimulationResult::set_match_quality(double value) {
 
 // MatchmakingQueue
 
-// required .protobufs.Region region = 1;
-inline bool MatchmakingQueue::has_region() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void MatchmakingQueue::set_has_region() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void MatchmakingQueue::clear_has_region() {
-  _has_bits_[0] &= ~0x00000001u;
+// repeated .protobufs.Region region = 1;
+inline int MatchmakingQueue::region_size() const {
+  return region_.size();
 }
 inline void MatchmakingQueue::clear_region() {
-  region_ = 1;
-  clear_has_region();
+  region_.Clear();
 }
-inline ::protobufs::Region MatchmakingQueue::region() const {
-  return static_cast< ::protobufs::Region >(region_);
+inline ::protobufs::Region MatchmakingQueue::region(int index) const {
+  return static_cast< ::protobufs::Region >(region_.Get(index));
 }
-inline void MatchmakingQueue::set_region(::protobufs::Region value) {
+inline void MatchmakingQueue::set_region(int index, ::protobufs::Region value) {
   assert(::protobufs::Region_IsValid(value));
-  set_has_region();
-  region_ = value;
+  region_.Set(index, value);
+}
+inline void MatchmakingQueue::add_region(::protobufs::Region value) {
+  assert(::protobufs::Region_IsValid(value));
+  region_.Add(value);
+}
+inline const ::google::protobuf::RepeatedField<int>&
+MatchmakingQueue::region() const {
+  return region_;
+}
+inline ::google::protobuf::RepeatedField<int>*
+MatchmakingQueue::mutable_region() {
+  return &region_;
 }
 
 // required int64 radius = 2;

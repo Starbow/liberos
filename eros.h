@@ -15,7 +15,7 @@
 #include "character.h"
 #include "chatroom.h"
 #include "matchmakingmatch.h"
-#include "divisions.h"
+#include "division.h"
 #include "map.h"
 
 
@@ -62,7 +62,7 @@ public:
 	int activeUserCount() const;
 
 	
-	const Divisions *divisions() const;
+	const QMap<int, Division*> &divisions() const;
 	const MatchmakingMatch *matchmakingMatch() const;
 
 	LocalUser *localUser();
@@ -89,6 +89,7 @@ public slots:
 
 	// Matchmaking slots
 	void queueMatchmaking(ErosRegion region, int search_radius);
+	void queueMatchmaking(ErosRegionList regions, int search_radius);
 	void dequeueMatchmaking();
 	void forfeitMatchmaking();
 
@@ -129,7 +130,7 @@ private:
 	QTcpSocket *socket_;
 	LocalUser *local_user_;
 	MatchmakingMatch *matchmaking_match_;
-	Divisions *divisions_;
+	QMap<int, Division*> divisions_;
 
 	ErosError last_error_;
 	QAtomicInt transaction_id_base_;

@@ -3,11 +3,15 @@
 #include "../matchmakingmatch.h"
 
 
-MatchmakingQueueRequest::MatchmakingQueueRequest(Eros *parent, ErosRegion region, int search_radius)
+MatchmakingQueueRequest::MatchmakingQueueRequest(Eros *parent, QList<ErosRegion> &regions, int search_radius)
 	: Request(parent, "MMQ")
 {
 	protobufs::MatchmakingQueue queue;
-	queue.set_region((protobufs::Region)region);
+	for (int i = 0; i < regions.length(); i++) 
+	{
+		queue.add_region((protobufs::Region)regions[i]);
+	}
+	
 	queue.set_radius(search_radius);
 	
 	this->data_ = serializeMessageToBuffer(&queue);

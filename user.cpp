@@ -10,6 +10,8 @@ User::User(Eros *parent, const QString &username)
 	this->id_ = 0;
 	this->first_update_ = true;
 	this->ladder_stats_global_ = nullptr;
+	this->division_ = nullptr;
+
 	this->state_ = ErosUserState::Unknown;
 }
 
@@ -55,23 +57,28 @@ const QList<Map*> &User::vetoes() const
 	return this->vetoes_;
 }
 
+Division *User::division() const
+{
+	return this->division_;
+}
+
 qint64 User::id() const
 {
 	return this->id_;
 }
 
-void User::update(const protobufs::UserStats &stats, const QList<Map*> &map_pool)
+void User::update(const protobufs::UserStats &stats, const QList<Map*> &map_pool, const QMap<int, Division*> &divisions)
 {
 	this->state_ = ErosUserState::Known;
 	this->username_ = QString::fromStdString(stats.username());
 	this->id_ = stats.id();
-	this->ladder_stats_global_ = new UserLadderStats(this, stats.wins(), stats.losses(), stats.forfeits(), stats.walkovers(), stats.points());
+	this->ladder_stats_global_ = new UserLadderStats(this, stats.wins(), stats.losses(), stats.forfeits(), stats.walkovers(), stats.points(), stats.mmr() * 100, stats.placements_remaining(), divisions[stats.division()]);
+	this->division_ = this->ladder_stats_global_->division();
 	this->search_radius_ = stats.search_radius();
-	
 	for (int i = 0; i < stats.region_size(); i++)
 	{
 		const protobufs::UserRegionStats &region = stats.region(i);
-		this->ladder_stats_[(ErosRegion)region.region()] = new UserLadderStats(this, region.wins(), region.losses(), region.forfeits(), region.walkovers(), region.points());
+		this->ladder_stats_[(ErosRegion)region.region()] = new UserLadderStats(this, region.wins(), region.losses(), region.forfeits(), region.walkovers(), region.points(), region.mmr() * 100, region.placements_remaining(), divisions[region.division()]);
 	}
 
 	this->vetoes_.clear();
@@ -101,7 +108,7 @@ void User::update(const protobufs::UserStats &stats, const QList<Map*> &map_pool
 
 void User::update(const protobufs::UserStats &stats)
 {
-	update(stats, eros_->mapPool());
+	update(stats, eros_->mapPool(), eros_->divisions());
 }
 
 void User::update(const protobufs::MapPool &vetoes, const QList<Map*> &map_pool)

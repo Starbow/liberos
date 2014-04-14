@@ -17,8 +17,10 @@ MatchmakingMatch::MatchmakingMatch(Eros *parent, const protobufs::MatchmakingRes
 	const protobufs::Map &map = result.map();
 	this->map_name_ = QString::fromStdString(map.battle_net_name());
 	this->map_id_ = map.battle_net_id();
+	this->region_ = (ErosRegion)map.region();
 	this->long_process_unlock_time_ = result.long_unlock_time();
 	this->long_process_response_time_ = result.long_response_time();
+	
 }
 
 MatchmakingMatch::~MatchmakingMatch()
@@ -64,4 +66,9 @@ const QString &MatchmakingMatch::mapName() const
 int MatchmakingMatch::mapId() const
 {
 	return this->map_id_;
+}
+
+ErosRegion MatchmakingMatch::region() const
+{
+	return this->region_;
 }
