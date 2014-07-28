@@ -8,7 +8,7 @@ CONFIG += staticlib c++11
 
 SOURCES += character.cpp\
            chatroom.cpp\
-           divisions.cpp\
+           division.cpp\
            eros.cpp\
            eros.pb.cc\
            localuser.cpp\
@@ -37,7 +37,7 @@ SOURCES += character.cpp\
 
 HEADERS += character.h\
            chatroom.h\
-           divisions.h\
+           division.h\
            enums.h\
            eros.h\
            eros.pb.h\
