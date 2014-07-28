@@ -656,6 +656,13 @@ class UserRegionStats : public ::google::protobuf::Message {
   inline ::google::protobuf::int64 division() const;
   inline void set_division(::google::protobuf::int64 value);
 
+  // required int64 division_rank = 10;
+  inline bool has_division_rank() const;
+  inline void clear_division_rank();
+  static const int kDivisionRankFieldNumber = 10;
+  inline ::google::protobuf::int64 division_rank() const;
+  inline void set_division_rank(::google::protobuf::int64 value);
+
   // @@protoc_insertion_point(class_scope:protobufs.UserRegionStats)
  private:
   inline void set_has_region();
@@ -676,6 +683,8 @@ class UserRegionStats : public ::google::protobuf::Message {
   inline void clear_has_placements_remaining();
   inline void set_has_division();
   inline void clear_has_division();
+  inline void set_has_division_rank();
+  inline void clear_has_division_rank();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -687,10 +696,11 @@ class UserRegionStats : public ::google::protobuf::Message {
   double mmr_;
   ::google::protobuf::int64 placements_remaining_;
   ::google::protobuf::int64 division_;
+  ::google::protobuf::int64 division_rank_;
   int region_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(9 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(10 + 31) / 32];
 
   friend void  protobuf_AddDesc_eros_2eproto();
   friend void protobuf_AssignDesc_eros_2eproto();
@@ -861,6 +871,13 @@ class UserStats : public ::google::protobuf::Message {
   inline ::google::protobuf::int64 division() const;
   inline void set_division(::google::protobuf::int64 value);
 
+  // required int64 division_rank = 14;
+  inline bool has_division_rank() const;
+  inline void clear_division_rank();
+  static const int kDivisionRankFieldNumber = 14;
+  inline ::google::protobuf::int64 division_rank() const;
+  inline void set_division_rank(::google::protobuf::int64 value);
+
   // @@protoc_insertion_point(class_scope:protobufs.UserStats)
  private:
   inline void set_has_username();
@@ -885,6 +902,8 @@ class UserStats : public ::google::protobuf::Message {
   inline void clear_has_placements_remaining();
   inline void set_has_division();
   inline void clear_has_division();
+  inline void set_has_division_rank();
+  inline void clear_has_division_rank();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -901,9 +920,10 @@ class UserStats : public ::google::protobuf::Message {
   double mmr_;
   ::google::protobuf::int64 placements_remaining_;
   ::google::protobuf::int64 division_;
+  ::google::protobuf::int64 division_rank_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(13 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(14 + 31) / 32];
 
   friend void  protobuf_AddDesc_eros_2eproto();
   friend void protobuf_AssignDesc_eros_2eproto();
@@ -3880,6 +3900,28 @@ inline void UserRegionStats::set_division(::google::protobuf::int64 value) {
   division_ = value;
 }
 
+// required int64 division_rank = 10;
+inline bool UserRegionStats::has_division_rank() const {
+  return (_has_bits_[0] & 0x00000200u) != 0;
+}
+inline void UserRegionStats::set_has_division_rank() {
+  _has_bits_[0] |= 0x00000200u;
+}
+inline void UserRegionStats::clear_has_division_rank() {
+  _has_bits_[0] &= ~0x00000200u;
+}
+inline void UserRegionStats::clear_division_rank() {
+  division_rank_ = GOOGLE_LONGLONG(0);
+  clear_has_division_rank();
+}
+inline ::google::protobuf::int64 UserRegionStats::division_rank() const {
+  return division_rank_;
+}
+inline void UserRegionStats::set_division_rank(::google::protobuf::int64 value) {
+  set_has_division_rank();
+  division_rank_ = value;
+}
+
 // -------------------------------------------------------------------
 
 // UserStats
@@ -4222,6 +4264,28 @@ inline ::google::protobuf::int64 UserStats::division() const {
 inline void UserStats::set_division(::google::protobuf::int64 value) {
   set_has_division();
   division_ = value;
+}
+
+// required int64 division_rank = 14;
+inline bool UserStats::has_division_rank() const {
+  return (_has_bits_[0] & 0x00002000u) != 0;
+}
+inline void UserStats::set_has_division_rank() {
+  _has_bits_[0] |= 0x00002000u;
+}
+inline void UserStats::clear_has_division_rank() {
+  _has_bits_[0] &= ~0x00002000u;
+}
+inline void UserStats::clear_division_rank() {
+  division_rank_ = GOOGLE_LONGLONG(0);
+  clear_has_division_rank();
+}
+inline ::google::protobuf::int64 UserStats::division_rank() const {
+  return division_rank_;
+}
+inline void UserStats::set_division_rank(::google::protobuf::int64 value) {
+  set_has_division_rank();
+  division_rank_ = value;
 }
 
 // -------------------------------------------------------------------

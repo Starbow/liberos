@@ -161,7 +161,7 @@ void protobuf_AssignDesc_eros_2eproto() {
       sizeof(HandshakeResponse));
   HandshakeResponse_HandshakeStatus_descriptor_ = HandshakeResponse_descriptor_->enum_type(0);
   UserRegionStats_descriptor_ = file->message_type(3);
-  static const int UserRegionStats_offsets_[9] = {
+  static const int UserRegionStats_offsets_[10] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserRegionStats, region_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserRegionStats, points_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserRegionStats, wins_),
@@ -171,6 +171,7 @@ void protobuf_AssignDesc_eros_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserRegionStats, mmr_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserRegionStats, placements_remaining_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserRegionStats, division_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserRegionStats, division_rank_),
   };
   UserRegionStats_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -184,7 +185,7 @@ void protobuf_AssignDesc_eros_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(UserRegionStats));
   UserStats_descriptor_ = file->message_type(4);
-  static const int UserStats_offsets_[13] = {
+  static const int UserStats_offsets_[14] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserStats, username_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserStats, search_radius_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserStats, points_),
@@ -198,6 +199,7 @@ void protobuf_AssignDesc_eros_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserStats, mmr_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserStats, placements_remaining_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserStats, division_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserStats, division_rank_),
   };
   UserStats_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -663,71 +665,73 @@ void protobuf_AddDesc_eros_2eproto() {
     "\006 \003(\0162\021.protobufs.Region\022$\n\010map_pool\030\007 \001"
     "(\0132\022.protobufs.MapPool\022\022\n\nmax_vetoes\030\010 \001"
     "(\003\"\?\n\017HandshakeStatus\022\010\n\004FAIL\020\000\022\013\n\007SUCCE"
-    "SS\020\001\022\025\n\021ALREADY_LOGGED_IN\020\002\"\304\001\n\017UserRegi"
+    "SS\020\001\022\025\n\021ALREADY_LOGGED_IN\020\002\"\333\001\n\017UserRegi"
     "onStats\022!\n\006region\030\001 \002(\0162\021.protobufs.Regi"
     "on\022\016\n\006points\030\002 \002(\003\022\014\n\004wins\030\003 \002(\003\022\016\n\006loss"
     "es\030\004 \002(\003\022\020\n\010forfeits\030\005 \002(\003\022\021\n\twalkovers\030"
     "\006 \002(\003\022\013\n\003mmr\030\007 \002(\001\022\034\n\024placements_remaini"
-    "ng\030\010 \002(\003\022\020\n\010division\030\t \002(\003\"\234\002\n\tUserStats"
-    "\022\020\n\010username\030\001 \002(\t\022\025\n\rsearch_radius\030\002 \002("
-    "\003\022\016\n\006points\030\003 \002(\003\022\014\n\004wins\030\004 \002(\003\022\016\n\006losse"
-    "s\030\005 \002(\003\022\020\n\010forfeits\030\006 \002(\003\022\021\n\twalkovers\030\007"
-    " \002(\003\022*\n\006region\030\010 \003(\0132\032.protobufs.UserReg"
-    "ionStats\022\036\n\006vetoes\030\t \003(\0132\016.protobufs.Map"
-    "\022\n\n\002id\030\n \002(\003\022\013\n\003mmr\030\013 \002(\001\022\034\n\024placements_"
-    "remaining\030\014 \002(\003\022\020\n\010division\030\r \002(\003\"&\n\007Map"
-    "Pool\022\033\n\003map\030\001 \003(\0132\016.protobufs.Map\"\224\001\n\003Ma"
-    "p\022!\n\006region\030\001 \002(\0162\021.protobufs.Region\022\027\n\017"
-    "battle_net_name\030\002 \002(\t\022\025\n\rbattle_net_id\030\003"
-    " \002(\005\022\023\n\013description\030\004 \001(\t\022\020\n\010info_url\030\005 "
-    "\001(\t\022\023\n\013preview_url\030\006 \001(\t\"b\n\020SimulationRe"
-    "sult\022&\n\010opponent\030\001 \002(\0132\024.protobufs.UserS"
-    "tats\022\017\n\007victory\030\002 \002(\010\022\025\n\rmatch_quality\030\003"
-    " \002(\001\"E\n\020MatchmakingQueue\022!\n\006region\030\001 \003(\016"
-    "2\021.protobufs.Region\022\016\n\006radius\030\002 \002(\003\"\357\001\n\021"
-    "MatchmakingResult\022\020\n\010timespan\030\001 \002(\003\022\017\n\007q"
-    "uality\030\002 \002(\001\022&\n\010opponent\030\003 \002(\0132\024.protobu"
-    "fs.UserStats\022\030\n\020opponent_latency\030\004 \002(\003\022\017"
-    "\n\007channel\030\005 \002(\t\022\021\n\tchat_room\030\006 \002(\t\022\033\n\003ma"
-    "p\030\007 \002(\0132\016.protobufs.Map\022\030\n\020long_unlock_t"
-    "ime\030\010 \002(\003\022\032\n\022long_response_time\030\t \002(\003\"\250\001"
-    "\n\014ChatRoomInfo\022\013\n\003key\030\001 \002(\t\022\014\n\004name\030\002 \002("
-    "\t\022\022\n\npassworded\030\003 \002(\010\022\020\n\010joinable\030\004 \002(\010\022"
-    "\r\n\005fixed\030\005 \002(\010\022\r\n\005users\030\006 \002(\003\022)\n\013partici"
-    "pant\030\007 \003(\0132\024.protobufs.UserStats\022\016\n\006forc"
-    "ed\030\010 \002(\010\"6\n\rChatRoomIndex\022%\n\004room\030\001 \003(\0132"
-    "\027.protobufs.ChatRoomInfo\">\n\013ChatMessage\022"
-    "\016\n\006sender\030\001 \002(\t\022\016\n\006target\030\002 \002(\t\022\017\n\007messa"
-    "ge\030\003 \002(\t\"o\n\017ChatRoomMessage\022%\n\004room\030\001 \002("
-    "\0132\027.protobufs.ChatRoomInfo\022$\n\006sender\030\002 \002"
-    "(\0132\024.protobufs.UserStats\022\017\n\007message\030\003 \002("
-    "\t\"K\n\022ChatPrivateMessage\022$\n\006sender\030\001 \002(\0132"
-    "\024.protobufs.UserStats\022\017\n\007message\030\002 \002(\t\"Y"
-    "\n\014ChatRoomUser\022%\n\004room\030\001 \002(\0132\027.protobufs"
-    ".ChatRoomInfo\022\"\n\004user\030\002 \002(\0132\024.protobufs."
-    "UserStats\"1\n\017ChatRoomRequest\022\014\n\004room\030\001 \002"
-    "(\t\022\020\n\010password\030\002 \002(\t\"N\n\020MatchmakingStats"
-    "\022!\n\006region\030\001 \002(\0162\021.protobufs.Region\022\027\n\017s"
-    "earching_users\030\002 \002(\003\"i\n\013ServerStats\022\024\n\014a"
-    "ctive_users\030\001 \002(\003\022\027\n\017searching_users\030\002 \002"
-    "(\003\022+\n\006region\030\003 \003(\0132\033.protobufs.Matchmaki"
-    "ngStats\"\351\001\n\tCharacter\022!\n\006region\030\001 \002(\0162\021."
-    "protobufs.Region\022\021\n\tsubregion\030\002 \002(\005\022\022\n\np"
-    "rofile_id\030\003 \002(\005\022\026\n\016character_name\030\004 \002(\t\022"
-    "\026\n\016character_code\030\005 \001(\005\022\024\n\014profile_link\030"
-    "\006 \001(\t\022\033\n\023ingame_profile_link\030\007 \001(\t\022\020\n\010ve"
-    "rified\030\010 \001(\010\022\035\n\025verification_portrait\030\t "
-    "\001(\005\"\306\001\n\020MatchParticipant\022\"\n\004user\030\001 \001(\0132\024"
-    ".protobufs.UserStats\022\'\n\tcharacter\030\002 \001(\0132"
-    "\024.protobufs.Character\022\025\n\rpoints_before\030\003"
-    " \002(\003\022\024\n\014points_after\030\004 \002(\003\022\031\n\021points_dif"
-    "ference\030\005 \002(\003\022\017\n\007victory\030\006 \002(\010\022\014\n\004race\030\007"
-    " \002(\t\"\177\n\013MatchResult\022!\n\006region\030\001 \002(\0162\021.pr"
-    "otobufs.Region\022\033\n\003map\030\002 \002(\0132\016.protobufs."
-    "Map\0220\n\013participant\030\003 \003(\0132\033.protobufs.Mat"
-    "chParticipant\"5\n\016BroadcastAlert\022\017\n\007messa"
-    "ge\030\002 \002(\t\022\022\n\npredefined\030\001 \002(\005*1\n\006Region\022\006"
-    "\n\002NA\020\001\022\006\n\002EU\020\002\022\006\n\002KR\020\003\022\006\n\002CN\020\005\022\007\n\003SEA\020\006", 3159);
+    "ng\030\010 \002(\003\022\020\n\010division\030\t \002(\003\022\025\n\rdivision_r"
+    "ank\030\n \002(\003\"\263\002\n\tUserStats\022\020\n\010username\030\001 \002("
+    "\t\022\025\n\rsearch_radius\030\002 \002(\003\022\016\n\006points\030\003 \002(\003"
+    "\022\014\n\004wins\030\004 \002(\003\022\016\n\006losses\030\005 \002(\003\022\020\n\010forfei"
+    "ts\030\006 \002(\003\022\021\n\twalkovers\030\007 \002(\003\022*\n\006region\030\010 "
+    "\003(\0132\032.protobufs.UserRegionStats\022\036\n\006vetoe"
+    "s\030\t \003(\0132\016.protobufs.Map\022\n\n\002id\030\n \002(\003\022\013\n\003m"
+    "mr\030\013 \002(\001\022\034\n\024placements_remaining\030\014 \002(\003\022\020"
+    "\n\010division\030\r \002(\003\022\025\n\rdivision_rank\030\016 \002(\003\""
+    "&\n\007MapPool\022\033\n\003map\030\001 \003(\0132\016.protobufs.Map\""
+    "\224\001\n\003Map\022!\n\006region\030\001 \002(\0162\021.protobufs.Regi"
+    "on\022\027\n\017battle_net_name\030\002 \002(\t\022\025\n\rbattle_ne"
+    "t_id\030\003 \002(\005\022\023\n\013description\030\004 \001(\t\022\020\n\010info_"
+    "url\030\005 \001(\t\022\023\n\013preview_url\030\006 \001(\t\"b\n\020Simula"
+    "tionResult\022&\n\010opponent\030\001 \002(\0132\024.protobufs"
+    ".UserStats\022\017\n\007victory\030\002 \002(\010\022\025\n\rmatch_qua"
+    "lity\030\003 \002(\001\"E\n\020MatchmakingQueue\022!\n\006region"
+    "\030\001 \003(\0162\021.protobufs.Region\022\016\n\006radius\030\002 \002("
+    "\003\"\357\001\n\021MatchmakingResult\022\020\n\010timespan\030\001 \002("
+    "\003\022\017\n\007quality\030\002 \002(\001\022&\n\010opponent\030\003 \002(\0132\024.p"
+    "rotobufs.UserStats\022\030\n\020opponent_latency\030\004"
+    " \002(\003\022\017\n\007channel\030\005 \002(\t\022\021\n\tchat_room\030\006 \002(\t"
+    "\022\033\n\003map\030\007 \002(\0132\016.protobufs.Map\022\030\n\020long_un"
+    "lock_time\030\010 \002(\003\022\032\n\022long_response_time\030\t "
+    "\002(\003\"\250\001\n\014ChatRoomInfo\022\013\n\003key\030\001 \002(\t\022\014\n\004nam"
+    "e\030\002 \002(\t\022\022\n\npassworded\030\003 \002(\010\022\020\n\010joinable\030"
+    "\004 \002(\010\022\r\n\005fixed\030\005 \002(\010\022\r\n\005users\030\006 \002(\003\022)\n\013p"
+    "articipant\030\007 \003(\0132\024.protobufs.UserStats\022\016"
+    "\n\006forced\030\010 \002(\010\"6\n\rChatRoomIndex\022%\n\004room\030"
+    "\001 \003(\0132\027.protobufs.ChatRoomInfo\">\n\013ChatMe"
+    "ssage\022\016\n\006sender\030\001 \002(\t\022\016\n\006target\030\002 \002(\t\022\017\n"
+    "\007message\030\003 \002(\t\"o\n\017ChatRoomMessage\022%\n\004roo"
+    "m\030\001 \002(\0132\027.protobufs.ChatRoomInfo\022$\n\006send"
+    "er\030\002 \002(\0132\024.protobufs.UserStats\022\017\n\007messag"
+    "e\030\003 \002(\t\"K\n\022ChatPrivateMessage\022$\n\006sender\030"
+    "\001 \002(\0132\024.protobufs.UserStats\022\017\n\007message\030\002"
+    " \002(\t\"Y\n\014ChatRoomUser\022%\n\004room\030\001 \002(\0132\027.pro"
+    "tobufs.ChatRoomInfo\022\"\n\004user\030\002 \002(\0132\024.prot"
+    "obufs.UserStats\"1\n\017ChatRoomRequest\022\014\n\004ro"
+    "om\030\001 \002(\t\022\020\n\010password\030\002 \002(\t\"N\n\020Matchmakin"
+    "gStats\022!\n\006region\030\001 \002(\0162\021.protobufs.Regio"
+    "n\022\027\n\017searching_users\030\002 \002(\003\"i\n\013ServerStat"
+    "s\022\024\n\014active_users\030\001 \002(\003\022\027\n\017searching_use"
+    "rs\030\002 \002(\003\022+\n\006region\030\003 \003(\0132\033.protobufs.Mat"
+    "chmakingStats\"\351\001\n\tCharacter\022!\n\006region\030\001 "
+    "\002(\0162\021.protobufs.Region\022\021\n\tsubregion\030\002 \002("
+    "\005\022\022\n\nprofile_id\030\003 \002(\005\022\026\n\016character_name\030"
+    "\004 \002(\t\022\026\n\016character_code\030\005 \001(\005\022\024\n\014profile"
+    "_link\030\006 \001(\t\022\033\n\023ingame_profile_link\030\007 \001(\t"
+    "\022\020\n\010verified\030\010 \001(\010\022\035\n\025verification_portr"
+    "ait\030\t \001(\005\"\306\001\n\020MatchParticipant\022\"\n\004user\030\001"
+    " \001(\0132\024.protobufs.UserStats\022\'\n\tcharacter\030"
+    "\002 \001(\0132\024.protobufs.Character\022\025\n\rpoints_be"
+    "fore\030\003 \002(\003\022\024\n\014points_after\030\004 \002(\003\022\031\n\021poin"
+    "ts_difference\030\005 \002(\003\022\017\n\007victory\030\006 \002(\010\022\014\n\004"
+    "race\030\007 \002(\t\"\177\n\013MatchResult\022!\n\006region\030\001 \002("
+    "\0162\021.protobufs.Region\022\033\n\003map\030\002 \002(\0132\016.prot"
+    "obufs.Map\0220\n\013participant\030\003 \003(\0132\033.protobu"
+    "fs.MatchParticipant\"5\n\016BroadcastAlert\022\017\n"
+    "\007message\030\002 \002(\t\022\022\n\npredefined\030\001 \002(\005*1\n\006Re"
+    "gion\022\006\n\002NA\020\001\022\006\n\002EU\020\002\022\006\n\002KR\020\003\022\006\n\002CN\020\005\022\007\n\003"
+    "SEA\020\006", 3205);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "eros.proto", &protobuf_RegisterTypes);
   Handshake::default_instance_ = new Handshake();
@@ -2108,6 +2112,7 @@ const int UserRegionStats::kWalkoversFieldNumber;
 const int UserRegionStats::kMmrFieldNumber;
 const int UserRegionStats::kPlacementsRemainingFieldNumber;
 const int UserRegionStats::kDivisionFieldNumber;
+const int UserRegionStats::kDivisionRankFieldNumber;
 #endif  // !_MSC_VER
 
 UserRegionStats::UserRegionStats()
@@ -2135,6 +2140,7 @@ void UserRegionStats::SharedCtor() {
   mmr_ = 0;
   placements_remaining_ = GOOGLE_LONGLONG(0);
   division_ = GOOGLE_LONGLONG(0);
+  division_rank_ = GOOGLE_LONGLONG(0);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -2181,6 +2187,7 @@ void UserRegionStats::Clear() {
   }
   if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     division_ = GOOGLE_LONGLONG(0);
+    division_rank_ = GOOGLE_LONGLONG(0);
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -2336,6 +2343,22 @@ bool UserRegionStats::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(80)) goto parse_division_rank;
+        break;
+      }
+
+      // required int64 division_rank = 10;
+      case 10: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_division_rank:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &division_rank_)));
+          set_has_division_rank();
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -2404,6 +2427,11 @@ void UserRegionStats::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt64(9, this->division(), output);
   }
 
+  // required int64 division_rank = 10;
+  if (has_division_rank()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(10, this->division_rank(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -2456,6 +2484,11 @@ void UserRegionStats::SerializeWithCachedSizes(
   // required int64 division = 9;
   if (has_division()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(9, this->division(), target);
+  }
+
+  // required int64 division_rank = 10;
+  if (has_division_rank()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(10, this->division_rank(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -2531,6 +2564,13 @@ int UserRegionStats::ByteSize() const {
           this->division());
     }
 
+    // required int64 division_rank = 10;
+    if (has_division_rank()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int64Size(
+          this->division_rank());
+    }
+
   }
   if (!unknown_fields().empty()) {
     total_size +=
@@ -2587,6 +2627,9 @@ void UserRegionStats::MergeFrom(const UserRegionStats& from) {
     if (from.has_division()) {
       set_division(from.division());
     }
+    if (from.has_division_rank()) {
+      set_division_rank(from.division_rank());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -2604,7 +2647,7 @@ void UserRegionStats::CopyFrom(const UserRegionStats& from) {
 }
 
 bool UserRegionStats::IsInitialized() const {
-  if ((_has_bits_[0] & 0x000001ff) != 0x000001ff) return false;
+  if ((_has_bits_[0] & 0x000003ff) != 0x000003ff) return false;
 
   return true;
 }
@@ -2620,6 +2663,7 @@ void UserRegionStats::Swap(UserRegionStats* other) {
     std::swap(mmr_, other->mmr_);
     std::swap(placements_remaining_, other->placements_remaining_);
     std::swap(division_, other->division_);
+    std::swap(division_rank_, other->division_rank_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -2651,6 +2695,7 @@ const int UserStats::kIdFieldNumber;
 const int UserStats::kMmrFieldNumber;
 const int UserStats::kPlacementsRemainingFieldNumber;
 const int UserStats::kDivisionFieldNumber;
+const int UserStats::kDivisionRankFieldNumber;
 #endif  // !_MSC_VER
 
 UserStats::UserStats()
@@ -2680,6 +2725,7 @@ void UserStats::SharedCtor() {
   mmr_ = 0;
   placements_remaining_ = GOOGLE_LONGLONG(0);
   division_ = GOOGLE_LONGLONG(0);
+  division_rank_ = GOOGLE_LONGLONG(0);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -2735,6 +2781,7 @@ void UserStats::Clear() {
     mmr_ = 0;
     placements_remaining_ = GOOGLE_LONGLONG(0);
     division_ = GOOGLE_LONGLONG(0);
+    division_rank_ = GOOGLE_LONGLONG(0);
   }
   region_.Clear();
   vetoes_.Clear();
@@ -2950,6 +2997,22 @@ bool UserStats::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(112)) goto parse_division_rank;
+        break;
+      }
+
+      // required int64 division_rank = 14;
+      case 14: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_division_rank:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &division_rank_)));
+          set_has_division_rank();
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -3043,6 +3106,11 @@ void UserStats::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt64(13, this->division(), output);
   }
 
+  // required int64 division_rank = 14;
+  if (has_division_rank()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(14, this->division_rank(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -3123,6 +3191,11 @@ void UserStats::SerializeWithCachedSizes(
   // required int64 division = 13;
   if (has_division()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(13, this->division(), target);
+  }
+
+  // required int64 division_rank = 14;
+  if (has_division_rank()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(14, this->division_rank(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -3213,6 +3286,13 @@ int UserStats::ByteSize() const {
           this->division());
     }
 
+    // required int64 division_rank = 14;
+    if (has_division_rank()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int64Size(
+          this->division_rank());
+    }
+
   }
   // repeated .protobufs.UserRegionStats region = 8;
   total_size += 1 * this->region_size();
@@ -3293,6 +3373,9 @@ void UserStats::MergeFrom(const UserStats& from) {
     if (from.has_division()) {
       set_division(from.division());
     }
+    if (from.has_division_rank()) {
+      set_division_rank(from.division_rank());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -3310,7 +3393,7 @@ void UserStats::CopyFrom(const UserStats& from) {
 }
 
 bool UserStats::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00001e7f) != 0x00001e7f) return false;
+  if ((_has_bits_[0] & 0x00003e7f) != 0x00003e7f) return false;
 
   for (int i = 0; i < region_size(); i++) {
     if (!this->region(i).IsInitialized()) return false;
@@ -3336,6 +3419,7 @@ void UserStats::Swap(UserStats* other) {
     std::swap(mmr_, other->mmr_);
     std::swap(placements_remaining_, other->placements_remaining_);
     std::swap(division_, other->division_);
+    std::swap(division_rank_, other->division_rank_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
