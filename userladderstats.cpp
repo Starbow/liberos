@@ -1,6 +1,6 @@
 #include "userladderstats.h"
 
-UserLadderStats::UserLadderStats(QObject *parent, int wins, int losses, int forfeits, int walkovers, int points, int rating, int placements, Division *division)
+UserLadderStats::UserLadderStats(QObject *parent, int wins, int losses, int forfeits, int walkovers, int points, int rating, int placements, Division *division, int division_rank)
 	: QObject(parent)
 {
 	this->wins_ = wins;
@@ -11,6 +11,7 @@ UserLadderStats::UserLadderStats(QObject *parent, int wins, int losses, int forf
 	this->rating_ = rating;
 	this->placements_ = placements;
 	this->division_ = division;
+    this->division_rank_ = division_rank;
 }
 
 UserLadderStats::~UserLadderStats()
@@ -49,4 +50,8 @@ int UserLadderStats::placements() const
 Division * UserLadderStats::division() const
 {
 	return this->division_;
+}
+int UserLadderStats::divisionRank() const
+{
+    return this->division_rank_;
 }

@@ -41,6 +41,7 @@ public:
 	const UserLadderStats *ladderStatsGlobal() const;
 	const QList<Map*> &vetoes() const;
 	Division *division() const;
+    int divisionRank() const;
 
 signals:
 	void updated(User* user);
@@ -58,7 +59,7 @@ protected:
 	QMap<ErosRegion, UserLadderStats*> ladder_stats_;
 	QList<Map*> vetoes_;
 	Division *division_;
-
+    int division_rank_;
 	ErosUserState state_;
 };
 

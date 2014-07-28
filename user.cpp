@@ -72,13 +72,13 @@ void User::update(const protobufs::UserStats &stats, const QList<Map*> &map_pool
 	this->state_ = ErosUserState::Known;
 	this->username_ = QString::fromStdString(stats.username());
 	this->id_ = stats.id();
-	this->ladder_stats_global_ = new UserLadderStats(this, stats.wins(), stats.losses(), stats.forfeits(), stats.walkovers(), stats.points(), stats.mmr() * 100, stats.placements_remaining(), divisions[stats.division()]);
+    this->ladder_stats_global_ = new UserLadderStats(this, stats.wins(), stats.losses(), stats.forfeits(), stats.walkovers(), stats.points(), stats.mmr() * 100, stats.placements_remaining(), divisions[stats.division()], stats.division_rank());
 	this->division_ = this->ladder_stats_global_->division();
 	this->search_radius_ = stats.search_radius();
 	for (int i = 0; i < stats.region_size(); i++)
 	{
 		const protobufs::UserRegionStats &region = stats.region(i);
-		this->ladder_stats_[(ErosRegion)region.region()] = new UserLadderStats(this, region.wins(), region.losses(), region.forfeits(), region.walkovers(), region.points(), region.mmr() * 100, region.placements_remaining(), divisions[region.division()]);
+        this->ladder_stats_[(ErosRegion)region.region()] = new UserLadderStats(this, region.wins(), region.losses(), region.forfeits(), region.walkovers(), region.points(), region.mmr() * 100, region.placements_remaining(), divisions[region.division()], region.division_rank());
 	}
 
 	this->vetoes_.clear();
@@ -134,4 +134,9 @@ void User::update(const protobufs::MapPool &vetoes, const QList<Map*> &map_pool)
 void User::update(const protobufs::MapPool &vetoes)
 {
 	update(vetoes, eros_->mapPool());
+}
+
+int User::divisionRank() const
+{
+    return this->division_rank_;
 }
